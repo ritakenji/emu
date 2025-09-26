@@ -5,17 +5,15 @@ export default async function handler(request, response) {
   await dbConnect();
 
   try {
-    const { id } = request.query;
-
     if (request.method === "GET") {
-      const entry = await Entry.findById(id).populate("reviews");
+      const entries = await Entry.find().populate("emotion");
 
-      if (!entry) {
+      if (!entries) {
         response.status(404).json({ status: "Not Found" });
         return;
       }
 
-      response.status(200).json(product);
+      response.status(200).json(entries);
       return;
     }
 
