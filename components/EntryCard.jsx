@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
 export default function EntryCard({ type, intensity, dateTime }) {
+  const formattedDate = new Date(dateTime).toLocaleString("de-DE", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+
   return (
     <EntryCardWrapper>
       <section>
@@ -12,7 +17,7 @@ export default function EntryCard({ type, intensity, dateTime }) {
         ))}
       </section>
       <p>Intensity: {intensity}</p>
-      <p>Date and Time: {dateTime}</p>
+      <p>Date and Time: {formattedDate}</p>
     </EntryCardWrapper>
   );
 }
