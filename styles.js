@@ -17,7 +17,7 @@ export default createGlobalStyle`
   }
 
   .contempt {
-  background-color: #cd97fc;
+    background-color: #cd97fc;
   } 
   
   .disgust {
@@ -29,7 +29,7 @@ export default createGlobalStyle`
 }
 
 .sadness {
-    background-color: #849cb5;
+  background-color: #849cb5;
 }
 
 .surprise {
