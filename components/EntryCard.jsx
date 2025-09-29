@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-export default function EntryCard({ type, intensity, dateTime}) {
+export default function EntryCard({ type, intensity, dateTime }) {
   return (
     <EntryCardWrapper>
-      <span>Type: {type}</span>
+      <section>
+        <p>Type:</p>
+        {type.map(({ _id, emotion }) => (
+          <span key={_id}>{emotion}</span>
+        ))}
+      </section>
       <p>Intensity: {intensity}</p>
       <p>Date and Time: {dateTime}</p>
     </EntryCardWrapper>
@@ -11,5 +16,5 @@ export default function EntryCard({ type, intensity, dateTime}) {
 }
 
 const EntryCardWrapper = styled.div`
-
+  border: 1px solid black;
 `;

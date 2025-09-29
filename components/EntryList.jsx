@@ -1,11 +1,11 @@
 import EntryCard from "./EntryCard";
 import styled from "styled-components";
 
-export default function EntryList({ data }) {
+export default function EntryList({ entries }) {
   return (
     <>
       <ListContainer>
-        {data.map((entry) => {
+        {entries.map((entry) => {
           return (
             <EntryCard
               key={entry._id}

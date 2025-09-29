@@ -2,19 +2,19 @@ import EntryList from "@/components/EntryList";
 import useSWR from "swr";
 
 export default function HomePage() {
-  const { data, isLoading } = useSWR("/api/entries", { fallbackData: [] });
+  const { data:entries, isLoading } = useSWR("/api/entries", { fallbackData: [] });
 
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
 
-  if (!data) {
+  if (!entries) {
     return;
   }
 
   return (
     <>
-      <EntryList data={data} />
+      <EntryList entries={entries} />
     </>
   );
 }
