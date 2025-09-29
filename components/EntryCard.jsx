@@ -6,7 +6,9 @@ export default function EntryCard({ type, intensity, dateTime }) {
       <section>
         <p>Type:</p>
         {type.map(({ _id, emotion }) => (
-          <span key={_id}>{emotion}</span>
+          <span key={_id} className={emotion.toLowerCase()}>
+            {emotion}
+          </span>
         ))}
       </section>
       <p>Intensity: {intensity}</p>

@@ -3,22 +3,16 @@ import styled from "styled-components";
 
 export default function EntryList({ entries }) {
   return (
-    <>
-      <ListContainer>
-        {entries.map((entry) => {
-          return (
-            <EntryCard
-              key={entry._id}
-              type={entry.emotion}
-              intensity={entry.intensity}
-              dateTime={entry.dateTime}
-/*               id={entry._id} */
-            />
-          );
-        })}
-      </ListContainer>
-      ;
-    </>
+    <ListContainer>
+      {entries.map((entry) => (
+        <EntryCard
+          key={entry._id}
+          type={entry.emotion}
+          intensity={entry.intensity}
+          dateTime={entry.dateTime}
+        />
+      ))}
+    </ListContainer>
   );
 }
 
