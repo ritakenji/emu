@@ -19,4 +19,5 @@ export default function EntryCard({ type, intensity, dateTime }) {
 
 const EntryCardWrapper = styled.div`
   border: 1px solid black;
+  width: 100%;
 `;

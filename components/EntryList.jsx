@@ -18,8 +18,9 @@ export default function EntryList({ entries }) {
 
 const ListContainer = styled.ul`
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   width: 100%;
+  padding: 0;
 `;
