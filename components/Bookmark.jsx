@@ -32,12 +32,14 @@ export default function Bookmark({ id }) {
 }
 
 const StyledButton = styled.button`
-  width: 50px;
-  height: 50px;
+  position: absolute;
   border: none;
   background-color: transparent;
+  top: -10px;
+  right: 5px;
 `;
 
 const PositionedBookmark = styled(BookmarkIcon)`
-  position: absolute;
+  width: 40px;
+  height: 40px;
 `;

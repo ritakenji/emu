@@ -27,6 +27,7 @@ export default function EntryCard({ type, intensity, dateTime, id }) {
 }
 
 const EntryCardWrapper = styled.div`
+  position: relative;
   width: 100%;
   padding: 0.7rem;
   background-color: var(--color-light);
