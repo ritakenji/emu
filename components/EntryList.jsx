@@ -1,16 +1,18 @@
 import EntryCard from "./EntryCard";
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function EntryList({ entries }) {
   return (
     <ListContainer>
       {entries.map((entry) => (
-        <EntryCard
-          key={entry._id}
-          type={entry.emotion}
-          intensity={entry.intensity}
-          dateTime={entry.dateTime}
-        />
+        <EntryDetailsLink href={`/${entry._id}`} key={entry._id}>
+          <EntryCard
+            type={entry.emotion}
+            intensity={entry.intensity}
+            dateTime={entry.dateTime}
+          />
+        </EntryDetailsLink>
       ))}
     </ListContainer>
   );
@@ -23,4 +25,7 @@ const ListContainer = styled.ul`
   gap: 20px;
   width: 100%;
   padding: 0;
+`;
+const EntryDetailsLink = styled(Link)`
+  text-decoration: none;
 `;

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-//import styled from "styled-components";
+import Link from "next/link";
+import styled from "styled-components";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -33,6 +34,7 @@ export default function EntryPage() {
 
   return (
     <>
+      <GoBackLink href="/"> ⬅️ Back </GoBackLink>
       <section>
         <p>Type:</p>
         {entry.emotion.map(({ _id, emotion }) => {
@@ -46,6 +48,11 @@ export default function EntryPage() {
       </section>
       <p>Intensity: {entry.intensity}</p>
       <p>Date and Time: {formattedDate}</p>
+      <p>Notes: {entry.notes}</p>
     </>
   );
 }
+
+const GoBackLink = styled(Link)`
+  text-decoration: none;
+`;
