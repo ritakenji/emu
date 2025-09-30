@@ -48,4 +48,5 @@ export default function EntryPage() {
 
 const GoBackLink = styled(Link)`
   text-decoration: none;
+  color: inherit;
 `;

@@ -1,6 +1,7 @@
 import EntryCard from "./EntryCard";
 import styled from "styled-components";
 import Link from "next/link";
+import Bookmark from "./Bookmark";
 
 export default function EntryList({ entries }) {
   return (
@@ -11,6 +12,7 @@ export default function EntryList({ entries }) {
             type={entry.emotion}
             intensity={entry.intensity}
             dateTime={entry.dateTime}
+            id={entry._id}
           />
         </EntryDetailsLink>
       ))}
@@ -28,4 +30,5 @@ const ListContainer = styled.ul`
 `;
 const EntryDetailsLink = styled(Link)`
   text-decoration: none;
+  color: inherit;
 `;
