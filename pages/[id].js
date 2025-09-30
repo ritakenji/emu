@@ -20,10 +20,6 @@ export default function EntryPage() {
     return null;
   }
 
-  //console.log("id:", id);
-
-  //const entry = entries.find((item) => item[_id] === id);
-
   if (!isReady || isLoading) return <h2>Loading...</h2>;
   if (error) return <h2>Failed to load entry</h2>;
 
@@ -37,14 +33,11 @@ export default function EntryPage() {
       <GoBackLink href="/"> ⬅️ Back </GoBackLink>
       <section>
         <p>Type:</p>
-        {entry.emotion.map(({ _id, emotion }) => {
-          console.log("emotion", emotion);
-          return (
-            <span key={_id} className={emotion.toLowerCase()}>
-              {emotion}
-            </span>
-          );
-        })}
+        {entry.emotion.map(({ _id, emotion }) => (
+          <span key={_id} className={emotion.toLowerCase()}>
+            {emotion}
+          </span>
+        ))}
       </section>
       <p>Intensity: {entry.intensity}</p>
       <p>Date and Time: {formattedDate}</p>

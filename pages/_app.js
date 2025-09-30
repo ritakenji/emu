@@ -5,14 +5,6 @@ import { SWRConfig } from "swr";
 import useSWR from "swr";
 
 export default function App({ Component, pageProps }) {
-  const {
-    data: entries,
-    isLoading,
-    error,
-  } = useSWR("/api/entries", {
-    fallbackData: [],
-  });
-
   return (
     <>
       <SWRConfig
