@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
+import styles from "@/styles";
 
 export default function NavBar() {
   return (
@@ -13,7 +14,7 @@ export default function NavBar() {
 }
 
 const Navigation = styled.div`
-  background-color: #8895c9;
+  background-color: var(--color-light);
   display: flex;
   justify-content: space-around;
   position: fixed;
@@ -22,7 +23,11 @@ const Navigation = styled.div`
   width: 100%;
 `;
 
-const HomeLink = styled(Link)``;
+const HomeLink = styled(Link)`
+  padding: 0.7rem;
+  flex-grow: 1;
+  text-align: center;
+`;
 
 /* 
 

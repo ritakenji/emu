@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import styles from "@/styles";
 
 export default function Header() {
   return <Title>Emu App</Title>;
@@ -7,7 +8,7 @@ export default function Header() {
 const Title = styled.h1`
   text-align: center;
   font-size: 1.5rem;
-  background-color: #e8e8e8;
+  background-color: var(--color-light);
   margin: 0;
   padding: 1rem;
   position: fixed;
