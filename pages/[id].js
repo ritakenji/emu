@@ -11,7 +11,7 @@ export default function EntryPage() {
     data: entry,
     isLoading,
     error,
-  } = useSWR(`/api/entries/${id}`, {
+  } = useSWR(`/api/entries/${id ? id : ""}`, {
     fallbackData: {},
   });
 
@@ -19,7 +19,7 @@ export default function EntryPage() {
     return null;
   }
 
-  console.log("id:", id);
+  //console.log("id:", id);
 
   //const entry = entries.find((item) => item[_id] === id);
 
@@ -35,11 +35,14 @@ export default function EntryPage() {
     <>
       <section>
         <p>Type:</p>
-        {entry.emotion.map(({ _id, emotion }) => (
-          <span key={_id} className={entry.emotion.toLowerCase()}>
-            {emotion}
-          </span>
-        ))}
+        {entry.emotion.map(({ _id, emotion }) => {
+          console.log("emotion", emotion);
+          return (
+            <span key={_id} className={emotion.toLowerCase()}>
+              {emotion}
+            </span>
+          );
+        })}
       </section>
       <p>Intensity: {entry.intensity}</p>
       <p>Date and Time: {formattedDate}</p>

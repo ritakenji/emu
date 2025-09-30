@@ -7,17 +7,19 @@ export default async function handler(request, response) {
 
   try {
     if (request.method === "GET") {
-      const entry = await Entry.findById(id);
+      const entry = await Entry.findById(id).populate("emotion");
 
       if (!entry) {
         response.status(404).json({ status: "Not found" });
         return;
       }
       response.status(200).json(entry);
+      return;
     }
   } catch (error) {
     console.error(error);
     response.status(500).json({ message: "Internal Server Error" });
+    return;
   }
 
   response.status(405).json({ status: "Method not allowed" });
