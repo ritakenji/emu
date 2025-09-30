@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Link from "next/link";
 import styled from "styled-components";
+import Bookmark from "@/components/Bookmark";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -31,17 +32,22 @@ export default function EntryPage() {
   return (
     <>
       <GoBackLink href="/"> ⬅️ Back </GoBackLink>
-      <section>
-        <p>Type:</p>
-        {entry.emotion.map(({ _id, emotion }) => (
-          <span key={_id} className={emotion.toLowerCase()}>
-            {emotion}
-          </span>
-        ))}
-      </section>
-      <p>Intensity: {entry.intensity}</p>
-      <p>Date and Time: {formattedDate}</p>
-      <p>Notes: {entry.notes}</p>
+      <BookmarkWrapper>
+        <Bookmark id={id} />
+      </BookmarkWrapper>
+      <DetailWrapper>
+        <section>
+          <p>Type:</p>
+          {entry.emotion.map(({ _id, emotion }) => (
+            <span key={_id} className={emotion.toLowerCase()}>
+              {emotion}
+            </span>
+          ))}
+        </section>
+        <p>Intensity: {entry.intensity}</p>
+        <p>Date and Time: {formattedDate}</p>
+        <p>Notes: {entry.notes}</p>
+      </DetailWrapper>
     </>
   );
 }
@@ -49,4 +55,13 @@ export default function EntryPage() {
 const GoBackLink = styled(Link)`
   text-decoration: none;
   color: inherit;
+`;
+
+const BookmarkWrapper = styled.div`
+  position: relative;
+`;
+
+const DetailWrapper = styled.div`
+  padding: 0.7rem;
+  background-color: var(--color-light);
 `;

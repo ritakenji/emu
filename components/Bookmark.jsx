@@ -23,9 +23,9 @@ export default function Bookmark({ id }) {
       }}
     >
       {bookmark.includes(id) ? (
-        <PositionedBookmark fill="black" />
+        <StyledBookmark fill="black" />
       ) : (
-        <PositionedBookmark />
+        <StyledBookmark />
       )}
     </StyledButton>
   );
@@ -39,7 +39,7 @@ const StyledButton = styled.button`
   right: 5px;
 `;
 
-const PositionedBookmark = styled(BookmarkIcon)`
+const StyledBookmark = styled(BookmarkIcon)`
   width: 40px;
   height: 40px;
 `;
