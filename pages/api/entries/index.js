@@ -6,7 +6,9 @@ export default async function handler(request, response) {
 
   try {
     if (request.method === "GET") {
-      const entries = await Entry.find().populate("emotion");
+      const entries = await Entry.find()
+        .populate("emotion")
+        .sort({ dateTime: -1 });
 
       if (!entries) {
         response.status(404).json({ status: "Not Found" });
