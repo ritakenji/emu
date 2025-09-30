@@ -1,43 +1,83 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+
+
+/* ---------------------global styling---------------------- */
   *,
   *::before,
   *::after {
     box-sizing: border-box;
   }
 
+  
+
   body {
     margin: 0;
     font-family: system-ui;
+    padding: 4rem 1.5rem;
   }
 
+  /* ---------------------theme colours---------------------- */
+
+  :root {
+    --main-bg-color: #fff;
+
+    --color-primary: #0c2faf;
+    --color-primary-lighter: color-mix(in oklab, var(--color-primary), white 65%);
+    --color-primary-darker: color-mix(in oklab, var(--color-primary), black 60%);
+
+    --color-secondary: #64f1ab;
+    --color-secondary-lighter: color-mix(in oklab, var(--color-secondary), white 65%);
+    --color-secondary-darker: color-mix(in oklab, var(--color-secondary), black 60%);
+
+    --color-light: #eaeaea;
+    --color-dark: #373842ff;
+    --color-medium: #9da0bfff;
+
+    --color-anger: #ff8282;
+    --color-contempt: #cd97fc;
+    --color-disgust: #cbfc97;
+    --color-fear: #bffff9;
+    --color-sadness: #849cb5;
+    --color-surprise: #fffa7f;
+    --color-enjoyment: #ffb27f;
+
+
+  }
+
+
+
+
+  /* ---------------------emotion colours---------------------- */
+
   .anger {
-    background-color: #ff8282;
+    background-color: var(--color-anger);
   }
 
   .contempt {
-    background-color: #cd97fc;
+    background-color: var(--color-contempt)
   } 
   
   .disgust {
-    background-color: #cbfc97;
-}
+    background-color: var(--color-disgust)
+  }
   
-.fear {
-  background-color: #bffff9;
-}
+  .fear {
+    background-color: var(--color-fear)
+  }
 
-.sadness {
-  background-color: #849cb5;
-}
+  .sadness {
+    background-color: var(--color-sadness)
+  }
 
-.surprise {
-  background-color: #fffa7f;
-}
+  .surprise {
+    background-color: var(--color-surprise)
+  }
 
-.enjoyment {
-  background-color: #ffb27f;
-}
+  .enjoyment {
+    background-color: var(--color-enjoyment)
+  }
+
 
 `;
