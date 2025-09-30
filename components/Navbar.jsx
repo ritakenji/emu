@@ -18,7 +18,8 @@ const Navigation = styled.div`
   justify-content: space-around;
   position: fixed;
   bottom: 0;
-  width: 100vw;
+  left: 0;
+  width: 100%;
 `;
 
 const HomeLink = styled(Link)``;
