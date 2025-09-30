@@ -32,7 +32,7 @@ export default createGlobalStyle`
     --color-secondary-darker: color-mix(in oklab, var(--color-secondary), black 60%);
 
     --color-light: #eaeaea;
-    --color-dark: #373842ff
+    --color-dark: #373842ff;
 
     --color-anger: #ff8282;
     --color-contempt: #cd97fc;

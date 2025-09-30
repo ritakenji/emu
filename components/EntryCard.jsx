@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+//import EmotionChips from "./EmotionChips";
+
 export default function EntryCard({ type, intensity, dateTime }) {
   const formattedDate = new Date(dateTime).toLocaleString("de-DE", {
     dateStyle: "medium",
@@ -9,20 +11,29 @@ export default function EntryCard({ type, intensity, dateTime }) {
   return (
     <EntryCardWrapper>
       <section>
-        <p>Type:</p>
-        {type.map(({ _id, emotion }) => (
-          <span key={_id} className={emotion.toLowerCase()}>
-            {emotion}
-          </span>
-        ))}
+        <p>{formattedDate}</p>
+        <p>
+          Type:
+          {type.map(({ _id, emotion }) => (
+            <Emotionchips key={_id} className={emotion.toLowerCase()}>
+              {emotion}
+            </Emotionchips>
+          ))}
+        </p>
       </section>
       <p>Intensity: {intensity}</p>
-      <p>Date and Time: {formattedDate}</p>
     </EntryCardWrapper>
   );
 }
 
 const EntryCardWrapper = styled.div`
-  border: 1px solid black;
   width: 100%;
+  padding: 0.7rem;
+  background-color: var(--color-light);
+`;
+
+const Emotionchips = styled.span`
+  padding: 5px 8px;
+  border-radius: 5px;
+  margin: 0 5px;
 `;
