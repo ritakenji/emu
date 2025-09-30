@@ -1,0 +1,48 @@
+import { useRouter } from "next/router";
+import useSWR from "swr";
+//import styled from "styled-components";
+
+export default function EntryPage() {
+  const router = useRouter();
+  const { isReady } = router;
+  const { id } = router.query;
+
+  const {
+    data: entry,
+    isLoading,
+    error,
+  } = useSWR(`/api/entries/${id}`, {
+    fallbackData: {},
+  });
+
+  if (!id) {
+    return null;
+  }
+
+  console.log("id:", id);
+
+  //const entry = entries.find((item) => item[_id] === id);
+
+  if (!isReady || isLoading) return <h2>Loading...</h2>;
+  if (error) return <h2>Failed to load entry</h2>;
+
+  const formattedDate = new Date(entry.dateTime).toLocaleString("de-DE", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+
+  return (
+    <>
+      <section>
+        <p>Type:</p>
+        {entry.emotion.map(({ _id, emotion }) => (
+          <span key={_id} className={entry.emotion.toLowerCase()}>
+            {emotion}
+          </span>
+        ))}
+      </section>
+      <p>Intensity: {entry.intensity}</p>
+      <p>Date and Time: {formattedDate}</p>
+    </>
+  );
+}
