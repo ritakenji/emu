@@ -14,7 +14,7 @@ export default function NavBar() {
 }
 
 const Navigation = styled.div`
-  background-color: var(--color-light);
+  background-color: var(--color-medium);
   display: flex;
   justify-content: space-around;
   position: fixed;

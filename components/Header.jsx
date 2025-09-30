@@ -8,7 +8,7 @@ export default function Header() {
 const Title = styled.h1`
   text-align: center;
   font-size: 1.5rem;
-  background-color: var(--color-light);
+  background-color: var(--color-medium);
   margin: 0;
   padding: 1rem;
   position: fixed;

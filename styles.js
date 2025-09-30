@@ -33,6 +33,7 @@ export default createGlobalStyle`
 
     --color-light: #eaeaea;
     --color-dark: #373842ff;
+    --color-medium: #9da0bfff;
 
     --color-anger: #ff8282;
     --color-contempt: #cd97fc;
