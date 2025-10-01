@@ -1,8 +1,7 @@
 import styled from "styled-components";
+import Bookmark from "./Bookmark";
 
-//import EmotionChips from "./EmotionChips";
-
-export default function EntryCard({ type, intensity, dateTime }) {
+export default function EntryCard({ type, intensity, dateTime, id }) {
   const formattedDate = new Date(dateTime).toLocaleString("de-DE", {
     dateStyle: "medium",
     timeStyle: "short",
@@ -10,6 +9,7 @@ export default function EntryCard({ type, intensity, dateTime }) {
 
   return (
     <EntryCardWrapper>
+      <Bookmark id={id}></Bookmark>
       <section>
         <p>{formattedDate}</p>
         <p>
@@ -27,6 +27,7 @@ export default function EntryCard({ type, intensity, dateTime }) {
 }
 
 const EntryCardWrapper = styled.div`
+  position: relative;
   width: 100%;
   padding: 0.7rem;
   background-color: var(--color-light);
