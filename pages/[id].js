@@ -18,7 +18,7 @@ export default function EntryPage() {
   });
 
   if (!id) {
-    return null;
+    return /*null*/;
   }
 
   if (!isReady || isLoading) return <h2>Loading...</h2>;

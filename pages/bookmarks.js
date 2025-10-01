@@ -1,8 +1,10 @@
 import EntryList from "@/components/EntryList";
 import useSWR from "swr";
 import Head from "next/head";
+import { useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
-export default function Bookmarks({ bookmark }) {
+export default function Bookmarks() {
   const {
     data: entries,
     isLoading,
@@ -10,6 +12,8 @@ export default function Bookmarks({ bookmark }) {
   } = useSWR("/api/entries", {
     fallbackData: [],
   });
+
+  const [bookmark] = useLocalStorageState("bookmark");
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -27,8 +31,13 @@ export default function Bookmarks({ bookmark }) {
   if (!entries) {
     return;
   }
+
   console.log("Bookmark", bookmark);
-  const bookmarkedEntries = entries.filter((entry) => bookmark[entry._id]);
+  const bookmarkedEntries = entries.filter((entry) =>
+    bookmark.includes(entry._id)
+  );
+  console.log("bookmark entries", bookmarkedEntries);
+  console.log("entries", entries);
 
   return (
     <>

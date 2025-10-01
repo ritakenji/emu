@@ -6,7 +6,6 @@ export default function Bookmark({ id }) {
   const [bookmark, setBookmark] = useLocalStorageState("bookmark", {
     defaultValue: [],
   });
-  console.log("Bookmark", bookmark);
   function handleToggleBookmark() {
     setBookmark((prevState) =>
       prevState.includes(id)

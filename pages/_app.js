@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
       >
         <GlobalStyle />
         <Header />
-        <Component {...pageProps} bookmark={bookmark} />
+        <Component {...pageProps} />
         <NavBar />
       </SWRConfig>
     </>
