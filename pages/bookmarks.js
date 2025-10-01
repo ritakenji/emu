@@ -1,7 +1,6 @@
 import EntryList from "@/components/EntryList";
 import useSWR from "swr";
 import Head from "next/head";
-import { useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 export default function Bookmarks() {
@@ -12,7 +11,7 @@ export default function Bookmarks() {
   } = useSWR("/api/entries", {
     fallbackData: [],
   });
-
+  // The following line is making the bookmark state accessible in this file although it's implemented in the bookmark component
   const [bookmark] = useLocalStorageState("bookmark");
 
   if (isLoading) {
@@ -32,19 +31,18 @@ export default function Bookmarks() {
     return;
   }
 
-  console.log("Bookmark", bookmark);
   const bookmarkedEntries = entries.filter((entry) =>
     bookmark.includes(entry._id)
   );
-  console.log("bookmark entries", bookmarkedEntries);
-  console.log("entries", entries);
 
   return (
     <>
       <Head>
         <title>Bookmarks</title>
       </Head>
+
       <h2>Bookmarked Emotion Entry List</h2>
+      {bookmark.length === 0 && <h3>Please bookmark an entry ...</h3>}
       <EntryList entries={bookmarkedEntries} />
     </>
   );
