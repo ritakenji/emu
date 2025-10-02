@@ -15,7 +15,6 @@ export default createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
-    padding: 4rem 1.5rem;
   }
 
   /* ---------------------theme colours---------------------- */
