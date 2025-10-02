@@ -24,7 +24,7 @@ export default function Bookmark({ id }) {
       {bookmark.includes(id) ? (
         <StyledBookmark fill="black" />
       ) : (
-        <StyledBookmark />
+        <StyledBookmark fill="white"/>
       )}
     </StyledButton>
   );

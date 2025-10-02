@@ -32,7 +32,7 @@ export default function EntryPage() {
   return (
     <>
       <HeaderWrapper className={entry.emotions[0].emotion.toLowerCase()}>
-        <GoBackLink href="/"> ← Back </GoBackLink>
+        <GoBackButton onClick={() => router.back()}> ← Back </GoBackButton>
         <h2>{formattedDate}</h2>
       </HeaderWrapper>
       <DetailWrapper>
@@ -46,16 +46,18 @@ export default function EntryPage() {
           ))}
         </section>
         <p>Intensity: {entry.intensity}</p>
-        <p>Date and Time: {formattedDate}</p>
         <p>Notes: {entry.notes}</p>
       </DetailWrapper>
     </>
   );
 }
 
-const GoBackLink = styled(Link)`
+const GoBackButton = styled.button`
   text-decoration: none;
   color: inherit;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
   font-weight: 700;
 `;
 
