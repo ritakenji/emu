@@ -46,7 +46,6 @@ export default function EntryPage() {
           ))}
         </section>
         <p>Intensity: {entry.intensity}</p>
-        <p>Date and Time: {formattedDate}</p>
         <p>Notes: {entry.notes}</p>
       </DetailWrapper>
     </>
