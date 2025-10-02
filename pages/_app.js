@@ -18,9 +18,8 @@ export default function App({ Component, pageProps }) {
         }}
       >
         <GlobalStyle />
-        <Header />
+
         <Component {...pageProps} />
-        <NavBar />
       </SWRConfig>
     </>
   );

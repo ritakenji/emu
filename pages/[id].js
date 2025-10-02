@@ -31,17 +31,18 @@ export default function EntryPage() {
 
   return (
     <>
-      <GoBackLink href="/"> ⬅️ Back </GoBackLink>
-      <BookmarkWrapper>
-        <Bookmark id={id} />
-      </BookmarkWrapper>
+      <HeaderWrapper className={entry.emotion[0].emotion.toLowerCase()}>
+        <GoBackLink href="/"> ← Back </GoBackLink>
+        <h2>{formattedDate}</h2>
+      </HeaderWrapper>
       <DetailWrapper>
+        <Bookmark id={id} />
         <section>
           <p>Type:</p>
           {entry.emotion.map(({ _id, emotion }) => (
-            <span key={_id} className={emotion.toLowerCase()}>
+            <Emotionchips key={_id} className={emotion.toLowerCase()}>
               {emotion}
-            </span>
+            </Emotionchips>
           ))}
         </section>
         <p>Intensity: {entry.intensity}</p>
@@ -55,13 +56,20 @@ export default function EntryPage() {
 const GoBackLink = styled(Link)`
   text-decoration: none;
   color: inherit;
+  font-weight: 700;
 `;
 
-const BookmarkWrapper = styled.div`
-  position: relative;
+const HeaderWrapper = styled.div`
+  padding: 1.5rem 1.5rem;
 `;
 
 const DetailWrapper = styled.div`
-  padding: 0.7rem;
-  background-color: var(--color-light);
+  position: relative;
+  padding: 1.5rem;
+`;
+
+const Emotionchips = styled.span`
+  padding: 5px 8px;
+  border-radius: 5px;
+  margin: 0 5px;
 `;

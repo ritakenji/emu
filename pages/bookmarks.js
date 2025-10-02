@@ -1,7 +1,9 @@
 import EntryList from "@/components/EntryList";
+import NavBar from "@/components/Navbar";
 import useSWR from "swr";
 import Head from "next/head";
 import useLocalStorageState from "use-local-storage-state";
+import styled from "styled-components";
 
 export default function Bookmarks() {
   const {
@@ -36,33 +38,19 @@ export default function Bookmarks() {
   );
 
   return (
-    <>
+    <StyledBody>
       <Head>
         <title>Bookmarks</title>
       </Head>
 
-      <h2>Bookmarked Emotion Entry List</h2>
+      <h2>Bookmarked entries</h2>
       {bookmark.length === 0 && <h3>Please bookmark an entry ...</h3>}
       <EntryList entries={bookmarkedEntries} />
-    </>
+      <NavBar />
+    </StyledBody>
   );
 }
 
-/*  <ArtList>
-          {bookmark.length === 0 && (
-            <StyledH2>Please select a favorite art piece ...</StyledH2>
-          )}
-          {data
-            .filter((image) => bookmark.includes(image.slug))
-            .map((image) => (
-              <ArtPiece
-                key={image.slug}
-                image={image}
-                bookmark={bookmark}
-                onToggleBookmark={onToggleBookmark}
-              >
-                <ArtTitle>&quot;{image.name}&quot;</ArtTitle>
-                by {image.artist}
-              </ArtPiece>
-            ))}
-        </ArtList> */
+const StyledBody = styled.div`
+  padding: 1rem 1.5rem 4rem;
+`;

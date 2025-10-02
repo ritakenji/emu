@@ -34,7 +34,7 @@ const StyledButton = styled.button`
   position: absolute;
   border: none;
   background-color: transparent;
-  top: -10px;
+  top: -15px;
   right: 5px;
 `;
 
