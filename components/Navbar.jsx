@@ -51,7 +51,9 @@ const StyledLink = styled(Link)`
 const iconCss = css`
   width: 30px;
   height: 30px;
-  stroke: ${({ $active }) => ($active ? "var(--color-primary)" : "black")};
+  /* stroke: ${({ $active }) =>
+    $active ? "var(--color-dark)" : "var(--color-dark)"}; */
+  stroke: var(--color-dark);
 `;
 
 const StyledHouse = styled(House)`
