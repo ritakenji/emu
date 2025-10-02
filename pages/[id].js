@@ -57,6 +57,7 @@ const GoBackButton = styled.button`
   color: inherit;
   background-color: transparent;
   border: none;
+  cursor: pointer;
   font-weight: 700;
 `;
 
