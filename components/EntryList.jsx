@@ -9,7 +9,7 @@ export default function EntryList({ entries }) {
       {entries.map((entry) => (
         <EntryDetailsLink href={`/${entry._id}`} key={entry._id}>
           <EntryCard
-            type={entry.emotion}
+            type={entry.emotions}
             intensity={entry.intensity}
             dateTime={entry.dateTime}
             id={entry._id}

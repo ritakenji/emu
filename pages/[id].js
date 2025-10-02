@@ -31,7 +31,7 @@ export default function EntryPage() {
 
   return (
     <>
-      <HeaderWrapper className={entry.emotion[0].emotion.toLowerCase()}>
+      <HeaderWrapper className={entry.emotions[0].emotion.toLowerCase()}>
         <GoBackLink href="/"> ← Back </GoBackLink>
         <h2>{formattedDate}</h2>
       </HeaderWrapper>
@@ -39,7 +39,7 @@ export default function EntryPage() {
         <Bookmark id={id} />
         <section>
           <p>Type:</p>
-          {entry.emotion.map(({ _id, emotion }) => (
+          {entry.emotions.map(({ _id, emotion }) => (
             <Emotionchips key={_id} className={emotion.toLowerCase()}>
               {emotion}
             </Emotionchips>

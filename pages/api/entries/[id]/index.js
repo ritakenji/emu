@@ -7,7 +7,7 @@ export default async function handler(request, response) {
 
   try {
     if (request.method === "GET") {
-      const entry = await Entry.findById(id).populate("emotion");
+      const entry = await Entry.findById(id).populate("emotions");
 
       if (!entry) {
         response.status(404).json({ status: "Not found" });
