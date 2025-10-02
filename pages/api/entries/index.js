@@ -7,7 +7,7 @@ export default async function handler(request, response) {
   try {
     if (request.method === "GET") {
       const entries = await Entry.find()
-        .populate("emotion")
+        .populate("emotions")
         .sort({ dateTime: -1 });
 
       if (!entries) {
