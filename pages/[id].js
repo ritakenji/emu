@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Bookmark from "@/components/Bookmark";
 
 export default function EntryPage() {
@@ -23,6 +22,20 @@ export default function EntryPage() {
 
   if (!isReady || isLoading) return <h2>Loading...</h2>;
   if (error) return <h2>Failed to load entry</h2>;
+
+  async function deleteEntry() {
+    const confirmed = confirm("Are you sure you want to delete the entry?"); //const confirmed = alert --> message, nothing happens, user can simply close window --> check how to do wrapping
+
+    if (!confirmed) return;
+
+    const response = await fetch(`/api/entries/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      router.push("/");
+    }
+  }
 
   const formattedDate = new Date(entry.dateTime).toLocaleString("de-DE", {
     dateStyle: "medium",
@@ -48,6 +61,11 @@ export default function EntryPage() {
         <p>Intensity: {entry.intensity}</p>
         <p>Notes: {entry.notes}</p>
       </DetailWrapper>
+      <ButtonContainer>
+        <StyledButton onClick={deleteEntry} type="button" $variant="delete">
+          Delete
+        </StyledButton>
+      </ButtonContainer>
     </>
   );
 }
@@ -74,4 +92,35 @@ const Emotionchips = styled.span`
   padding: 5px 8px;
   border-radius: 5px;
   margin: 0 5px;
+`;
+
+const ButtonContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  & > * {
+    flex-grow: 1;
+    text-align: center;
+  }
+`;
+
+const StyledButton = styled.button`
+  background-color: white;
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  border: 1px solid black;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  font-size: inherit;
+
+  ${({ $variant }) =>
+    $variant === "delete" &&
+    css`
+      background-color: lightgray;
+      color: red;
+    `}
 `;
