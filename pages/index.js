@@ -14,6 +14,7 @@ export default function HomePage() {
     fallbackData: [],
   });
 
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -38,6 +39,7 @@ export default function HomePage() {
       </Head>
       <Header />
       <h2>Emotion Entry List</h2>
+      {entries.length === 0 && <h3>Please add an entry ...</h3>}
       <EntryList entries={entries} />
       <NavBar />
     </StyledBody>

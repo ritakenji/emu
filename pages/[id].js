@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled, { css } from "styled-components";
 import Bookmark from "@/components/Bookmark";
+import { useState } from "react";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -15,6 +16,8 @@ export default function EntryPage() {
   } = useSWR(`/api/entries/${id ? id : ""}`, {
     fallbackData: {},
   });
+
+  const [mode, setMode] = useState("default");
 
   if (!id) {
     return /*null*/;
@@ -62,9 +65,29 @@ export default function EntryPage() {
         <p>Notes: {entry.notes}</p>
       </DetailWrapper>
       <ButtonContainer>
-        <StyledButton onClick={deleteEntry} type="button" $variant="delete">
-          Delete
-        </StyledButton>
+        {mode === "default" && (
+          <StyledButton
+            onClick={() => setMode("delete")}
+            type="button"
+            $variant="delete"
+          >
+            Delete
+          </StyledButton>
+        )}
+        {mode === "delete" && (
+          <>
+            <StyledButton onClick={deleteEntry} type="button" $variant="delete">
+              Delete
+            </StyledButton>
+            <StyledButton
+              onClick={() => setMode("default")}
+              type="button"
+              $variant="delete"
+            >
+              Cancel
+            </StyledButton>
+          </>
+        )}
       </ButtonContainer>
     </>
   );
@@ -124,3 +147,42 @@ const StyledButton = styled.button`
       color: red;
     `}
 `;
+
+//  {/* we have 3 states here that we want to switch between
+//        (default - only infos and buttons, delete - cancel and delete button, edit - input fields and confirm button) */}
+
+//       {isVisible === "default" && (
+//         <>
+//           <button onClick={() => setIsVisible("delete")}>Delete</button>
+//           <button onClick={() => setIsVisible("edit")}>Edit</button>
+//         </>
+//       )}
+
+//       {isVisible === "delete" && (
+//         <>
+//           <p className="color-card-headline">Really delete?</p>
+//           <button onClick={() => setIsVisible("default")}>Cancel</button>
+//           <button title="delete movie" onClick={() => onDeleteColor(id)}>
+//             Delete
+//           </button>
+//         </>
+//       )}
+
+//       {isVisible === "edit" && (
+//         <>
+//           <Colorform
+//             defaultValue={color}
+//             buttonText={"Update Color"}
+//             onSubmitColor={(updatedData) => {
+//               onSubmitColor({ id, ...updatedData });
+//               setIsVisible("default");
+//             }}
+//             //onSubmitColor is the prop that we give this form from App
+//             //updatedData is the stuff that the form gives us when submitting it
+//             //onSubmitColor is the handlerfunction(handleEditColor) that was assigned to this prop
+//             //the spread here add the 3 attributes from the form (role,hex,contrast) to the id (wee need all 4 of them)
+//             //these 4 things are then given back to App
+//           />
+//           <button onClick={() => setIsVisible("default")}>Cancel</button>
+//         </>
+//       )}
