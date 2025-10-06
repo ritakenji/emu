@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import useSWR from "swr";
 
-export default function EntryForm({ onSubmit, formName, defaultData }) {
+export default function EntryForm({ onSubmit }) {
   const {
     data: emotions,
     isLoading,
@@ -34,13 +34,32 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
+    // START Here we are defining a variable which should contain all emotion names of the emotions that were selected --> We want to add a new entry in the same format as all the other objects in the entries collection
+    const emotionKey = Object.keys(data).find((key) => data[key] === "on");
+
+    // Use destructuring to pull out the non-emotion properties and construct the new object
+    const {
+      [emotionKey]: _, // Destructure and ignore the emotion property
+      ...rest // Capture the rest of the properties
+    } = data;
+
+    /* Britta's idea of how to get the id of an emotion
+    const idOfEmotion= emotions.filter((emotion)=>emotion.emotions.includes(${emotionKey}))
+     */
+
+    const newObject = {
+      emotions: [emotionKey], // Use the found key
+      ...rest, // Spread the remaining properties
+    };
+
     console.log("form data", data);
 
-    // Get the names of all possible emotions
-    const emotionKeys = emotions.map((e) => e.emotion);
+    // END
 
-    // Check if any emotion key exists in the submitted 'data' object.
-    // Checked checkboxes are included in FormData; unchecked ones are not.
+    // Get the names of all possible emotions
+    const emotionKeys = emotions.map((e) => e.emotion); //previously named 'selectedEmotionKeys' by Gemini
+
+    // Check if any emotion key exists in the submitted 'data' object. Checked checkboxes are included in FormData; unchecked ones are not.
     const isAnyEmotionSelected = emotionKeys.some((key) => key in data);
 
     const isDateTimeSelected = data.dateTime;
@@ -55,7 +74,8 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
       return;
     }
 
-    // onSubmit(data);
+    onSubmit(newObject);
+    console.log("newObject:", newObject);
   }
 
   const ticks = [];
@@ -64,8 +84,8 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
   }
 
   return (
-    <FormContainer aria-labelledby={formName} onSubmit={handleSubmit}>
-      <Label>Emotions *</Label>
+    <FormContainer onSubmit={handleSubmit}>
+      <Label>Type *</Label>
       <EmotionContainer>
         {emotions.map(({ emotion, _id }) => {
           return (
@@ -77,58 +97,13 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
         })}
       </EmotionContainer>
 
-      {/* <Label htmlFor="emotions">Emotion:</Label>
-      <Input
-        type="checkbox"
-        id="emotions"
-        name="emotions"
-        list="emotions-list"
-      />
-      <datalist id="emotions-list">
-        <option value="0" label="0">
-          1
-        </option>
-        <option value="2">2</option>
-        <option value="4">3</option>
-      </datalist> */}
-
       <Label htmlFor="intensity">Intensity *</Label>
-
-      {/* <StyledRange class="range">
-        <input type="range" min="1" max="10" name="intensity" />
-        <Ticks class="ticks">
-          <Tick class="tick">1</Tick>
-          <Tick class="tick">2</Tick>
-          <Tick class="tick">3</Tick>
-          <Tick class="tick">4</Tick>
-          <Tick class="tick">5</Tick>
-          <Tick class="tick">6</Tick>
-          <Tick class="tick">7</Tick>
-          <Tick class="tick">8</Tick>
-          <Tick class="tick">9</Tick>
-          <Tick class="tick">10</Tick>
-        </Ticks>
-      </StyledRange> */}
-
       <input type="range" min="1" max="10" name="intensity" step="1" />
       <StyledRange>
         {ticks.map((t) => (
           <span key={t}>{t}</span>
         ))}
       </StyledRange>
-
-      {/* <datalist id="tickmarks">
-        <option value="1" label="1"></option>
-        <option value="2" label="2"></option>
-        <option value="3" label="3"></option>
-        <option value="4" label="4"></option>
-        <option value="5" label="5"></option>
-        <option value="6" label="6"></option>
-        <option value="7" label="7"></option>
-        <option value="8" label="8"></option>
-        <option value="9" label="9"></option>
-        <option value="10" label="10"></option>
-      </datalist> */}
 
       <Label htmlFor="notes">Notes</Label>
       <Input
@@ -139,16 +114,9 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
       />
 
       <Label htmlFor="dateTime">Date and Time *</Label>
-      <Input
-        id="dateTime"
-        name="dateTime"
-        type="datetime-local"
-        defaultValue={defaultData?.mapURL}
-      />
+      <Input id="dateTime" name="dateTime" type="datetime-local" />
 
-      <button type="submit">
-        {defaultData ? "Update entry" : "Add entry"}
-      </button>
+      <button type="submit"> Submit </button>
     </FormContainer>
   );
 }
@@ -183,16 +151,3 @@ const StyledRange = styled.div`
   margin-top: 8px;
   font-size: 14px;
 `;
-
-// const Ticks = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-// `;
-
-// const Tick = styled.span`
-//   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   width: 1px;
-//   background: gray;
-// `;

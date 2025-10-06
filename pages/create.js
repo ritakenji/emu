@@ -8,25 +8,23 @@ const StyledBackLink = styled(Link)`
   justify-self: flex-start;
 `;
 
-export default function CreatePlacePage() {
+export default function Create() {
   const router = useRouter();
-  /* const { mutate } = useSWR("/api/places"); */
 
-  async function addPlace(place) {
-    // I need to send the info from the form to the BKEND
-    console.log("adding place", place);
+  async function addEntry(entry) {
+    // We need to send the info from the form to the BKEND
+    console.log("adding entry", entry);
 
-    const response = await fetch("api/places", {
-      //need to sent this newPlace to the BKEND to b save in the DB
+    const response = await fetch("api/entries", {
+      //need to sent this newEntry to the BKEND to b save in the DB
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(place),
+      body: JSON.stringify(entry),
     });
 
     if (response.ok) {
-      /* mutate(); //once i know the responsde is OK, I call mutate method of useSWR to re-render page */
       router.push("/"); // using push instead because we dont want to rerender the create page, we want to direct the user to homepage
     }
   }
@@ -35,9 +33,7 @@ export default function CreatePlacePage() {
     <>
       <h2>Add entry</h2>
       <StyledBackLink href="/">back</StyledBackLink>
-      <EntryForm
-      //   onSubmit={addPlace} formName={"add-place"}
-      />
+      <EntryForm onSubmit={addEntry} />
       <NavBar />
     </>
   );
