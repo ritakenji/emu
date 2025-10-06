@@ -1,6 +1,34 @@
 import styled from "styled-components";
+import useSWR from "swr";
 
 export default function EntryForm({ onSubmit, formName, defaultData }) {
+  const {
+    data: emotions,
+    isLoading,
+    error,
+  } = useSWR("/api/emotions", {
+    fallbackData: [],
+  });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return (
+      <>
+        <p>Sorry, we could not retrieve the entry data at the moment.</p>
+        <p>Please try again later.</p>
+      </>
+    );
+  }
+
+  if (!emotions) {
+    return;
+  }
+
+  console.log("emotions", emotions);
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -10,42 +38,29 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
 
   return (
     <FormContainer aria-labelledby={formName} onSubmit={handleSubmit}>
-      <Label htmlFor="name">Name</Label>
-      <Input
-        id="name"
-        name="name"
-        type="text"
-        defaultValue={defaultData?.name}
-      />
-      <Label htmlFor="image-url">Image Url</Label>
-      <Input
-        id="image-url"
-        name="image"
-        type="text"
-        defaultValue={defaultData?.image}
-      />
+      {emotions.map(({ emotion, _id }) => {
+        return (
+          <div key={_id}>
+            <Label htmlFor={emotion}>{emotion}</Label>
+            <Input id={emotion} name={emotion} type="checkbox" />
+          </div>
+        );
+      })}
       <Label htmlFor="location">Location</Label>
       <Input
-        id="location"
-        name="location"
-        type="text"
+        id="notes"
+        name="notes"
+        type="textfield"
         defaultValue={defaultData?.location}
       />
-      <Label htmlFor="map-url">Map Url</Label>
+      <Label htmlFor="dateTime">Date and Time</Label>
       <Input
-        id="map-url"
-        name="mapURL"
-        type="text"
+        id="dateTime"
+        name="dateTime"
+        type="datetime-local"
         defaultValue={defaultData?.mapURL}
       />
-      <Label htmlFor="description">Description</Label>
-      <Textarea
-        name="description"
-        id="description"
-        cols="30"
-        rows="10"
-        defaultValue={defaultData?.description}
-      ></Textarea>
+
       <button type="submit">
         {defaultData ? "Update entry" : "Add entry"}
       </button>
