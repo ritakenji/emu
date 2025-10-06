@@ -33,7 +33,29 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onSubmit(data);
+
+    console.log("form data", data);
+
+    // Get the names of all possible emotions
+    const emotionKeys = emotions.map((e) => e.emotion);
+
+    // Check if any emotion key exists in the submitted 'data' object.
+    // Checked checkboxes are included in FormData; unchecked ones are not.
+    const isAnyEmotionSelected = emotionKeys.some((key) => key in data);
+
+    const isDateTimeSelected = data.dateTime;
+
+    if (!isAnyEmotionSelected) {
+      alert("Please select at least one emotion.");
+      return;
+    }
+
+    if (!isDateTimeSelected) {
+      alert("Please select date and time.");
+      return;
+    }
+
+    // onSubmit(data);
   }
 
   const ticks = [];
@@ -43,16 +65,34 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
 
   return (
     <FormContainer aria-labelledby={formName} onSubmit={handleSubmit}>
-      {emotions.map(({ emotion, _id }) => {
-        return (
-          <div key={_id}>
-            <Label htmlFor={emotion}>{emotion}</Label>
-            <Input id={emotion} name={emotion} type="checkbox" required />
-          </div>
-        );
-      })}
+      <Label>Emotions *</Label>
+      <EmotionContainer>
+        {emotions.map(({ emotion, _id }) => {
+          return (
+            <div key={_id}>
+              <Input id={emotion} name={emotion} type="checkbox" />
+              <Label htmlFor={emotion}>{emotion}</Label>
+            </div>
+          );
+        })}
+      </EmotionContainer>
 
-      <Label htmlFor="intensity">Intensity</Label>
+      {/* <Label htmlFor="emotions">Emotion:</Label>
+      <Input
+        type="checkbox"
+        id="emotions"
+        name="emotions"
+        list="emotions-list"
+      />
+      <datalist id="emotions-list">
+        <option value="0" label="0">
+          1
+        </option>
+        <option value="2">2</option>
+        <option value="4">3</option>
+      </datalist> */}
+
+      <Label htmlFor="intensity">Intensity *</Label>
 
       {/* <StyledRange class="range">
         <input type="range" min="1" max="10" name="intensity" />
@@ -98,13 +138,12 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
         placeholder="Today I feel ..."
       />
 
-      <Label htmlFor="dateTime">Date and Time</Label>
+      <Label htmlFor="dateTime">Date and Time *</Label>
       <Input
         id="dateTime"
         name="dateTime"
         type="datetime-local"
         defaultValue={defaultData?.mapURL}
-        required
       />
 
       <button type="submit">
@@ -114,27 +153,28 @@ export default function EntryForm({ onSubmit, formName, defaultData }) {
   );
 }
 
-export const FormContainer = styled.form`
+const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
 `;
 
-export const Input = styled.input`
+const Input = styled.input`
   padding: 0.5rem;
   font-size: inherit;
   border: 1px solid black;
   border-radius: 0.5rem;
 `;
 
-export const Textarea = styled.textarea`
-  font-family: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
+const Label = styled.label`
+  font-weight: bold;
 `;
 
-export const Label = styled.label`
-  font-weight: bold;
+const EmotionContainer = styled.div`
+  display: flex;
+
+  > div {
+    margin-right: 20px;
+  }
 `;
 
 const StyledRange = styled.div`

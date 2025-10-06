@@ -33,7 +33,7 @@ export default function CreatePlacePage() {
 
   return (
     <>
-      <h2 id="add-place">Add Place</h2>
+      <h2>Add entry</h2>
       <StyledBackLink href="/">back</StyledBackLink>
       <EntryForm
       //   onSubmit={addPlace} formName={"add-place"}
