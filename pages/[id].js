@@ -27,9 +27,9 @@ export default function EntryPage() {
   if (error) return <h2>Failed to load entry</h2>;
 
   async function deleteEntry() {
-    const confirmed = confirm("Are you sure you want to delete the entry?"); //const confirmed = alert --> message, nothing happens, user can simply close window --> check how to do wrapping
+    /*  const confirmed = confirm("Are you sure you want to delete the entry?");
 
-    if (!confirmed) return;
+    if (!confirmed) return; */
 
     const response = await fetch(`/api/entries/${id}`, {
       method: "DELETE",
@@ -74,21 +74,31 @@ export default function EntryPage() {
             Delete
           </StyledButton>
         )}
-        {mode === "delete" && (
-          <>
-            <StyledButton onClick={deleteEntry} type="button" $variant="delete">
-              Delete
-            </StyledButton>
-            <StyledButton
-              onClick={() => setMode("default")}
-              type="button"
-              $variant="delete"
-            >
-              Cancel
-            </StyledButton>
-          </>
-        )}
       </ButtonContainer>
+      {mode === "delete" && (
+        <>
+          <DeleteContainer>
+            <p>Are you sure you want to delete the entry?</p>
+            <ButtonBox>
+              <StyledButton
+                onClick={deleteEntry}
+                type="button"
+                $variant="delete"
+              >
+                Delete
+              </StyledButton>
+              <StyledButton
+                onClick={() => setMode("default")}
+                type="button"
+                $variant="delete"
+              >
+                Cancel
+              </StyledButton>
+            </ButtonBox>
+          </DeleteContainer>
+          <Overlay onClick={() => setMode("default")} />
+        </>
+      )}
     </>
   );
 }
@@ -139,6 +149,7 @@ const StyledButton = styled.button`
   font-weight: bold;
   border: none;
   font-size: inherit;
+  text-align: center;
 
   ${({ $variant }) =>
     $variant === "delete" &&
@@ -148,41 +159,30 @@ const StyledButton = styled.button`
     `}
 `;
 
-//  {/* we have 3 states here that we want to switch between
-//        (default - only infos and buttons, delete - cancel and delete button, edit - input fields and confirm button) */}
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.3;
+  z-index: 999;
+`;
 
-//       {isVisible === "default" && (
-//         <>
-//           <button onClick={() => setIsVisible("delete")}>Delete</button>
-//           <button onClick={() => setIsVisible("edit")}>Edit</button>
-//         </>
-//       )}
+const DeleteContainer = styled.div`
+  background-color: white;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+`;
 
-//       {isVisible === "delete" && (
-//         <>
-//           <p className="color-card-headline">Really delete?</p>
-//           <button onClick={() => setIsVisible("default")}>Cancel</button>
-//           <button title="delete movie" onClick={() => onDeleteColor(id)}>
-//             Delete
-//           </button>
-//         </>
-//       )}
-
-//       {isVisible === "edit" && (
-//         <>
-//           <Colorform
-//             defaultValue={color}
-//             buttonText={"Update Color"}
-//             onSubmitColor={(updatedData) => {
-//               onSubmitColor({ id, ...updatedData });
-//               setIsVisible("default");
-//             }}
-//             //onSubmitColor is the prop that we give this form from App
-//             //updatedData is the stuff that the form gives us when submitting it
-//             //onSubmitColor is the handlerfunction(handleEditColor) that was assigned to this prop
-//             //the spread here add the 3 attributes from the form (role,hex,contrast) to the id (wee need all 4 of them)
-//             //these 4 things are then given back to App
-//           />
-//           <button onClick={() => setIsVisible("default")}>Cancel</button>
-//         </>
-//       )}
+const ButtonBox = styled.div`
+  display: flex;
+  gap: 1em;
+`;
