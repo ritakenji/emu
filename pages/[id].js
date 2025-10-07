@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Bookmark from "@/components/Bookmark";
+import { useState } from "react";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -17,12 +17,28 @@ export default function EntryPage() {
     fallbackData: {},
   });
 
+  const [mode, setMode] = useState("default");
+
   if (!id) {
     return /*null*/;
   }
 
   if (!isReady || isLoading) return <h2>Loading...</h2>;
   if (error) return <h2>Failed to load entry</h2>;
+
+  async function deleteEntry() {
+    /*  const confirmed = confirm("Are you sure you want to delete the entry?");
+
+    if (!confirmed) return; */
+
+    const response = await fetch(`/api/entries/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      router.push("/");
+    }
+  }
 
   const formattedDate = new Date(entry.dateTime).toLocaleString("de-DE", {
     dateStyle: "medium",
@@ -48,6 +64,41 @@ export default function EntryPage() {
         <p>Intensity: {entry.intensity}</p>
         <p>Notes: {entry.notes}</p>
       </DetailWrapper>
+      <ButtonContainer>
+        {mode === "default" && (
+          <StyledButton
+            onClick={() => setMode("delete")}
+            type="button"
+            $variant="delete"
+          >
+            Delete
+          </StyledButton>
+        )}
+      </ButtonContainer>
+      {mode === "delete" && (
+        <>
+          <DeleteContainer>
+            <p>Are you sure you want to delete the entry?</p>
+            <ButtonBox>
+              <StyledButton
+                onClick={deleteEntry}
+                type="button"
+                $variant="delete"
+              >
+                Delete
+              </StyledButton>
+              <StyledButton
+                onClick={() => setMode("default")}
+                type="button"
+                $variant="delete"
+              >
+                Cancel
+              </StyledButton>
+            </ButtonBox>
+          </DeleteContainer>
+          <Overlay onClick={() => setMode("default")} />
+        </>
+      )}
     </>
   );
 }
@@ -74,4 +125,64 @@ const Emotionchips = styled.span`
   padding: 5px 8px;
   border-radius: 5px;
   margin: 0 5px;
+`;
+
+const ButtonContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  & > * {
+    flex-grow: 1;
+    text-align: center;
+  }
+`;
+
+const StyledButton = styled.button`
+  background-color: white;
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  border: 1px solid black;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  font-size: inherit;
+  text-align: center;
+
+  ${({ $variant }) =>
+    $variant === "delete" &&
+    css`
+      background-color: lightgray;
+      color: red;
+    `}
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.3;
+  z-index: 999;
+`;
+
+const DeleteContainer = styled.div`
+  background-color: white;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  gap: 1em;
 `;
