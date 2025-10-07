@@ -30,13 +30,13 @@ export default function FilterForm({ onSubmit }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     console.log("FilterForm data", data);
-    //onSubmit(data);
+    onSubmit(data);
   }
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="emotions">Filter:</label>
+      <label htmlFor="emotions">Filter: </label>
       <select name="emotions" id="emotions">
-        <option value="reset">Choose an emotion</option>
+        <option value="reset">Show All</option>
         {emotions.map(({ emotion, _id }) => {
           return (
             <option key={_id} value={_id}>
