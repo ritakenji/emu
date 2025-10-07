@@ -56,7 +56,17 @@ export default function HomePage() {
       <Header />
       <h2>Emotion Entry List</h2>
 
-      {entries.length !== 0 && <FilterForm onSubmit={handleFilterSubmit} />}
+      {entries.length !== 0 && (
+        <>
+          <FilterForm onSubmit={handleFilterSubmit} />{" "}
+          {!selectedFilterEmotionId ||
+            (selectedFilterEmotionId !== "reset" && (
+              <button onClick={() => setSelectedFilterEmotionId("reset")}>
+                Reset
+              </button>
+            ))}
+        </>
+      )}
 
       {filteredEntries.length === 0 ? (
         <h3>
