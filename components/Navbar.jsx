@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
-import { BookmarkIcon, House } from "lucide-react";
+import { BookmarkIcon, House, PlusCircle } from "lucide-react";
 
 export default function NavBar() {
   const { pathname } = useRouter(); // e.g. "/" or "/bookmarks"
   const isHome = pathname === "/";
   const isBookmarks = pathname === "/bookmarks";
+  const isCreate = pathname === "/create";
 
   return (
     <Navigation>
@@ -16,6 +17,13 @@ export default function NavBar() {
         $active={isHome}
       >
         <StyledHouse $active={isHome} />
+      </StyledLink>
+      <StyledLink
+        href="/create"
+        aria-current={isCreate ? "page" : undefined}
+        $active={isCreate}
+      >
+        <StyledCreate $active={isCreate} />
       </StyledLink>
       <StyledLink
         href="/bookmarks"
@@ -59,6 +67,11 @@ const iconCss = css`
 const StyledHouse = styled(House)`
   ${iconCss}
 `;
+
+const StyledCreate = styled(PlusCircle)`
+  ${iconCss}
+`;
+
 const StyledBookmark = styled(BookmarkIcon)`
   ${iconCss}
 `;
