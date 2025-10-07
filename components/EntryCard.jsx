@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Bookmark from "./Bookmark";
 
 export default function EntryCard({ type, intensity, dateTime, id }) {
-  const formattedDate = new Date(dateTime).toLocaleString("de-DE", {
+  const formattedDate = new Date(dateTime).toLocaleString("en-GB", {
     dateStyle: "medium",
     timeStyle: "short",
   });

@@ -41,7 +41,7 @@ export default function EntryPage() {
     }
   }
 
-  const formattedDate = new Date(entry.dateTime).toLocaleString("de-DE", {
+  const formattedDate = new Date(entry.dateTime).toLocaleString("en-GB", {
     dateStyle: "medium",
     timeStyle: "short",
   });

@@ -15,6 +15,16 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
     fallbackData: [],
   });
 
+  const toLocalDateTime = (isoString) => {
+    if (!isoString) return "";
+    const date = new Date(isoString);
+    const tzOffset = date.getTimezoneOffset() * 60000; // in ms
+    const localISO = new Date(date.getTime() - tzOffset)
+      .toISOString()
+      .slice(0, 16);
+    return localISO;
+  };
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -141,7 +151,7 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
         id="dateTime"
         name="dateTime"
         type="datetime-local"
-        defaultValue={initialValues.dateTime}
+        defaultValue={toLocalDateTime(initialValues.dateTime)}
       />
 
       <button type="submit"> {buttonText} </button>
