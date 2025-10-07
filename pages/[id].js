@@ -113,7 +113,8 @@ export default function EntryPage() {
       {mode === "edit" && (
         <>
           <EntryForm
-            buttonText={"Update"} /* need to pass {onSubmit} at some point */
+            buttonText={"Update"}
+            initialValues={entry} /* need to pass {onSubmit} at some point */
           ></EntryForm>
           {/*
           defaultValues --> same as the entry in question

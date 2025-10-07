@@ -5,6 +5,8 @@ import { useState } from "react";
 export default function EntryForm({ onSubmit, buttonText, initialValues }) {
   const [selectedTypes, setSelectedTypes] = useState([]);
 
+  console.log("initialValues.dateTime:", initialValues.dateTime);
+
   const {
     data: emotions,
     isLoading,
@@ -111,7 +113,14 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
       </EmotionContainer>
 
       <Label htmlFor="intensity">Intensity *</Label>
-      <input type="range" min="1" max="10" name="intensity" step="1" />
+      <input
+        type="range"
+        min="1"
+        max="10"
+        name="intensity"
+        step="1"
+        defaultValue={initialValues.intensity}
+      />
       <StyledRange>
         {ticks.map((t) => (
           <span key={t}>{t}</span>
@@ -124,10 +133,16 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
         name="notes"
         type="textfield"
         placeholder="Today I feel ..."
+        defaultValue={initialValues.notes}
       />
 
       <Label htmlFor="dateTime">Date and Time *</Label>
-      <Input id="dateTime" name="dateTime" type="datetime-local" />
+      <Input
+        id="dateTime"
+        name="dateTime"
+        type="datetime-local"
+        defaultValue={initialValues.dateTime}
+      />
 
       <button type="submit"> {buttonText} </button>
     </FormContainer>
