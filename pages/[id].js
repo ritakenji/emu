@@ -3,6 +3,7 @@ import useSWR from "swr";
 import styled, { css } from "styled-components";
 import Bookmark from "@/components/Bookmark";
 import { useState } from "react";
+import EntryForm from "@/components/EntryForm";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -66,13 +67,23 @@ export default function EntryPage() {
       </DetailWrapper>
       <ButtonContainer>
         {mode === "default" && (
-          <StyledButton
-            onClick={() => setMode("delete")}
-            type="button"
-            $variant="delete"
-          >
-            Delete
-          </StyledButton>
+          <>
+            <StyledButtonEdit
+              onClick={() => setMode("edit")}
+              type="button"
+              $variant="edit"
+            >
+              Edit
+            </StyledButtonEdit>
+
+            <StyledButton
+              onClick={() => setMode("delete")}
+              type="button"
+              $variant="delete"
+            >
+              Delete
+            </StyledButton>
+          </>
         )}
       </ButtonContainer>
       {mode === "delete" && (
@@ -97,6 +108,18 @@ export default function EntryPage() {
             </ButtonBox>
           </DeleteContainer>
           <Overlay onClick={() => setMode("default")} />
+        </>
+      )}
+      {mode === "edit" && (
+        <>
+          <EntryForm
+            buttonText={"Update"} /* need to pass {onSubmit} at some point */
+          ></EntryForm>
+          {/*
+          defaultValues --> same as the entry in question
+          button text --> edit DONE
+          new button --> cancel
+          */}
         </>
       )}
     </>
@@ -150,6 +173,7 @@ const StyledButton = styled.button`
   border: none;
   font-size: inherit;
   text-align: center;
+  cursor: pointer;
 
   ${({ $variant }) =>
     $variant === "delete" &&
@@ -157,6 +181,20 @@ const StyledButton = styled.button`
       background-color: lightgray;
       color: red;
     `}
+`;
+
+const StyledButtonEdit = styled.button`
+  background-color: lightblue;
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  border: 1px solid black;
+  color: yellow;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  font-size: inherit;
+  text-align: center;
+  cursor: pointer;
 `;
 
 const Overlay = styled.div`

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import useSWR from "swr";
 import { useState } from "react";
 
-export default function EntryForm({ onSubmit }) {
+export default function EntryForm({ onSubmit, buttonText, initialValues }) {
   const [selectedTypes, setSelectedTypes] = useState([]);
 
   const {
@@ -129,7 +129,7 @@ export default function EntryForm({ onSubmit }) {
       <Label htmlFor="dateTime">Date and Time *</Label>
       <Input id="dateTime" name="dateTime" type="datetime-local" />
 
-      <button type="submit"> Submit </button>
+      <button type="submit"> {buttonText} </button>
     </FormContainer>
   );
 }
