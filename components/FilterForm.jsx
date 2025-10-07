@@ -1,6 +1,11 @@
 import useSWR from "swr";
+import { useRef } from "react";
 
-export default function FilterForm({ onSubmit }) {
+export default function FilterForm({
+  onSubmit,
+  selectedFilterEmotionId,
+  setSelectedFilterEmotionId,
+}) {
   const {
     data: emotions,
     isLoading,
@@ -8,6 +13,11 @@ export default function FilterForm({ onSubmit }) {
   } = useSWR("/api/emotions", {
     fallbackData: [],
   });
+
+  const formElement = useRef();
+  function resetForm() {
+    formElement.current.reset();
+  }
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -33,7 +43,7 @@ export default function FilterForm({ onSubmit }) {
     onSubmit(data);
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} ref={formElement}>
       <label htmlFor="emotions">Filter: </label>
       <select name="emotions" id="emotions">
         <option value="reset">Show All</option>
@@ -48,6 +58,18 @@ export default function FilterForm({ onSubmit }) {
       <button name="apply" type="submit">
         Apply
       </button>
+      {!selectedFilterEmotionId ||
+        (selectedFilterEmotionId !== "reset" && (
+          <button
+            type="reset"
+            onClick={() => {
+              setSelectedFilterEmotionId("reset");
+              resetForm();
+            }}
+          >
+            Reset
+          </button>
+        ))}
     </form>
   );
 }

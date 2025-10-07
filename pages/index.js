@@ -58,13 +58,11 @@ export default function HomePage() {
 
       {entries.length !== 0 && (
         <>
-          <FilterForm onSubmit={handleFilterSubmit} />{" "}
-          {!selectedFilterEmotionId ||
-            (selectedFilterEmotionId !== "reset" && (
-              <button onClick={() => setSelectedFilterEmotionId("reset")}>
-                Reset
-              </button>
-            ))}
+          <FilterForm
+            onSubmit={handleFilterSubmit}
+            selectedFilterEmotionId={selectedFilterEmotionId}
+            setSelectedFilterEmotionId={setSelectedFilterEmotionId}
+          />{" "}
         </>
       )}
 
