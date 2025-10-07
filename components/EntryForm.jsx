@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import useSWR from "swr";
+import { useState } from "react";
 
 export default function EntryForm({ onSubmit }) {
+  const [selectedTypes, setSelectedTypes] = useState([]);
+
   const {
     data: emotions,
     isLoading,
@@ -29,42 +32,46 @@ export default function EntryForm({ onSubmit }) {
 
   console.log("emotions", emotions);
 
+  // if the user checks a type add it to the state, else remove it
+  function handleCheckBox(event) {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedTypes((prev) => [...prev, value]);
+    } else {
+      setSelectedTypes((prev) => prev.filter((v) => v !== value));
+    }
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-
-    // START Here we are defining a variable which should contain all emotion names of the emotions that were selected --> We want to add a new entry in the same format as all the other objects in the entries collection
-    const emotionKey = Object.keys(data).find((key) => data[key] === "on");
+    // *************** START
 
     // Use destructuring to pull out the non-emotion properties and construct the new object
-    const {
-      [emotionKey]: _, // Destructure and ignore the emotion property
-      ...rest // Capture the rest of the properties
-    } = data;
 
     /* Britta's idea of how to get the id of an emotion
     const idOfEmotion= emotions.filter((emotion)=>emotion.emotions.includes(${emotionKey}))
+     const newObject = {
+      emotions: [idOfEmotion], // Use the found id
+      ...rest, // Spread the remaining properties
+    };
+    or we need to somehow change/add the type string to the entries schema for emotions
+
      */
 
     const newObject = {
-      emotions: [emotionKey], // Use the found key
-      ...rest, // Spread the remaining properties
+      emotions: [...selectedTypes], // Use the found key
+      ...data, // Spread the remaining properties
     };
 
     console.log("form data", data);
 
-    // END
-
-    // Get the names of all possible emotions
-    const emotionKeys = emotions.map((e) => e.emotion); //previously named 'selectedEmotionKeys' by Gemini
-
-    // Check if any emotion key exists in the submitted 'data' object. Checked checkboxes are included in FormData; unchecked ones are not.
-    const isAnyEmotionSelected = emotionKeys.some((key) => key in data);
+    // *************** END
 
     const isDateTimeSelected = data.dateTime;
 
-    if (!isAnyEmotionSelected) {
+    if (selectedTypes.length === 0) {
       alert("Please select at least one emotion.");
       return;
     }
@@ -90,8 +97,14 @@ export default function EntryForm({ onSubmit }) {
         {emotions.map(({ emotion, _id }) => {
           return (
             <div key={_id}>
-              <Input id={emotion} name={emotion} type="checkbox" />
-              <Label htmlFor={emotion}>{emotion}</Label>
+              <Input
+                onChange={handleCheckBox}
+                id={emotion}
+                name="type"
+                type="checkbox"
+                value={_id}
+              />
+              <Label htmlFor="type">{emotion}</Label>
             </div>
           );
         })}
