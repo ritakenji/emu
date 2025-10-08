@@ -7,9 +7,10 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
   // It checks if initialValues.emotions exists and is truthy.
   // If it is, that value is used; otherwise, it uses the empty array [].
   const [selectedTypes, setSelectedTypes] = useState(
-    initialValues.emotions || [] // first case -> for edit, second case -> for create
+    initialValues?.emotions || [] // first case -> for edit, second case -> for create
   );
 
+  console.log("initialValues: ", initialValues);
   const {
     data: emotions,
     isLoading,
@@ -145,7 +146,7 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
         max="10"
         name="intensity"
         step="1"
-        defaultValue={initialValues.intensity}
+        defaultValue={initialValues?.intensity}
       />
       <StyledRange>
         {ticks.map((t) => (
@@ -159,7 +160,7 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
         name="notes"
         type="textfield"
         placeholder="Today I feel ..."
-        defaultValue={initialValues.notes}
+        defaultValue={initialValues?.notes}
       />
 
       <Label htmlFor="dateTime">Date and Time *</Label>
@@ -167,7 +168,7 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
         id="dateTime"
         name="dateTime"
         type="datetime-local"
-        defaultValue={toLocalDateTime(initialValues.dateTime)}
+        defaultValue={toLocalDateTime(initialValues?.dateTime)}
       />
 
       <button type="submit"> {buttonText} </button>
