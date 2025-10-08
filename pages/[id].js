@@ -21,7 +21,7 @@ export default function EntryPage() {
   const [mode, setMode] = useState("default");
 
   if (!id) {
-    return /*null*/;
+    return;
   }
 
   if (!isReady || isLoading) return <h2>Loading...</h2>;
