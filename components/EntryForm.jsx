@@ -53,11 +53,21 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
 
   // if the user checks a type add it to the state, else remove it
   function handleCheckBox(event) {
-    const { value, checked } = event.target;
+    const { value: _id, checked } = event.target;
+
+    // We need to find the full emotion object from the 'emotions' list.
+    const selectedEmotionObject = emotions.find((e) => e._id === _id);
+
     if (checked) {
-      setSelectedTypes((prev) => [...prev, value]);
+      // 1. Check if the emotion is NOT already selected (prevents duplicates)
+      const isAlreadySelected = selectedTypes.some((e) => e._id === _id);
+
+      if (!isAlreadySelected && selectedEmotionObject) {
+        // 2. Add the full emotion object to the state
+        setSelectedTypes((prev) => [...prev, selectedEmotionObject]);
+      }
     } else {
-      setSelectedTypes((prev) => prev.filter((v) => v !== value));
+      setSelectedTypes((prev) => prev.filter((e) => e._id !== _id));
     }
   }
 
@@ -83,8 +93,6 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
       emotions: [...selectedTypes], // Use the found key
       ...data, // Spread the remaining properties
     };
-
-    console.log("form data", data);
 
     // *************** END
 
@@ -122,7 +130,7 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
                 name="type"
                 type="checkbox"
                 value={_id}
-                checked={isSelected(_id)} // if nr of items(emotions) is growing, use 3rd list(done only once), if constant, use tenerary condition(ask thr question every time) --> we decided to go for the list as its cleaner and effective
+                checked={isSelected(_id)} // if nr of items(emotions) is growing, use 3rd list(done only once), if constant, use tenerary condition(ask thr question every time) --> we went for tenerary
               />
               <Label htmlFor="type">{emotion}</Label>
             </div>

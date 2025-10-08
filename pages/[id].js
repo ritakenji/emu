@@ -27,11 +27,23 @@ export default function EntryPage() {
   if (!isReady || isLoading) return <h2>Loading...</h2>;
   if (error) return <h2>Failed to load entry</h2>;
 
+  async function editEntry(entry) {
+    console.log("Editing entry ...");
+
+    const response = await fetch(`/api/entries/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(entry),
+    });
+
+    if (response.ok) {
+      router.push("/");
+    }
+  }
+
   async function deleteEntry() {
-    /*  const confirmed = confirm("Are you sure you want to delete the entry?");
-
-    if (!confirmed) return; */
-
     const response = await fetch(`/api/entries/${id}`, {
       method: "DELETE",
     });
@@ -114,13 +126,9 @@ export default function EntryPage() {
         <>
           <EntryForm
             buttonText={"Update"}
-            initialValues={entry} /* need to pass {onSubmit} at some point */
+            initialValues={entry}
+            onSubmit={editEntry}
           ></EntryForm>
-          {/*
-          defaultValues --> same as the entry in question
-          button text --> edit DONE
-          new button --> cancel
-          */}
         </>
       )}
     </>
