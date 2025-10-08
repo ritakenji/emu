@@ -4,6 +4,8 @@ import Head from "next/head";
 import NavBar from "@/components/Navbar";
 import Header from "@/components/Header";
 import styled from "styled-components";
+import FilterForm from "@/components/FilterForm";
+import { useState } from "react";
 
 export default function HomePage() {
   const {
@@ -14,6 +16,8 @@ export default function HomePage() {
     fallbackData: [],
   });
 
+  const [selectedFilterEmotionId, setSelectedFilterEmotionId] =
+    useState("reset");
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -31,6 +35,18 @@ export default function HomePage() {
   if (!entries) {
     return;
   }
+  const filteredEntries =
+    !selectedFilterEmotionId || selectedFilterEmotionId === "reset"
+      ? entries
+      : entries.filter(
+          (entry) =>
+            Array.isArray(entry.emotions) &&
+            entry.emotions.some((e) => e._id === selectedFilterEmotionId)
+        );
+
+  function handleFilterSubmit({ emotions }) {
+    setSelectedFilterEmotionId(emotions); // "_id" or "reset"
+  }
 
   return (
     <StyledBody>
@@ -39,8 +55,23 @@ export default function HomePage() {
       </Head>
       <Header />
       <h2>Emotion Entry List</h2>
-      {entries.length === 0 && <h3>Please add an entry ...</h3>}
-      <EntryList entries={entries} />
+
+      {entries.length !== 0 && (
+        <FilterForm
+          onSubmit={handleFilterSubmit}
+          selectedFilterEmotionId={selectedFilterEmotionId}
+          setSelectedFilterEmotionId={setSelectedFilterEmotionId}
+        />
+      )}
+
+      {filteredEntries.length === 0 ? (
+        <h3>
+          {entries.length === 0
+            ? "Please add an entry ..."
+            : "No entries match this filter."}
+        </h3>
+      ) : null}
+      <EntryList entries={filteredEntries} />
       <NavBar />
     </StyledBody>
   );
