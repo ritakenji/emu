@@ -3,9 +3,12 @@ import useSWR from "swr";
 import { useState } from "react";
 
 export default function EntryForm({ onSubmit, buttonText, initialValues }) {
-  const [selectedTypes, setSelectedTypes] = useState([]);
-
-  console.log("initialValues.dateTime:", initialValues.dateTime);
+  // Use a logical OR operator (||) to set the initial state.
+  // It checks if initialValues.emotions exists and is truthy.
+  // If it is, that value is used; otherwise, it uses the empty array [].
+  const [selectedTypes, setSelectedTypes] = useState(
+    initialValues.emotions || [] // first case -> for edit, second case -> for create
+  );
 
   const {
     data: emotions,
@@ -14,6 +17,12 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
   } = useSWR("/api/emotions", {
     fallbackData: [],
   });
+
+  const isSelected = (_id) => {
+    // Use the Array.prototype.some() method to check if at least one element
+    // in the selectedTypes array satisfies the condition.
+    return selectedTypes.some((selectedEmotion) => selectedEmotion._id === _id);
+  };
 
   const toLocalDateTime = (isoString) => {
     if (!isoString) return "";
@@ -41,8 +50,6 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
   if (!emotions) {
     return;
   }
-
-  console.log("emotions", emotions);
 
   // if the user checks a type add it to the state, else remove it
   function handleCheckBox(event) {
@@ -115,6 +122,7 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
                 name="type"
                 type="checkbox"
                 value={_id}
+                checked={isSelected(_id)} // if nr of items(emotions) is growing, use 3rd list(done only once), if constant, use tenerary condition(ask thr question every time) --> we decided to go for the list as its cleaner and effective
               />
               <Label htmlFor="type">{emotion}</Label>
             </div>
