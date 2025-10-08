@@ -60,7 +60,7 @@ export default function EntryPage() {
 
   return (
     <>
-      <HeaderWrapper className={entry.emotions[0].emotion.toLowerCase()}>
+      <HeaderWrapper className={entry.emotions?.[0]?.emotion?.toLowerCase()}>
         <GoBackButton onClick={() => router.back()}> ← Back </GoBackButton>
         <h2>{formattedDate}</h2>
       </HeaderWrapper>
@@ -68,7 +68,7 @@ export default function EntryPage() {
         <Bookmark id={id} />
         <section>
           <p>Type:</p>
-          {entry.emotions.map(({ _id, emotion }) => (
+          {entry.emotions?.map(({ _id, emotion }) => (
             <Emotionchips key={_id} className={emotion.toLowerCase()}>
               {emotion}
             </Emotionchips>
@@ -186,7 +186,6 @@ const StyledButton = styled.button`
   background-color: white;
   padding: 0.8rem;
   border-radius: 0.6rem;
-  border: 1px solid black;
   color: black;
   text-decoration: none;
   font-weight: bold;
@@ -226,6 +225,7 @@ const Overlay = styled.div`
   background-color: black;
   opacity: 0.3;
   z-index: 999;
+  cursor: pointer;
 `;
 
 const ModalContainer = styled.div`

@@ -8,11 +8,8 @@ export default function EntryForm({
   initialValues,
   formTitle,
 }) {
-  // Use a logical OR operator (||) to set the initial state.
-  // It checks if initialValues.emotions exists and is truthy.
-  // If it is, that value is used; otherwise, it uses the empty array [].
   const [selectedTypes, setSelectedTypes] = useState(
-    initialValues?.emotions || [] // first case -> for edit, second case -> for create
+    initialValues?.emotions || []
   );
 
   const {
@@ -24,15 +21,13 @@ export default function EntryForm({
   });
 
   const isSelected = (_id) => {
-    // Use the Array.prototype.some() method to check if at least one element
-    // in the selectedTypes array satisfies the condition.
     return selectedTypes.some((selectedEmotion) => selectedEmotion._id === _id);
   };
 
   const toLocalDateTime = (isoString) => {
     if (!isoString) return "";
     const date = new Date(isoString);
-    const tzOffset = date.getTimezoneOffset() * 60000; // in ms
+    const tzOffset = date.getTimezoneOffset() * 60000;
     const localISO = new Date(date.getTime() - tzOffset)
       .toISOString()
       .slice(0, 16);
@@ -56,22 +51,18 @@ export default function EntryForm({
     return;
   }
 
-  // if the user checks a type add it to the state, else remove it
   function handleCheckBox(event) {
     const { value: _id, checked } = event.target;
 
-    // We need to find the full emotion object from the 'emotions' list.
     const selectedEmotionObject = emotions.find((e) => e._id === _id);
 
-    if (checked) {
-      // 1. Check if the emotion is NOT already selected (prevents duplicates)
-      const isAlreadySelected = selectedTypes.some((e) => e._id === _id);
-
-      if (!isAlreadySelected && selectedEmotionObject) {
-        // 2. Add the full emotion object to the state
-        setSelectedTypes((prev) => [...prev, selectedEmotionObject]);
-      }
-    } else {
+    if (
+      checked &&
+      selectedEmotionObject &&
+      !selectedTypes.some((e) => e._id === _id)
+    ) {
+      setSelectedTypes((prev) => [...prev, selectedEmotionObject]);
+    } else if (!checked) {
       setSelectedTypes((prev) => prev.filter((e) => e._id !== _id));
     }
   }
@@ -80,14 +71,11 @@ export default function EntryForm({
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    // *************** START
-    // Use destructuring to pull out the non-emotion properties and construct the new object
 
     const newObject = {
-      emotions: [...selectedTypes], // Use the found key
-      ...data, // Spread the remaining properties
+      emotions: [...selectedTypes],
+      ...data,
     };
-    // *************** END
 
     const isDateTimeSelected = data.dateTime;
 
@@ -115,21 +103,19 @@ export default function EntryForm({
       <h2>{formTitle}</h2>
       <Label>Type *</Label>
       <EmotionContainer>
-        {emotions.map(({ emotion, _id }) => {
-          return (
-            <div key={_id}>
-              <Input
-                onChange={handleCheckBox}
-                id={emotion}
-                name="type"
-                type="checkbox"
-                value={_id}
-                checked={isSelected(_id)} // if nr of items(emotions) is growing, use 3rd list(done only once), if constant, use tenerary condition(ask thr question every time) --> we went for tenerary
-              />
-              <Label htmlFor="type">{emotion}</Label>
-            </div>
-          );
-        })}
+        {emotions.map(({ emotion, _id }) => (
+          <div key={_id}>
+            <Input
+              onChange={handleCheckBox}
+              id={emotion}
+              name="type"
+              type="checkbox"
+              value={_id}
+              checked={isSelected(_id)}
+            />
+            <Label htmlFor="type">{emotion}</Label>
+          </div>
+        ))}
       </EmotionContainer>
 
       <Label htmlFor="intensity">Intensity *</Label>

@@ -13,7 +13,6 @@ export default function Bookmarks() {
   } = useSWR("/api/entries", {
     fallbackData: [],
   });
-  // The following line is making the bookmark state accessible in this file although it's implemented in the bookmark component
   const [bookmark] = useLocalStorageState("bookmark");
 
   if (isLoading) {

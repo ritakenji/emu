@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { BookmarkIcon, House, PlusCircle } from "lucide-react";
 
 export default function NavBar() {
-  const { pathname } = useRouter(); // e.g. "/" or "/bookmarks"
+  const { pathname } = useRouter(); 
   const isHome = pathname === "/";
   const isBookmarks = pathname === "/bookmarks";
   const isCreate = pathname === "/create";
@@ -59,8 +59,6 @@ const StyledLink = styled(Link)`
 const iconCss = css`
   width: 30px;
   height: 30px;
-  /* stroke: ${({ $active }) =>
-    $active ? "var(--color-dark)" : "var(--color-dark)"}; */
   stroke: var(--color-dark);
 `;
 
