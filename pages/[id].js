@@ -3,6 +3,7 @@ import useSWR from "swr";
 import styled, { css } from "styled-components";
 import Bookmark from "@/components/Bookmark";
 import { useState } from "react";
+import EntryForm from "@/components/EntryForm";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -20,17 +21,29 @@ export default function EntryPage() {
   const [mode, setMode] = useState("default");
 
   if (!id) {
-    return /*null*/;
+    return;
   }
 
   if (!isReady || isLoading) return <h2>Loading...</h2>;
   if (error) return <h2>Failed to load entry</h2>;
 
+  async function editEntry(entry) {
+    console.log("Editing entry ...");
+
+    const response = await fetch(`/api/entries/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(entry),
+    });
+
+    if (response.ok) {
+      router.push("/");
+    }
+  }
+
   async function deleteEntry() {
-    /*  const confirmed = confirm("Are you sure you want to delete the entry?");
-
-    if (!confirmed) return; */
-
     const response = await fetch(`/api/entries/${id}`, {
       method: "DELETE",
     });
@@ -40,14 +53,14 @@ export default function EntryPage() {
     }
   }
 
-  const formattedDate = new Date(entry.dateTime).toLocaleString("de-DE", {
+  const formattedDate = new Date(entry.dateTime).toLocaleString("en-GB", {
     dateStyle: "medium",
     timeStyle: "short",
   });
 
   return (
     <>
-      <HeaderWrapper className={entry.emotions[0].emotion.toLowerCase()}>
+      <HeaderWrapper className={entry.emotions?.[0]?.emotion?.toLowerCase()}>
         <GoBackButton onClick={() => router.back()}> ← Back </GoBackButton>
         <h2>{formattedDate}</h2>
       </HeaderWrapper>
@@ -55,7 +68,7 @@ export default function EntryPage() {
         <Bookmark id={id} />
         <section>
           <p>Type:</p>
-          {entry.emotions.map(({ _id, emotion }) => (
+          {entry.emotions?.map(({ _id, emotion }) => (
             <Emotionchips key={_id} className={emotion.toLowerCase()}>
               {emotion}
             </Emotionchips>
@@ -66,18 +79,28 @@ export default function EntryPage() {
       </DetailWrapper>
       <ButtonContainer>
         {mode === "default" && (
-          <StyledButton
-            onClick={() => setMode("delete")}
-            type="button"
-            $variant="delete"
-          >
-            Delete
-          </StyledButton>
+          <>
+            <StyledButtonEdit
+              onClick={() => setMode("edit")}
+              type="button"
+              $variant="edit"
+            >
+              Edit
+            </StyledButtonEdit>
+
+            <StyledButton
+              onClick={() => setMode("delete")}
+              type="button"
+              $variant="delete"
+            >
+              Delete
+            </StyledButton>
+          </>
         )}
       </ButtonContainer>
       {mode === "delete" && (
         <>
-          <DeleteContainer>
+          <ModalContainer>
             <p>Are you sure you want to delete the entry?</p>
             <ButtonBox>
               <StyledButton
@@ -95,7 +118,27 @@ export default function EntryPage() {
                 Cancel
               </StyledButton>
             </ButtonBox>
-          </DeleteContainer>
+          </ModalContainer>
+          <Overlay onClick={() => setMode("default")} />
+        </>
+      )}
+      {mode === "edit" && (
+        <>
+          <ModalContainer>
+            <EntryForm
+              buttonText={"Update"}
+              initialValues={entry}
+              onSubmit={editEntry}
+              formTitle={"Edit Entry"}
+            ></EntryForm>
+            <StyledButton
+              onClick={() => setMode("default")}
+              type="button"
+              $variant="delete"
+            >
+              Cancel
+            </StyledButton>
+          </ModalContainer>
           <Overlay onClick={() => setMode("default")} />
         </>
       )}
@@ -143,13 +186,13 @@ const StyledButton = styled.button`
   background-color: white;
   padding: 0.8rem;
   border-radius: 0.6rem;
-  border: 1px solid black;
   color: black;
   text-decoration: none;
   font-weight: bold;
   border: none;
   font-size: inherit;
   text-align: center;
+  cursor: pointer;
 
   ${({ $variant }) =>
     $variant === "delete" &&
@@ -157,6 +200,20 @@ const StyledButton = styled.button`
       background-color: lightgray;
       color: red;
     `}
+`;
+
+const StyledButtonEdit = styled.button`
+  background-color: lightblue;
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  border: 1px solid black;
+  color: yellow;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  font-size: inherit;
+  text-align: center;
+  cursor: pointer;
 `;
 
 const Overlay = styled.div`
@@ -168,9 +225,10 @@ const Overlay = styled.div`
   background-color: black;
   opacity: 0.3;
   z-index: 999;
+  cursor: pointer;
 `;
 
-const DeleteContainer = styled.div`
+const ModalContainer = styled.div`
   background-color: white;
   position: fixed;
   display: flex;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import styles from "@/styles";
 
 export default function Header() {
   return <Title>Emu App</Title>;

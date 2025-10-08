@@ -16,9 +16,6 @@ export default function HomePage() {
     fallbackData: [],
   });
 
-  const [selectedFilterEmotionId, setSelectedFilterEmotionId] =
-    useState("reset");
-
   if (isLoading) {
     return <p>Loading...</p>;
   }

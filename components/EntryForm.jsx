@@ -2,8 +2,15 @@ import styled from "styled-components";
 import useSWR from "swr";
 import { useState } from "react";
 
-export default function EntryForm({ onSubmit }) {
-  const [selectedTypes, setSelectedTypes] = useState([]);
+export default function EntryForm({
+  onSubmit,
+  buttonText,
+  initialValues,
+  formTitle,
+}) {
+  const [selectedTypes, setSelectedTypes] = useState(
+    initialValues?.emotions || []
+  );
 
   const {
     data: emotions,
@@ -12,6 +19,20 @@ export default function EntryForm({ onSubmit }) {
   } = useSWR("/api/emotions", {
     fallbackData: [],
   });
+
+  const isSelected = (_id) => {
+    return selectedTypes.some((selectedEmotion) => selectedEmotion._id === _id);
+  };
+
+  const toLocalDateTime = (isoString) => {
+    if (!isoString) return "";
+    const date = new Date(isoString);
+    const tzOffset = date.getTimezoneOffset() * 60000;
+    const localISO = new Date(date.getTime() - tzOffset)
+      .toISOString()
+      .slice(0, 16);
+    return localISO;
+  };
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -30,15 +51,19 @@ export default function EntryForm({ onSubmit }) {
     return;
   }
 
-  console.log("emotions", emotions);
-
-  // if the user checks a type add it to the state, else remove it
   function handleCheckBox(event) {
-    const { value, checked } = event.target;
-    if (checked) {
-      setSelectedTypes((prev) => [...prev, value]);
-    } else {
-      setSelectedTypes((prev) => prev.filter((v) => v !== value));
+    const { value: _id, checked } = event.target;
+
+    const selectedEmotionObject = emotions.find((e) => e._id === _id);
+
+    if (
+      checked &&
+      selectedEmotionObject &&
+      !selectedTypes.some((e) => e._id === _id)
+    ) {
+      setSelectedTypes((prev) => [...prev, selectedEmotionObject]);
+    } else if (!checked) {
+      setSelectedTypes((prev) => prev.filter((e) => e._id !== _id));
     }
   }
 
@@ -46,28 +71,11 @@ export default function EntryForm({ onSubmit }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    // *************** START
-
-    // Use destructuring to pull out the non-emotion properties and construct the new object
-
-    /* Britta's idea of how to get the id of an emotion
-    const idOfEmotion= emotions.filter((emotion)=>emotion.emotions.includes(${emotionKey}))
-     const newObject = {
-      emotions: [idOfEmotion], // Use the found id
-      ...rest, // Spread the remaining properties
-    };
-    or we need to somehow change/add the type string to the entries schema for emotions
-
-     */
 
     const newObject = {
-      emotions: [...selectedTypes], // Use the found key
-      ...data, // Spread the remaining properties
+      emotions: [...selectedTypes],
+      ...data,
     };
-
-    console.log("form data", data);
-
-    // *************** END
 
     const isDateTimeSelected = data.dateTime;
 
@@ -92,26 +100,33 @@ export default function EntryForm({ onSubmit }) {
 
   return (
     <FormContainer onSubmit={handleSubmit}>
+      <h2>{formTitle}</h2>
       <Label>Type *</Label>
       <EmotionContainer>
-        {emotions.map(({ emotion, _id }) => {
-          return (
-            <div key={_id}>
-              <Input
-                onChange={handleCheckBox}
-                id={emotion}
-                name="type"
-                type="checkbox"
-                value={_id}
-              />
-              <Label htmlFor="type">{emotion}</Label>
-            </div>
-          );
-        })}
+        {emotions.map(({ emotion, _id }) => (
+          <div key={_id}>
+            <Input
+              onChange={handleCheckBox}
+              id={emotion}
+              name="type"
+              type="checkbox"
+              value={_id}
+              checked={isSelected(_id)}
+            />
+            <Label htmlFor="type">{emotion}</Label>
+          </div>
+        ))}
       </EmotionContainer>
 
       <Label htmlFor="intensity">Intensity *</Label>
-      <input type="range" min="1" max="10" name="intensity" step="1" />
+      <input
+        type="range"
+        min="1"
+        max="10"
+        name="intensity"
+        step="1"
+        defaultValue={initialValues?.intensity}
+      />
       <StyledRange>
         {ticks.map((t) => (
           <span key={t}>{t}</span>
@@ -124,12 +139,18 @@ export default function EntryForm({ onSubmit }) {
         name="notes"
         type="textfield"
         placeholder="Today I feel ..."
+        defaultValue={initialValues?.notes}
       />
 
       <Label htmlFor="dateTime">Date and Time *</Label>
-      <Input id="dateTime" name="dateTime" type="datetime-local" />
+      <Input
+        id="dateTime"
+        name="dateTime"
+        type="datetime-local"
+        defaultValue={toLocalDateTime(initialValues?.dateTime)}
+      />
 
-      <button type="submit"> Submit </button>
+      <button type="submit"> {buttonText} </button>
     </FormContainer>
   );
 }
@@ -152,6 +173,7 @@ const Label = styled.label`
 
 const EmotionContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
 
   > div {
     margin-right: 20px;

@@ -17,12 +17,12 @@ export default async function handler(request, response) {
       return;
     }
 
-    /*  if (request.method === "PUT") {
+    if (request.method === "PUT") {
       const updateEntry = request.body;
       await Entry.findByIdAndUpdate(id, updateEntry);
       response.status(200).json({ message: "Entry successfully updated" });
       return;
-    } */
+    }
 
     if (request.method === "DELETE") {
       const deleteEntry = await Entry.findByIdAndDelete(id);

@@ -1,7 +1,6 @@
 import EntryCard from "./EntryCard";
 import styled from "styled-components";
 import Link from "next/link";
-import Bookmark from "./Bookmark";
 
 export default function EntryList({ entries }) {
   return (

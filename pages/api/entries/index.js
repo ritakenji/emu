@@ -19,8 +19,8 @@ export default async function handler(request, response) {
       return;
     }
     if (request.method === "POST") {
-      const entryData = request.body; //Where can the FE send info on the new place to the BE? Int he body of the request
-      await Entry.create(entryData); //create aka add for POST method in BE
+      const entryData = request.body;
+      await Entry.create(entryData); 
       response.status(200).json({ status: "Entry created." });
       return;
     }
