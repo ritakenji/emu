@@ -2,7 +2,12 @@ import styled from "styled-components";
 import useSWR from "swr";
 import { useState } from "react";
 
-export default function EntryForm({ onSubmit, buttonText, initialValues }) {
+export default function EntryForm({
+  onSubmit,
+  buttonText,
+  initialValues,
+  formTitle,
+}) {
   // Use a logical OR operator (||) to set the initial state.
   // It checks if initialValues.emotions exists and is truthy.
   // If it is, that value is used; otherwise, it uses the empty array [].
@@ -107,6 +112,7 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
 
   return (
     <FormContainer onSubmit={handleSubmit}>
+      <h2>{formTitle}</h2>
       <Label>Type *</Label>
       <EmotionContainer>
         {emotions.map(({ emotion, _id }) => {

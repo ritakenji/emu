@@ -100,7 +100,7 @@ export default function EntryPage() {
       </ButtonContainer>
       {mode === "delete" && (
         <>
-          <DeleteContainer>
+          <ModalContainer>
             <p>Are you sure you want to delete the entry?</p>
             <ButtonBox>
               <StyledButton
@@ -118,7 +118,7 @@ export default function EntryPage() {
                 Cancel
               </StyledButton>
             </ButtonBox>
-          </DeleteContainer>
+          </ModalContainer>
           <Overlay onClick={() => setMode("default")} />
         </>
       )}
@@ -128,7 +128,30 @@ export default function EntryPage() {
             buttonText={"Update"}
             initialValues={entry}
             onSubmit={editEntry}
+            formTitle={"Edit Entry"}
           ></EntryForm>
+          {/* 
+          
+         <ModalContainer>
+            <p></p>
+            <ButtonBox>
+              <StyledButton
+                onClick={deleteEntry}
+                type="button"
+                $variant="delete"
+              >
+                Delete
+              </StyledButton>
+              <StyledButton
+                onClick={() => setMode("default")}
+                type="button"
+                $variant="delete"
+              >
+                Cancel
+              </StyledButton>
+            </ButtonBox>
+          </ModalContainer>
+          <Overlay onClick={() => setMode("default")} /> */}
         </>
       )}
     </>
@@ -217,7 +240,7 @@ const Overlay = styled.div`
   z-index: 999;
 `;
 
-const DeleteContainer = styled.div`
+const ModalContainer = styled.div`
   background-color: white;
   position: fixed;
   display: flex;

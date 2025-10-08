@@ -27,9 +27,12 @@ export default function Create() {
 
   return (
     <>
-      <h2>Add entry</h2>
       <StyledBackLink href="/">back</StyledBackLink>
-      <EntryForm onSubmit={addEntry} buttonText={"Submit"} />
+      <EntryForm
+        onSubmit={addEntry}
+        buttonText={"Submit"}
+        formTitle={"Add Entry"}
+      />
       <NavBar />
     </>
   );
