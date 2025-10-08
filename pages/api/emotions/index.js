@@ -16,18 +16,6 @@ export default async function handler(request, response) {
       response.status(200).json(emotions);
       return;
     }
-
-    /* if (request.method === "PUT") {
-      const updateEntry = request.body;
-      await Entry.findByIdAndUpdate(id, updateEntry);
-      response.status(200).json({ message: "Entry successfully updated" });
-      return;
-    }
-    if (request.method === "DELETE") {
-      const deleteEntry = await Entry.findByIdAndDelete(id);
-      response.status(200).json({ message: "Entry successfully deleted" });
-      return;
-    }*/
   } catch (error) {
     console.error(error);
     response.status(500).json({ message: "Internal Server Error" });

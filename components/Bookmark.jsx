@@ -6,6 +6,7 @@ export default function Bookmark({ id }) {
   const [bookmark, setBookmark] = useLocalStorageState("bookmark", {
     defaultValue: [],
   });
+
   function handleToggleBookmark() {
     setBookmark((prevState) =>
       prevState.includes(id)
@@ -13,6 +14,7 @@ export default function Bookmark({ id }) {
         : [...prevState, id]
     );
   }
+  
   return (
     <StyledButton
       type="button"

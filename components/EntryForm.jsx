@@ -10,7 +10,6 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
     initialValues?.emotions || [] // first case -> for edit, second case -> for create
   );
 
-  console.log("initialValues: ", initialValues);
   const {
     data: emotions,
     isLoading,
@@ -77,24 +76,12 @@ export default function EntryForm({ onSubmit, buttonText, initialValues }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     // *************** START
-
     // Use destructuring to pull out the non-emotion properties and construct the new object
-
-    /* Britta's idea of how to get the id of an emotion
-    const idOfEmotion= emotions.filter((emotion)=>emotion.emotions.includes(${emotionKey}))
-     const newObject = {
-      emotions: [idOfEmotion], // Use the found id
-      ...rest, // Spread the remaining properties
-    };
-    or we need to somehow change/add the type string to the entries schema for emotions
-
-     */
 
     const newObject = {
       emotions: [...selectedTypes], // Use the found key
       ...data, // Spread the remaining properties
     };
-
     // *************** END
 
     const isDateTimeSelected = data.dateTime;

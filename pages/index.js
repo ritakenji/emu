@@ -14,7 +14,6 @@ export default function HomePage() {
     fallbackData: [],
   });
 
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
