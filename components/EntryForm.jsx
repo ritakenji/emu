@@ -187,6 +187,7 @@ const Label = styled.label`
 
 const EmotionContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
 
   > div {
     margin-right: 20px;

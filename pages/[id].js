@@ -124,34 +124,22 @@ export default function EntryPage() {
       )}
       {mode === "edit" && (
         <>
-          <EntryForm
-            buttonText={"Update"}
-            initialValues={entry}
-            onSubmit={editEntry}
-            formTitle={"Edit Entry"}
-          ></EntryForm>
-          {/* 
-          
-         <ModalContainer>
-            <p></p>
-            <ButtonBox>
-              <StyledButton
-                onClick={deleteEntry}
-                type="button"
-                $variant="delete"
-              >
-                Delete
-              </StyledButton>
-              <StyledButton
-                onClick={() => setMode("default")}
-                type="button"
-                $variant="delete"
-              >
-                Cancel
-              </StyledButton>
-            </ButtonBox>
+          <ModalContainer>
+            <EntryForm
+              buttonText={"Update"}
+              initialValues={entry}
+              onSubmit={editEntry}
+              formTitle={"Edit Entry"}
+            ></EntryForm>
+            <StyledButton
+              onClick={() => setMode("default")}
+              type="button"
+              $variant="delete"
+            >
+              Cancel
+            </StyledButton>
           </ModalContainer>
-          <Overlay onClick={() => setMode("default")} /> */}
+          <Overlay onClick={() => setMode("default")} />
         </>
       )}
     </>
