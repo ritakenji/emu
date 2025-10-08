@@ -57,13 +57,11 @@ export default function HomePage() {
       <h2>Emotion Entry List</h2>
 
       {entries.length !== 0 && (
-        <>
-          <FilterForm
-            onSubmit={handleFilterSubmit}
-            selectedFilterEmotionId={selectedFilterEmotionId}
-            setSelectedFilterEmotionId={setSelectedFilterEmotionId}
-          />{" "}
-        </>
+        <FilterForm
+          onSubmit={handleFilterSubmit}
+          selectedFilterEmotionId={selectedFilterEmotionId}
+          setSelectedFilterEmotionId={setSelectedFilterEmotionId}
+        />
       )}
 
       {filteredEntries.length === 0 ? (

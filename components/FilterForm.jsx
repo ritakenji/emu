@@ -16,6 +16,7 @@ export default function FilterForm({
 
   const formElement = useRef();
   function resetForm() {
+    setSelectedFilterEmotionId("reset");
     formElement.current.reset();
   }
 
@@ -47,29 +48,20 @@ export default function FilterForm({
       <label htmlFor="emotions">Filter: </label>
       <select name="emotions" id="emotions">
         <option value="reset">Show All</option>
-        {emotions.map(({ emotion, _id }) => {
-          return (
-            <option key={_id} value={_id}>
-              {emotion}
-            </option>
-          );
-        })}
+        {emotions.map(({ emotion, _id }) => (
+          <option key={_id} value={_id}>
+            {emotion}
+          </option>
+        ))}
       </select>
       <button name="apply" type="submit">
         Apply
       </button>
-      {!selectedFilterEmotionId ||
-        (selectedFilterEmotionId !== "reset" && (
-          <button
-            type="reset"
-            onClick={() => {
-              setSelectedFilterEmotionId("reset");
-              resetForm();
-            }}
-          >
-            Reset
-          </button>
-        ))}
+      {selectedFilterEmotionId && selectedFilterEmotionId !== "reset" && (
+        <button type="reset" onClick={resetForm}>
+          Reset
+        </button>
+      )}
     </form>
   );
 }
