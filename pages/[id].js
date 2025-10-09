@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled, { css } from "styled-components";
 import Bookmark from "@/components/Bookmark";
-import { useState } from "react";
 import EntryForm from "@/components/EntryForm";
 
 export default function EntryPage() {
@@ -14,9 +14,7 @@ export default function EntryPage() {
     data: entry,
     isLoading,
     error,
-  } = useSWR(`/api/entries/${id ? id : ""}`, {
-    fallbackData: {},
-  });
+  } = useSWR(id ? `/api/entries/${id}` : null, { fallbackData: {} });
 
   const [mode, setMode] = useState("default");
 
@@ -24,8 +22,8 @@ export default function EntryPage() {
     return;
   }
 
-  if (!isReady || isLoading) return <h2>Loading...</h2>;
-  if (error) return <h2>Failed to load entry</h2>;
+  if (!isReady || isLoading) return <h2 aria-live="polite">Loading...</h2>;
+  if (error) return <h2 aria-live="assertive">Failed to load entry</h2>;
 
   async function editEntry(entry) {
     console.log("Editing entry ...");
@@ -61,18 +59,25 @@ export default function EntryPage() {
   return (
     <>
       <HeaderWrapper className={entry.emotions?.[0]?.emotion?.toLowerCase()}>
-        <GoBackButton onClick={() => router.back()}> ← Back </GoBackButton>
-        <h2>{formattedDate}</h2>
+        <GoBackButton aria-label="Go back" onClick={() => router.back()}>
+          {" "}
+          ← Back{" "}
+        </GoBackButton>
+        {formattedDate && <h2>{formattedDate}</h2>}
       </HeaderWrapper>
       <DetailWrapper>
         <Bookmark id={id} />
-        <section>
-          <p>Type:</p>
-          {entry.emotions?.map(({ _id, emotion }) => (
-            <Emotionchips key={_id} className={emotion.toLowerCase()}>
-              {emotion}
-            </Emotionchips>
-          ))}
+        <section aria-labelledby="emotion-types">
+          <h3 id="emotion-types">Type:</h3>
+          <EmotionList>
+            {entry.emotions?.map(({ _id, emotion }) => (
+              <EmotionItem key={_id}>
+                <EmotionChip className={emotion.toLowerCase()}>
+                  {emotion}
+                </EmotionChip>
+              </EmotionItem>
+            ))}
+          </EmotionList>
         </section>
         <p>Intensity: {entry.intensity}</p>
         <p>Notes: {entry.notes}</p>
@@ -100,7 +105,8 @@ export default function EntryPage() {
       </ButtonContainer>
       {mode === "delete" && (
         <>
-          <ModalContainer>
+          <ModalContainer aria-labelledby="delete-title">
+            <h2 id="delete-title">Delete entry</h2>
             <p>Are you sure you want to delete the entry?</p>
             <ButtonBox>
               <StyledButton
@@ -119,12 +125,13 @@ export default function EntryPage() {
               </StyledButton>
             </ButtonBox>
           </ModalContainer>
-          <Overlay onClick={() => setMode("default")} />
+          <Overlay aria-hidden="true" onClick={() => setMode("default")} />
         </>
       )}
       {mode === "edit" && (
         <>
-          <ModalContainer>
+          <ModalContainer aria-labelledby="edit-title">
+            <h2 id="edit-title">Edit Entry</h2>
             <EntryForm
               buttonText={"Update"}
               initialValues={entry}
@@ -139,7 +146,7 @@ export default function EntryPage() {
               Cancel
             </StyledButton>
           </ModalContainer>
-          <Overlay onClick={() => setMode("default")} />
+          <Overlay aria-hidden="true" onClick={() => setMode("default")} />
         </>
       )}
     </>
@@ -155,22 +162,48 @@ const GoBackButton = styled.button`
   font-weight: 700;
 `;
 
-const HeaderWrapper = styled.div`
+const HeaderWrapper = styled.header`
   padding: 1.5rem 1.5rem;
 `;
 
-const DetailWrapper = styled.div`
+const DetailWrapper = styled.article`
   position: relative;
   padding: 1.5rem;
 `;
 
-const Emotionchips = styled.span`
+/* const Emotionchips = styled.span`
   padding: 5px 8px;
   border-radius: 5px;
   margin: 0 5px;
+`; */
+const EmotionList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem; /* space between chips */
+  margin: 0.25rem 0 1rem;
+  padding: 0;
+  list-style: none;
 `;
 
-const ButtonContainer = styled.section`
+const EmotionItem = styled.li`
+  list-style: none;
+`;
+
+const EmotionChip = styled.span`
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06),
+    /* subtle outer */ inset 0 0 0 1px rgba(0, 0, 0, 0.06); /* hairline border */
+  /* default look */
+  background: #eee;
+  color: #222;
+`;
+
+const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -210,13 +243,12 @@ const StyledButtonEdit = styled.button`
   color: yellow;
   text-decoration: none;
   font-weight: bold;
-  border: none;
   font-size: inherit;
   text-align: center;
   cursor: pointer;
 `;
 
-const Overlay = styled.div`
+const Overlay = styled.div.attrs({ "aria-hidden": "true" })`
   position: fixed;
   top: 0;
   left: 0;
@@ -228,7 +260,10 @@ const Overlay = styled.div`
   cursor: pointer;
 `;
 
-const ModalContainer = styled.div`
+const ModalContainer = styled.div.attrs({
+  role: "dialog",
+  "aria-modal": "true",
+})`
   background-color: white;
   position: fixed;
   display: flex;
