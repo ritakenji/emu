@@ -10,7 +10,7 @@ export default function NavBar() {
   const isCreate = pathname === "/create";
 
   return (
-    <Navigation>
+    <Navigation role="navigation" aria-label="Main navigation">
       <StyledLink
         href="/"
         aria-current={isHome ? "page" : undefined}
@@ -39,7 +39,7 @@ export default function NavBar() {
   );
 }
 
-const Navigation = styled.div`
+const Navigation = styled.nav`
   background-color: var(--color-light);
   display: flex;
   justify-content: space-around;
