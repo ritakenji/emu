@@ -6,14 +6,21 @@ export default function EntryList({ entries }) {
   return (
     <ListContainer>
       {entries.map((entry) => (
-        <EntryDetailsLink href={`/${entry._id}`} key={entry._id}>
-          <EntryCard
-            type={entry.emotions}
-            intensity={entry.intensity}
-            dateTime={entry.dateTime}
-            id={entry._id}
-          />
-        </EntryDetailsLink>
+        <li key={entry._id}>
+          <EntryDetailsLink
+            href={`/${entry._id}`}
+            aria-label={`View details for entry on ${new Date(
+              entry.dateTime
+            ).toLocaleDateString("en-GB")}`}
+          >
+            <EntryCard
+              type={entry.emotions}
+              intensity={entry.intensity}
+              dateTime={entry.dateTime}
+              id={entry._id}
+            />
+          </EntryDetailsLink>
+        </li>
       ))}
     </ListContainer>
   );
