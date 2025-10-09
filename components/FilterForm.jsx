@@ -14,10 +14,10 @@ export default function FilterForm({
     fallbackData: [],
   });
 
-  const formElement = useRef();
+  const formRef = useRef();
   function resetForm() {
     setSelectedFilterEmotionId("reset");
-    formElement.current.reset();
+    formRef.current.reset();
   }
 
   if (isLoading) {
@@ -44,7 +44,7 @@ export default function FilterForm({
     onSubmit(data);
   }
   return (
-    <form onSubmit={handleSubmit} ref={formElement}>
+    <form onSubmit={handleSubmit} ref={formRef}>
       <label htmlFor="emotions">Filter: </label>
       <select
         name="emotions"
