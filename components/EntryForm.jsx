@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import useSWR from "swr";
 import { useState } from "react";
+import useSWR from "swr";
+import styled from "styled-components";
 
 export default function EntryForm({
   onSubmit,
@@ -35,14 +35,20 @@ export default function EntryForm({
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <p role="status" aria-live="polite">
+        Loading...
+      </p>
+    );
   }
 
   if (error) {
     return (
       <>
-        <p>Sorry, we could not retrieve the entry data at the moment.</p>
-        <p>Please try again later.</p>
+        <p aria-live="assertive">
+          Sorry, we could not retrieve the entry data at the moment.
+        </p>
+        <p aria-live="assertive">Please try again later.</p>
       </>
     );
   }
@@ -51,16 +57,11 @@ export default function EntryForm({
     return;
   }
 
-  function handleCheckBox(event) {
+  function handleCheckbox(event) {
     const { value: _id, checked } = event.target;
-
     const selectedEmotionObject = emotions.find((e) => e._id === _id);
 
-    if (
-      checked &&
-      selectedEmotionObject &&
-      !selectedTypes.some((e) => e._id === _id)
-    ) {
+    if (checked && selectedEmotionObject && !isSelected(_id)) {
       setSelectedTypes((prev) => [...prev, selectedEmotionObject]);
     } else if (!checked) {
       setSelectedTypes((prev) => prev.filter((e) => e._id !== _id));
@@ -77,20 +78,17 @@ export default function EntryForm({
       ...data,
     };
 
-    const isDateTimeSelected = data.dateTime;
-
     if (selectedTypes.length === 0) {
       alert("Please select at least one emotion.");
       return;
     }
 
-    if (!isDateTimeSelected) {
+    if (!data.dateTime) {
       alert("Please select date and time.");
       return;
     }
 
     onSubmit(newObject);
-    console.log("newObject:", newObject);
   }
 
   const ticks = [];
@@ -101,32 +99,49 @@ export default function EntryForm({
   return (
     <FormContainer onSubmit={handleSubmit}>
       <h2>{formTitle}</h2>
-      <Label>Type *</Label>
-      <EmotionContainer>
-        {emotions.map(({ emotion, _id }) => (
-          <div key={_id}>
-            <Input
-              onChange={handleCheckBox}
-              id={emotion}
-              name="type"
-              type="checkbox"
-              value={_id}
-              checked={isSelected(_id)}
-            />
-            <Label htmlFor="type">{emotion}</Label>
-          </div>
-        ))}
-      </EmotionContainer>
+      <Fieldset aria-required="true">
+        <Legend>Type *</Legend>
+        <OptionsList>
+          {emotions.map(({ emotion, _id }) => {
+            const inputId = `emotion-${_id}`;
+            return (
+              <li key={_id}>
+                <Checkbox
+                  onChange={handleCheckbox}
+                  id={inputId}
+                  name="type"
+                  type="checkbox"
+                  value={_id}
+                  checked={isSelected(_id)}
+                />
+                <Label htmlFor={inputId}>{emotion}</Label>
+              </li>
+            );
+          })}
+        </OptionsList>
+      </Fieldset>
 
-      <Label htmlFor="intensity">Intensity *</Label>
-      <input
+      <Label htmlFor="intensity" aria-required="true">
+        Intensity *
+      </Label>
+      <Range
+        id="intensity"
+        name="intensity"
         type="range"
         min="1"
         max="10"
-        name="intensity"
         step="1"
-        defaultValue={initialValues?.intensity}
+        defaultValue={initialValues?.intensity ?? 5}
+        list="intensity-ticks"
+        required
+        aria-describedby="intensity-help"
       />
+
+      <datalist id="intensity-ticks">
+        {ticks.map((t) => (
+          <option key={t} value={t} label={String(t)} />
+        ))}
+      </datalist>
       <StyledRange>
         {ticks.map((t) => (
           <span key={t}>{t}</span>
@@ -134,15 +149,18 @@ export default function EntryForm({
       </StyledRange>
 
       <Label htmlFor="notes">Notes</Label>
-      <Input
+
+      <Textarea
         id="notes"
         name="notes"
-        type="textfield"
-        placeholder="Today I feel ..."
+        placeholder="Today I feel …"
         defaultValue={initialValues?.notes}
+        rows={4}
       />
 
-      <Label htmlFor="dateTime">Date and Time *</Label>
+      <Label htmlFor="dateTime" aria-required="true">
+        Date and Time *
+      </Label>
       <Input
         id="dateTime"
         name="dateTime"
@@ -150,7 +168,7 @@ export default function EntryForm({
         defaultValue={toLocalDateTime(initialValues?.dateTime)}
       />
 
-      <button type="submit"> {buttonText} </button>
+      <SubmitButton type="submit"> {buttonText} </SubmitButton>
     </FormContainer>
   );
 }
@@ -158,6 +176,25 @@ export default function EntryForm({
 const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
+`;
+const Fieldset = styled.fieldset`
+  border: 0;
+  padding: 0;
+  margin: 0;
+`;
+
+const Legend = styled.legend`
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+`;
+
+const OptionsList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 `;
 
 const Input = styled.input`
@@ -167,17 +204,28 @@ const Input = styled.input`
   border-radius: 0.5rem;
 `;
 
+const Checkbox = styled(Input)`
+  margin-right: 0.35rem;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border-radius: 0.25rem;
+`;
+
+const Range = styled.input`
+  width: 100%;
+`;
+
 const Label = styled.label`
   font-weight: bold;
 `;
 
-const EmotionContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
-  > div {
-    margin-right: 20px;
-  }
+const Textarea = styled.textarea`
+  padding: 0.5rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  resize: vertical;
 `;
 
 const StyledRange = styled.div`
@@ -185,4 +233,8 @@ const StyledRange = styled.div`
   justify-content: space-between;
   margin-top: 8px;
   font-size: 14px;
+`;
+
+const SubmitButton = styled.button`
+  margin-top: 0.5rem;
 `;
