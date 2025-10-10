@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Bookmark from "./Bookmark";
+import styled from "styled-components";
 
 export default function EntryCard({ type, intensity, dateTime, id }) {
   const formattedDate = new Date(dateTime).toLocaleString("en-GB", {
