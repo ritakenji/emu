@@ -7,6 +7,8 @@ export default function Bookmark({ id }) {
     defaultValue: [],
   });
 
+  const isBookmarked = bookmark.includes(id);
+
   function handleToggleBookmark() {
     setBookmark((prevState) =>
       prevState.includes(id)
@@ -14,10 +16,13 @@ export default function Bookmark({ id }) {
         : [...prevState, id]
     );
   }
-  
+
   return (
     <StyledButton
       type="button"
+      aria-pressed={isBookmarked}
+      aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+      title={isBookmarked ? "Remove bookmark" : "Add bookmark"}
       onClick={(event) => {
         event.preventDefault();
         handleToggleBookmark();
@@ -26,7 +31,7 @@ export default function Bookmark({ id }) {
       {bookmark.includes(id) ? (
         <StyledBookmark fill="black" />
       ) : (
-        <StyledBookmark fill="white"/>
+        <StyledBookmark fill="white" />
       )}
     </StyledButton>
   );
