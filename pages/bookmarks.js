@@ -1,35 +1,36 @@
-import EntryList from "@/components/EntryList";
-import NavBar from "@/components/Navbar";
-import useSWR from "swr";
 import Head from "next/head";
+import useSWR from "swr";
 import useLocalStorageState from "use-local-storage-state";
 import styled from "styled-components";
 
+import EntryList from "@/components/EntryList";
+import NavBar from "@/components/Navbar";
+
 export default function Bookmarks() {
   const {
-    data: entries,
+    data: entries = [],
     isLoading,
     error,
   } = useSWR("/api/entries", {
     fallbackData: [],
   });
-  const [bookmark] = useLocalStorageState("bookmark");
+  const [bookmark] = useLocalStorageState("bookmark", {
+    defaultValue: [],
+  });
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p aria-live="polite">Loading...</p>;
   }
 
   if (error) {
     return (
       <>
-        <p>Sorry, we could not retrieve the entry data at the moment.</p>
-        <p>Please try again later.</p>
+        <p aria-live="assertive">
+          Sorry, we could not retrieve the entry data at the moment.
+        </p>
+        <p aria-live="assertive">Please try again later.</p>
       </>
     );
-  }
-
-  if (!entries) {
-    return;
   }
 
   const bookmarkedEntries = entries.filter((entry) =>
@@ -37,19 +38,24 @@ export default function Bookmarks() {
   );
 
   return (
-    <StyledBody>
+    <Main>
       <Head>
         <title>Bookmarks</title>
       </Head>
 
-      <h2>Bookmarked entries</h2>
-      {bookmark.length === 0 && <h3>Please bookmark an entry ...</h3>}
-      <EntryList entries={bookmarkedEntries} />
+      <h1>Bookmarked entries</h1>
+      {bookmark.length === 0 ? (
+        <h2>No bookmarks yet</h2>
+      ) : bookmarkedEntries.length === 0 ? (
+        <h2>No matches found</h2>
+      ) : (
+        <EntryList entries={bookmarkedEntries} />
+      )}
       <NavBar />
-    </StyledBody>
+    </Main>
   );
 }
 
-const StyledBody = styled.div`
+const Main = styled.main`
   padding: 1rem 1.5rem 4rem;
 `;
