@@ -1,15 +1,16 @@
-import EntryList from "@/components/EntryList";
-import useSWR from "swr";
-import Head from "next/head";
-import NavBar from "@/components/Navbar";
-import Header from "@/components/Header";
-import styled from "styled-components";
-import FilterForm from "@/components/FilterForm";
 import { useState } from "react";
+import Head from "next/head";
+import useSWR from "swr";
+import styled from "styled-components";
+
+import Header from "@/components/Header";
+import NavBar from "@/components/Navbar";
+import EntryList from "@/components/EntryList";
+import FilterForm from "@/components/FilterForm";
 
 export default function HomePage() {
   const {
-    data: entries,
+    data: entries = [],
     isLoading,
     error,
   } = useSWR("/api/entries", {
@@ -20,21 +21,20 @@ export default function HomePage() {
     useState("reset");
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p aria-live="polite">Loading...</p>;
   }
 
   if (error) {
     return (
       <>
-        <p>Sorry, we could not retrieve the entry data at the moment.</p>
-        <p>Please try again later.</p>
+        <p aria-live="assertive">
+          Sorry, we could not retrieve the entry data at the moment.
+        </p>
+        <p aria-live="assertive">Please try again later.</p>
       </>
     );
   }
 
-  if (!entries) {
-    return;
-  }
   const filteredEntries =
     !selectedFilterEmotionId || selectedFilterEmotionId === "reset"
       ? entries
@@ -45,38 +45,44 @@ export default function HomePage() {
         );
 
   function handleFilterSubmit({ emotions }) {
-    setSelectedFilterEmotionId(emotions); // "_id" or "reset"
+    setSelectedFilterEmotionId(emotions);
   }
 
   return (
-    <StyledBody>
-      <Head>
-        <title>Homepage</title>
-      </Head>
-      <Header />
-      <h2>Emotion Entry List</h2>
+    <>
+      <Main>
+        <Head>
+          <title>Homepage</title>
+        </Head>
+        <Header />
+        <h1>Emotion Entry List</h1>
 
-      {entries.length !== 0 && (
-        <FilterForm
-          onSubmit={handleFilterSubmit}
-          selectedFilterEmotionId={selectedFilterEmotionId}
-          setSelectedFilterEmotionId={setSelectedFilterEmotionId}
-        />
-      )}
+        {entries.length !== 0 && (
+          <FilterForm
+            onSubmit={handleFilterSubmit}
+            selectedFilterEmotionId={selectedFilterEmotionId}
+            setSelectedFilterEmotionId={setSelectedFilterEmotionId}
+          />
+        )}
 
-      {filteredEntries.length === 0 ? (
-        <h3>
-          {entries.length === 0
-            ? "Please add an entry ..."
-            : "No entries match this filter."}
-        </h3>
-      ) : null}
-      <EntryList entries={filteredEntries} />
+        {filteredEntries.length === 0 ? (
+          <EmptyState as="h2">
+            {entries.length === 0
+              ? "Please add an entry …"
+              : "No entries match this filter."}
+          </EmptyState>
+        ) : (
+          <EntryList entries={filteredEntries} />
+        )}
+      </Main>
       <NavBar />
-    </StyledBody>
+    </>
   );
 }
 
-const StyledBody = styled.div`
+const Main = styled.main`
   padding: 4rem 1.5rem;
+`;
+const EmptyState = styled.p`
+  margin: 0.75rem 0 1rem;
 `;
