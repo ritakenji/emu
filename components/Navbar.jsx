@@ -4,17 +4,18 @@ import styled, { css } from "styled-components";
 import { BookmarkIcon, House, PlusCircle } from "lucide-react";
 
 export default function NavBar() {
-  const { pathname } = useRouter(); 
+  const { pathname } = useRouter();
   const isHome = pathname === "/";
   const isBookmarks = pathname === "/bookmarks";
   const isCreate = pathname === "/create";
 
   return (
-    <Navigation>
+    <Navigation role="navigation" aria-label="Main navigation">
       <StyledLink
         href="/"
         aria-current={isHome ? "page" : undefined}
         $active={isHome}
+        aria-label="Home"
       >
         <StyledHouse $active={isHome} />
       </StyledLink>
@@ -22,6 +23,7 @@ export default function NavBar() {
         href="/create"
         aria-current={isCreate ? "page" : undefined}
         $active={isCreate}
+        aria-label="Create new entry"
       >
         <StyledCreate $active={isCreate} />
       </StyledLink>
@@ -29,6 +31,7 @@ export default function NavBar() {
         href="/bookmarks"
         aria-current={isBookmarks ? "page" : undefined}
         $active={isBookmarks}
+        aria-label="Bookmarked entries"
       >
         <StyledBookmark $active={isBookmarks} />
       </StyledLink>
@@ -36,7 +39,7 @@ export default function NavBar() {
   );
 }
 
-const Navigation = styled.div`
+const Navigation = styled.nav`
   background-color: var(--color-light);
   display: flex;
   justify-content: space-around;
