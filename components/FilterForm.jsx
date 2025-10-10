@@ -14,22 +14,22 @@ export default function FilterForm({
     fallbackData: [],
   });
 
-  const formElement = useRef();
+  const formRef = useRef();
   function resetForm() {
     setSelectedFilterEmotionId("reset");
-    formElement.current.reset();
+    formRef.current.reset();
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p aria-live="polite">Loading...</p>;
   }
 
   if (error) {
     return (
-      <>
+      <div aria-live="assertive">
         <p>Sorry, we could not retrieve the entry data at the moment.</p>
         <p>Please try again later.</p>
-      </>
+      </div>
     );
   }
 
@@ -44,9 +44,13 @@ export default function FilterForm({
     onSubmit(data);
   }
   return (
-    <form onSubmit={handleSubmit} ref={formElement}>
+    <form onSubmit={handleSubmit} ref={formRef}>
       <label htmlFor="emotions">Filter: </label>
-      <select name="emotions" id="emotions">
+      <select
+        name="emotions"
+        id="emotions"
+        aria-label="Filter entries by emotion"
+      >
         <option value="reset">Show All</option>
         {emotions.map(({ emotion, _id }) => (
           <option key={_id} value={_id}>
