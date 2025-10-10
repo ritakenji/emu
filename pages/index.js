@@ -52,6 +52,12 @@ export default function HomePage() {
     <>
       <Main>
         <Head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta
+            name="description"
+            content="Emu App is a web application designed for users to track, analyse, and reflect on their emotional states over time. It facilitates personal emotional awareness and can be used in therapeutic settings or for individual self-reflection."
+          ></meta>
           <title>Homepage</title>
         </Head>
         <Header />

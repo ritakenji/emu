@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled, { css } from "styled-components";
+import Head from "next/head";
+
 import Bookmark from "@/components/Bookmark";
 import EntryForm from "@/components/EntryForm";
 
@@ -58,6 +60,15 @@ export default function EntryPage() {
 
   return (
     <>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="View the details of an entry on the Emu App."
+        ></meta>
+        <title> Details Page</title>
+      </Head>
       <HeaderWrapper className={entry.emotions?.[0]?.emotion?.toLowerCase()}>
         <GoBackButton aria-label="Go back" onClick={() => router.back()}>
           {" "}
