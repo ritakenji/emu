@@ -8,9 +8,9 @@ import NavBar from "@/components/Navbar";
 export default function Create() {
   const router = useRouter();
 
-  async function addEntry(entry) {
+  async function handleAddEntry(entry) {
     try {
-      const response = await fetch("api/entries", {
+      const response = await fetch("/api/entries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -19,10 +19,13 @@ export default function Create() {
       });
 
       if (!response.ok) {
+        console.error("Failed to create entry");
         return;
       }
       router.push("/");
-    } catch (e) {}
+    } catch (e) {
+      console.error("Failed to add entry:", e);
+    }
   }
 
   return (
@@ -35,7 +38,7 @@ export default function Create() {
       </Header>
       <Main>
         <EntryForm
-          onSubmit={addEntry}
+          onSubmit={handleAddEntry}
           buttonText={"Submit"}
           formTitle={"Add Entry"}
         />
