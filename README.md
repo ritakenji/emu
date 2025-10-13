@@ -17,7 +17,7 @@
   <h2 align="center">⭐ EMU App ⭐</h2>
 
   <p align="center">
-    A web application designed for users to track, analyse, and reflect on their emotional states over time. It facilitates personal emotional awareness and can be used in therapeutic settings or for individual self-reflection.
+    A web application designed for users to track, analyse, and reflect on their emotional states over time.It facilitates personal emotional awareness and can be used in therapeutic settings or for individual self-reflection.
     </br>
     <a href="https://emu-ecru.vercel.app/">View Demo</a>
   </p>
@@ -37,7 +37,7 @@
     </li>
     <li><a href="#technologies">Technologies</a></li>
     <li><a href="#preview">Preview</a></li>
-    <li><a href="#authors">Authors</a></li>
+    <li><a href="#contributors">Contributors</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -47,15 +47,9 @@
 
 <h2 id="overview">🌐 Overview</h2>
 
-<p><a href="https://ritakenji.github.io/rita-quizapp/">Rita-quizapp</a> is an ongoing project created as part of the Web-Development Front-End bootcamp's Recap Projects at Neuefische. The main goal of this project is to apply all the learned material taught during the bootcamp's sessions.</p>
+<p>The <a href="https://ritakenji.github.io/emu/">EMU App</a> is the final project, also known as Capstone Project. The main goal of this project is to apply all the learned material taught during the bootcamp.</p>
 
-<p>In part 1, the task provided was simple: build the layout of a mobile web application (a quiz app) following the required design and behaviour specifications listed.</p>
-
-<p>In part 2, we were tasked to create a whole new page and add interactability to some elements present through the entire application.</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/wd-bootcamp/web-exercises/refs/heads/main/sessions/recap-project-1/quiz-app/assets/homepage.png" alt="reference-image-1" height=375px width=400px><img src="https://raw.githubusercontent.com/wd-bootcamp/web-exercises/refs/heads/main/sessions/recap-project-2/quiz-app/wireframes/quiz-app-form-page.png" alt="reference-image-1" height=325px width=200px><img src="https://raw.githubusercontent.com/wd-bootcamp/web-exercises/refs/heads/main/sessions/recap-project-1/quiz-app/assets/profilepage.png" alt="reference-image-2" height=375px width=400px>
-</p>
+<p>The application is designed for users to track, analyse, and reflect on their emotional states over time.It facilitates personal emotional awareness and can be used in therapeutic settings or for individual self-reflection.</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -74,7 +68,7 @@ The application is optimized for mobile screen, but responsive CSS design has be
 
 </br>
 <div align="center">
-  <a href="https://ritakenji.github.io/rita-quizapp/">
+  <a href="https://ritakenji.github.io/emu/">
     <img src="assets/mobile-preview.png" alt="web-preview">
   </a>
 </div>
@@ -119,20 +113,22 @@ It consists of 4 pages:
 <h2 id="technologies">💻 Technologies</h2>
 
 <p>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/nolan/64/javascript-logo.png" alt="javascript-logo"/></a>
-<a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/nolan/64/css3.png" alt="css3"/></a>
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/nolan/64/html-5.png" alt="html-5"/></a>
-<a href="https://react.dev/" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/external-fauzidea-gradient-fauzidea/64/external-atom-back-to-school-fauzidea-gradient-fauzidea.png" alt="external-atom-back-to-school-fauzidea-gradient-fauzidea"/></a>
-<a href="https://nextjs.org/" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/nolan/64/nextjs.png" alt="nextjs"/></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><img src="assets/html.png" alt="Logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img src="assets/css.png" alt="Logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="assets/JS.png" alt="Logo"></a>
+    <a href="https://nodejs.org/" target="_blank"><img src="assets/nodejs.png" alt="Logo"></a>
+    <a href="https://react.dev/" target="_blank"><img src="assets/react.png" alt="Logo"></a>
+    <a href="https://nextjs.org/" target="_blank"><img src="assets/nextjs.png" alt="Logo"></a>
+    <a href="https://www.mongodb.com/" target="_blank"><img src="assets/mongo.png" alt="Logo"></a>
 </p>
-<p>✨ JavaScript ✨ CSS ✨ HTML ✨ React ✨ Next.js ✨</p>
+<p>✨ HTML ✨ CSS ✨ JavaScript ✨ Node.js ✨ React ✨ Next.js ✨ MongoDB ✨</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ******************************************************** CONTRIBUTORS *************************************************
  -->
 
-<h2 id="acknowledgments">👥 Contributors</h2>
+<h2 id="contributors">👥 Contributors</h2>
 
 <a href="https://github.com/ritakenji/emu/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ritakenji/emu" />
