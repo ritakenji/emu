@@ -5,8 +5,8 @@ import styled from "styled-components";
 
 import Header from "@/components/Header";
 import NavBar from "@/components/Navbar";
-import EntryList from "@/components/EntryList";
-import FilterForm from "@/components/FilterForm";
+import EntryList from "@/components/Lists/EntryList";
+import FilterForm from "@/components/Forms/FilterForm";
 
 export default function HomePage() {
   const {

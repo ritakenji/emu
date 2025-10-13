@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 
 export default function MultiwayButton({ onClick, $variant, buttonText }) {

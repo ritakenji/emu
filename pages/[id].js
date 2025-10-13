@@ -7,7 +7,7 @@ import Head from "next/head";
 import BackButton from "@/components/Buttons/BackButton";
 import Bookmark from "@/components/Bookmark";
 import EmotionList from "@/components/Lists/EmotionList";
-import EntryForm from "@/components/EntryForm";
+import EntryForm from "@/components/Forms/EntryForm";
 import Modal from "@/components/Modal";
 import MultiwayButton from "@/components/Buttons/MultiwayButton";
 

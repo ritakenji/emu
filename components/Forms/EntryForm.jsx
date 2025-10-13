@@ -2,6 +2,8 @@ import { useState } from "react";
 import useSWR from "swr";
 import styled from "styled-components";
 
+import { toLocalDateTime } from "@/utils/helpers";
+
 export default function EntryForm({
   onSubmit,
   buttonText,
@@ -22,16 +24,6 @@ export default function EntryForm({
 
   const isSelected = (_id) => {
     return selectedTypes.some((selectedEmotion) => selectedEmotion._id === _id);
-  };
-
-  const toLocalDateTime = (isoString) => {
-    if (!isoString) return "";
-    const date = new Date(isoString);
-    const tzOffset = date.getTimezoneOffset() * 60000;
-    const localISO = new Date(date.getTime() - tzOffset)
-      .toISOString()
-      .slice(0, 16);
-    return localISO;
   };
 
   if (isLoading) {

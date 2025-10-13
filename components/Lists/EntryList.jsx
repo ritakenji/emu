@@ -1,4 +1,4 @@
-import EntryCard from "./EntryCard";
+import EntryCard from "../EntryCard";
 import styled from "styled-components";
 import Link from "next/link";
 
