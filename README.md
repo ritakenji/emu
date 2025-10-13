@@ -66,11 +66,7 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ******************************************************** FEATURES *************************************************
-
- List the key functionalities and features of your application. What can a user do with it? Think of this as a bullet-point summary of your project's capabilities.
-
- -->
+<!-- ******************************************************** FEATURES ************************************************* -->
 
 <h2 id="features">🧩 Features</h2>
 
@@ -101,11 +97,7 @@ It consists of 4 pages:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ******************************************************** LEARNING OUTCOMES *************************************************
-
- This is a great section to highlight what you've learned. What new concepts did you apply? Did you master a new technology or design principle? This shows off the skills you've gained during the project.
-
- -->
+<!-- ******************************************************** LEARNING OUTCOMES ************************************************* -->
 
 <h2 id="learning-outcomes">🧠 Learning Outcomes</h2>
 
@@ -122,20 +114,29 @@ It consists of 4 pages:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ******************************************************** TECHNOLOGIES *************************************************
-
-Clearly list all the programming languages and frameworks you used. It's a good idea to include visuals like skill icons to make this section stand out.
-
- -->
+<!-- ******************************************************** TECHNOLOGIES *************************************************  -->
 
 <h2 id="technologies">💻 Technologies</h2>
 
 <p>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="https://img.icons8.com/dusk/64/javascript-logo.png" alt="javascript" width="40" height="40"/></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"> <img src="https://img.icons8.com/dusk/64/css3.png" alt="html-5" width="40" height="40"/></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"> <img src="https://img.icons8.com/dusk/64/html-5.png" alt="html-5" width="40" height="40"/></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/nolan/64/javascript-logo.png" alt="javascript-logo"/></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/nolan/64/css3.png" alt="css3"/></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/nolan/64/html-5.png" alt="html-5"/></a>
+<a href="https://react.dev/" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/external-fauzidea-gradient-fauzidea/64/external-atom-back-to-school-fauzidea-gradient-fauzidea.png" alt="external-atom-back-to-school-fauzidea-gradient-fauzidea"/></a>
+<a href="https://nextjs.org/" target="_blank"> <img width="40" height="40" src="https://img.icons8.com/nolan/64/nextjs.png" alt="nextjs"/></a>
 </p>
-<p>✨ JavaScript ✨ CSS ✨ HTML ✨</p>
+<p>✨ JavaScript ✨ CSS ✨ HTML ✨ React ✨ Next.js ✨</p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ******************************************************** CONTRIBUTORS *************************************************
+ -->
+
+<h2 id="acknowledgments">👥 Contributors</h2>
+
+<a href="https://github.com/ritakenji/emu/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ritakenji/emu" />
+</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
