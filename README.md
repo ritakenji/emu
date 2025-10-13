@@ -118,7 +118,7 @@ In total, there are 4 pages to explore:
 - ...Backend
 - ...API and CRUD
 - ...React Dynamic routes
-- ...React 
+- ...React
 - ...UX/UI principles
 - ...React State
 
