@@ -17,7 +17,7 @@
   <h2 align="center">⭐ EMU App ⭐</h2>
 
   <p align="center">
-    A web application designed for users to track, analyse, and reflect on their emotional states over time.It facilitates personal emotional awareness and can be used in therapeutic settings or for individual self-reflection.
+    A web application to reflect on your daily emotions.
     </br>
     <a href="https://emu-ecru.vercel.app/">View Demo</a>
   </p>
@@ -47,16 +47,9 @@
 
 <h2 id="overview">🌐 Overview</h2>
 
-<p>The <a href="https://ritakenji.github.io/emu/">EMU App</a> is the final project, also known as Capstone Project. The main goal of this project is to apply all the learned material taught during the bootcamp.</p>
-
-<p>The application is designed for users to track, analyse, and reflect on their emotional states over time.It facilitates personal emotional awareness and can be used in therapeutic settings or for individual self-reflection.</p>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<h3 id="notes">📝 Notes</h3>
-
-<p>Part 1 of this project was creating the website's layout using only HTML and CSS. Part 2 was about implementing JavaScript to add interactivity between elements.</p>
-<p>❗Some changes may apply from time to time, as this project will be continuously growing throughout the bootcamp to optimize functionality, design and showcase new learning outcomes.❗</p>
+<p>The <a href="https://ritakenji.github.io/emu/">EMU App</a> is designed for users to track, analyse, and reflect on their emotional states over time. It facilitates personal emotional awareness and can be used in therapeutic settings or for individual self-reflection.
+</p>
+<p>This application, built by Anna Schemmel, Britta Maier and Rita Macedo, is the final project of the Web-Development bootcamp, also known as Capstone Project. The main goal of this project was to show all the learned skills and technologies taught during the Frontend Web-Development bootcamp at Neuefische.</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -64,30 +57,55 @@
 
 <h2 id="features">🧩 Features</h2>
 
-The application is optimized for mobile screen, but responsive CSS design has been applied, meaning it can be viewed and interacted without any issues, from any size of device (mobile, tablet, laptop or desktop).
+EMU app is optimized for mobile screen, but responsive CSS design has been applied, it can therefore be viewed and interacted without any issues, from any size of device (mobile, tablet, laptop or desktop).
 
 </br>
 <div align="center">
-  <a href="https://ritakenji.github.io/emu/">
-    <img src="assets/mobile-preview.png" alt="web-preview">
+  <a href="https://emu-ecru.vercel.app/">
+    <img src="assets/mobile-preview.jpg" alt="mobile preview">
   </a>
 </div>
 </br>
+User can navigate through the application using the navigation bar present on the bottom on the screen.
+In total, there are 4 pages to explore:
 
-It consists of 4 pages:
+- 🏠 **Home Page**: Browse a well-organised collection of emotion entries.
 
-- 🏠 **Home page**: Here, the user will have access to view all questions available on the platform.
-  - Each card will have a question and upon clicking the button, the user unveils the correct answer. It is also possible to hide the answer once revealed, toggling back and forth;
-  - By clicking on the bookmark icon, it is possible for the user to bookmark each question of their interest. <!--- which in the future part of the project will be stored in the _Bookmarks page_. --->
-- 🔖 **Bookmarks page**: This is a exclusively dedicated space for the user to view the questions they've bookmarked on the homepage.
-  <!---- Here the user may not just view, but also remove a card from their saved bookmark selection.--->
-- ➕ **Add page**: On this page, the user can create new question cards.
-  - These newly created question cards will be displayed on the Add page, below the form;
-  - The main feature of this page is the form, consisting of 3 input areas and one button.
-- 👤 **Profile page**: This section allows the user to view and manage their profile and settings.
-  - '_About Me_' section displays the user's bio;
-  - Present on this page are 2 _counters_ - number of questions created and number of saved bookmarks;
-  - Last section is '_Settings_', which allows the user to toggle **Dark Mode**.
+  - The collection is ordered chronologically with the newest entries starting from the top.
+  - Each emotion entry shows the date and time it was created on, the emotions felt in that moment and their intensity.
+  - Emotion types are visually distinct, using different colours to differentiate them.
+  - A heart icon is present on each entry, which makes it possible for the user to toggle the entry's bookmark state.
+  - The user can easily filter entries based on an emotion.
+  - If collection is empty, user will be prompted to add some via Create Page.
+
+- 📊 **Details Page**: View detailed information on each emotion entry.
+
+  - User is directed to ths page by clickling on a single entry, either on Homepage or Bookmarks page.
+  - Each entry details page shows:
+    - Date and time (as entry's title)
+    - Emotion types
+    - Emotion intensity
+    - Notes
+  - The user has the options to edit or delete the entry.
+  - Clicking either option prompts a pop-up window allowing user to make the change (update/delete), as well as cancel the action.
+
+- ➕ **Create Page**: Add new emotion entries, enriching the emotion catalogue.
+
+  - The main feature of this page is the form, with the inputs:
+    - Date and time (mandatory)
+    - Emotion types (mandatory)
+    - Emotion intensity (mandatory)
+    - Notes
+  - Date and time field is pre-set to show date and time format as DD-MM-YYYY, --:--, but adjustable by the user.
+  - The emotions are selected from the existing emotions list via a checkbox.
+  - The emotion intensity is selectable on a scale of 1 to 10.
+  - Form submission with any empty mandatory fields is blocked, and clear validation messages indicate the fields that need completion.
+  - Upon submission, the new emotion entry is added to the top of the emotion entries list.
+
+- 🔖 **Bookmarks Page**: Save and showcase favourite emotion entries.
+  - User can find all bookmarked entries in this page.
+  - If there are no bookmarked emotion entries in the bookmarked list, a message is displayed to the user indicating that there are no bookmarks.
+  - It is possible to toggle the bookmark state of each entry in all pages.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -96,15 +114,8 @@ It consists of 4 pages:
 <h2 id="learning-outcomes">🧠 Learning Outcomes</h2>
 
 - Using correct **HTML semantics** to structure the page and make it more accessible to anyone visiting it;
-- Learning how to correctly use the **BEM** method to classify the page's elements;
-- Understanding the **CSS box-model**, **flexbox** and **positioning** principles to achieve a clean and **responsive design** that works seamlessly;
-- **DOM** (Document Object Model) reading and manipulation.
-- Combining HTML with JavaScript via **click**, **change** and **submit** events, in order to trigger actions that allow certain elements to change appearance and others to be created or even fully erased;
-- All in all, integrating a wide set of JavaScript **statements**, **expressions**, **methods**, **functions**, and more to: <!-- , as well as data structures such as **arrays** and **objects**; -->
-  - **Toggle** styling of elements, text values and **darkmode**;
-  - **Submit forms**;
-  - **Count** characters in **input fields**;
-  - etc.
+- ...
+- ...
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
