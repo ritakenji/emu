@@ -3,8 +3,10 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![Unlicense License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Forks][forks-shield]][forks-url]
+[![LinkedIn][linkedin-shield1]][linkedin-url1]
+[![LinkedIn][linkedin-shield2]][linkedin-url2]
+[![LinkedIn][linkedin-shield3]][linkedin-url3]
 
 </br>
 <div align="center">
@@ -39,11 +41,7 @@
 </details>
 </br>
 
-<!-- ******************************************************** OVERVIEW *************************************************
-
-Start with a clear, engaging title for your project. Write a brief summary explaining what the project is, its main purpose, and what someone can expect to find in the repository.
-
--->
+<!-- ******************************************************** OVERVIEW ************************************************* -->
 
 <h2 id="overview">🌐 Overview</h2>
 
@@ -171,13 +169,21 @@ I am sure anyone could make great use of them for their own projects, especially
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/ritakenji/rita-quizapp.svg?style=for-the-badge
-[contributors-url]: https://github.com/ritakenji/rita-quizapp/graphs/contributors
-[stars-shield]: https://img.shields.io/github/stars/ritakenji/rita-quizapp.svg?style=for-the-badge
-[stars-url]: https://github.com/ritakenji/rita-quizapp/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ritakenji/rita-quizapp.svg?style=for-the-badge
-[issues-url]: https://github.com/ritakenji/rita-quizapp/issues
-[license-shield]: https://img.shields.io/github/license/ritakenji/rita-quizapp.svg?style=for-the-badge
-[license-url]: https://github.com/ritakenji/rita-quizapp/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/rita-macedo-557864103/
+[contributors-shield]: https://img.shields.io/github/contributors/ritakenji/emu.svg?style=for-the-badge
+[contributors-url]: https://github.com/ritakenji/emu/graphs/contributors
+[stars-shield]: https://img.shields.io/github/stars/ritakenji/emu.svg?style=for-the-badge
+[stars-url]: https://github.com/ritakenji/emu/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ritakenji/emu.svg?style=for-the-badge
+[issues-url]: https://github.com/ritakenji/emu/issues
+[forks-shield]: https://img.shields.io/github/forks/ritakenji/emu.svg?style=for-the-badge
+[forks-url]: https://github.com/ritakenji/emu/forks
+<!-- Anna's Linkedin Shields -->
+[linkedin-shield1]: https://img.shields.io/badge/-Anna's_LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url1]: https://www.linkedin.com/in/anna-lynn-schemmel/
+<!-- Britta's Linkedin Shields -->
+[linkedin-shield2]: https://img.shields.io/badge/-Britta's_LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url2]: https://www.linkedin.com/in/britta-maier-38a913236/
+<!-- Rita's Linkedin Shields -->
+[linkedin-shield3]: https://img.shields.io/badge/-Rita's_LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url3]: https://www.linkedin.com/in/rita-macedo-557864103/
+
