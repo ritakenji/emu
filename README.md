@@ -32,7 +32,7 @@
     <li>
         <a href="#learning-outcomes">Learning Outcomes</a>
         <ul>
-        <li><a href="#notes">Notes</a></li>
+        <li><a href="#notes">Dataflow and File Structure</a></li>
       </ul>
     </li>
     <li><a href="#technologies">Technologies</a></li>
