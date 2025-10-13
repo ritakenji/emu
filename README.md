@@ -57,7 +57,7 @@
 
 <h2 id="features">🧩 Features</h2>
 
-EMU app is optimized for mobile screen, but responsive CSS design has been applied, it can therefore be viewed and interacted without any issues, from any size of device (mobile, tablet, laptop or desktop).
+EMU app is optimized for mobile screen, but because responsive CSS design has been applied, it is possible to view and interact with the app without any issues, from any size of device (mobile, tablet, laptop or desktop).
 
 </br>
 <div align="center">
@@ -66,7 +66,6 @@ EMU app is optimized for mobile screen, but responsive CSS design has been appli
   </a>
 </div>
 </br>
-User can navigate through the application using the navigation bar present on the bottom on the screen.
 In total, there are 4 pages to explore:
 
 - 🏠 **Home Page**: Browse a well-organised collection of emotion entries.
@@ -114,8 +113,14 @@ In total, there are 4 pages to explore:
 <h2 id="learning-outcomes">🧠 Learning Outcomes</h2>
 
 - Using correct **HTML semantics** to structure the page and make it more accessible to anyone visiting it;
-- ...
-- ...
+- ...Agile Workflow -> SCRUM
+- ...TDD/Component testing
+- ...Backend
+- ...API and CRUD
+- ...React Dynamic routes
+- ...React 
+- ...UX/UI principles
+- ...React State
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
