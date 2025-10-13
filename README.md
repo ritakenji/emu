@@ -122,6 +122,9 @@ In total, there are 4 pages to explore:
 - ...UX/UI principles
 - ...React State
 
+<h3 id="notes">📁 Dataflow and File Structure</h3>
+<p>[insert excalidraws here]</p>
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ******************************************************** TECHNOLOGIES *************************************************  -->
@@ -141,8 +144,13 @@ In total, there are 4 pages to explore:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- ******************************************************** CONTRIBUTORS *************************************************
- -->
+<!-- ******************************************************** PREVIEW ************************************************* -->
+<h2 id="preview">🔍 Preview</h2>
+<p>[Insert screenshots or a GIF of your application in action, this should include not just the "happy path" but edge cases as well (what happens when there's an error? Etc). Remember to add clear titles for each image.]</p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ******************************************************** CONTRIBUTORS ************************************************* -->
 
 <h2 id="contributors">👥 Contributors</h2>
 
