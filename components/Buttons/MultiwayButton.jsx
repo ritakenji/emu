@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 export default function MultiwayButton({ onClick, $variant, buttonText }) {
-  // const router = useRouter();
   return (
     <StyledMultiwayButton onClick={onClick} type="button" $variant={$variant}>
       {buttonText}
