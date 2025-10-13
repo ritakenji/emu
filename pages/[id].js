@@ -35,13 +35,14 @@ export default function EntryPage() {
     timeStyle: "short",
   });
 
-  async function editEntry(updatedEntry) {
+  async function editEntry(entry) {
+    console.log("EDIT payload", entry);
     const response = await fetch(`/api/entries/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedEntry),
+      body: JSON.stringify(entry),
     });
 
     if (response.ok) {
@@ -104,7 +105,7 @@ export default function EntryPage() {
           <p>Are you sure you want to delete the entry?</p>
           <ButtonBox>
             <MultiwayButton
-              onClick={() => deleteEntry}
+              onClick={deleteEntry}
               $variant="deleteAndCancel"
               buttonText="Delete"
             />

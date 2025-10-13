@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
 import styled from "styled-components";
 
@@ -13,6 +13,9 @@ export default function EntryForm({
   const [selectedTypes, setSelectedTypes] = useState(
     initialValues?.emotions || []
   );
+  useEffect(() => {
+    setSelectedTypes(initialValues?.emotions || []);
+  }, [initialValues]);
 
   const {
     data: emotions,
@@ -69,6 +72,7 @@ export default function EntryForm({
       emotions: [...selectedTypes],
       ...data,
     };
+    console.log("SUBMIT payload", newObject);
 
     if (selectedTypes.length === 0) {
       alert("Please select at least one emotion.");
