@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import Head from "next/head";
 
-import EntryForm from "@/components/EntryForm";
+import EntryForm from "@/components/Forms/EntryForm";
 import NavBar from "@/components/Navbar";
 
 export default function Create() {

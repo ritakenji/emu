@@ -3,7 +3,7 @@ import useSWR from "swr";
 import useLocalStorageState from "use-local-storage-state";
 import styled from "styled-components";
 
-import EntryList from "@/components/EntryList";
+import EntryList from "@/components/Lists/EntryList";
 import NavBar from "@/components/Navbar";
 
 export default function Bookmarks() {
