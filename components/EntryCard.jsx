@@ -30,7 +30,7 @@ const EntryCardWrapper = styled.div`
   position: relative;
   width: 100%;
   padding: 0.7rem;
-  background-color: var(--color-light);
+  background-color: #fff;
 `;
 
 const Emotionchips = styled.span`

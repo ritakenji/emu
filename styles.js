@@ -17,6 +17,7 @@ export default createGlobalStyle`
     font-family: system-ui;
     color: var(--color-dark);
     font-family: "Inter", sans-serif;
+    background-color: var(--color-light);
   }
 
   /* ---------------------theme colours---------------------- */
