@@ -27,15 +27,17 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#features">Features</a></li>
     <li>
-      <a href="#overview">Overview</a>
-      <ul>
+        <a href="#learning-outcomes">Learning Outcomes</a>
+        <ul>
         <li><a href="#notes">Notes</a></li>
       </ul>
     </li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#learning-outcomes">Learning Outcomes</a></li>
     <li><a href="#technologies">Technologies</a></li>
+    <li><a href="#preview">Preview</a></li>
+    <li><a href="#authors">Authors</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
