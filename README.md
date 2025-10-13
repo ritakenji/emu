@@ -1,8 +1,8 @@
 <a id="readme-top"></a>
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
+[![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
 [![LinkedIn][linkedin-shield1]][linkedin-url1]
 [![LinkedIn][linkedin-shield2]][linkedin-url2]
@@ -177,13 +177,18 @@ I am sure anyone could make great use of them for their own projects, especially
 [issues-url]: https://github.com/ritakenji/emu/issues
 [forks-shield]: https://img.shields.io/github/forks/ritakenji/emu.svg?style=for-the-badge
 [forks-url]: https://github.com/ritakenji/emu/forks
+
 <!-- Anna's Linkedin Shields -->
+
 [linkedin-shield1]: https://img.shields.io/badge/-Anna's_LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url1]: https://www.linkedin.com/in/anna-lynn-schemmel/
+
 <!-- Britta's Linkedin Shields -->
+
 [linkedin-shield2]: https://img.shields.io/badge/-Britta's_LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url2]: https://www.linkedin.com/in/britta-maier-38a913236/
+
 <!-- Rita's Linkedin Shields -->
+
 [linkedin-shield3]: https://img.shields.io/badge/-Rita's_LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url3]: https://www.linkedin.com/in/rita-macedo-557864103/
-
