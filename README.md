@@ -66,7 +66,8 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
   </a>
 </div>
 </br>
-In total, there are 4 pages to explore:
+
+- Located on the bottom of the viewport, the Navigation Bar allows the user to intuitively explore the app and locate themselves within it.
 
 - 🏠 **Home Page**: Browse a well-organised collection of emotion entries.
 
@@ -104,7 +105,6 @@ In total, there are 4 pages to explore:
 - 🔖 **Bookmarks Page**: Save and showcase favourite emotion entries.
   - User can find all bookmarked entries in this page.
   - If there are no bookmarked emotion entries in the bookmarked list, a message is displayed to the user indicating that there are no bookmarks.
-  - It is possible to toggle the bookmark state of each entry in all pages.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -114,7 +114,7 @@ In total, there are 4 pages to explore:
 
 - Using correct **HTML semantics** to structure the page and make it more accessible to anyone visiting it;
 - ...Agile Workflow -> SCRUM
-- ...TDD/Component testing
+- ...TDD/Component testing --> x % code coverage
 - ...Backend
 - ...API and CRUD
 - ...React Dynamic routes
