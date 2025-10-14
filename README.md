@@ -32,7 +32,9 @@
     <li>
         <a href="#learning-outcomes">Learning Outcomes</a>
         <ul>
-        <li><a href="#notes">Dataflow and File Structure</a></li>
+        <li><a href="#technical">Technical</a></li>
+        <li><a href="#soft-teamwork">Soft Skills & Teamwork</a></li>
+        <li><a href="#notes">File Structure</a></li>
       </ul>
     </li>
     <li><a href="#technologies">Technologies</a></li>
@@ -121,27 +123,67 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <!-- ******************************************************** LEARNING OUTCOMES ************************************************* -->
 
 <h2 id="learning-outcomes">🧠 Learning Outcomes</h2>
+<h3 id="technical">🔩 Technical</h3>
 
-- Using correct **HTML semantics** to structure the page and make it more accessible to anyone visiting it.
-- Becoming familiarized with the **Agile methodology framework** for project management, specifically the **SCRUM** method.
-- Applying basic **UX/UI principles** (hierarchy, consistency, contrast, etc) to the design of the application to achieve not only aesthetically pleasing, but also excellent accessibility for all users.
-- Learned to **read, understand and review code of others**, strengthening our problem solving and attention to detail skills.
-- Practicing and implementing the **DRY (Don’t Repeat Yourself) principle** as a refactoring method. We learned to reduce the repetition of code patterns, promoting reusability and maintainability, therefore creating more efficient, readable, and error-free code.
-- Developed stronger problem solving skills by practicing understanding each tasks’ requirements, discussing potential different approaches, deciding on a final approach and doing **dry runs** before jumping straight to code.
-- Learned how to present and keep our work in structured and understandable ways by using the right terminologies for naming and refering, creating concise file structures and dataflows.
-- Practicing **Test-Driven Development (TDD) and component testing** to catch bugs early, make requirements clearer before writing code, and safely update complex features with confidence.
-- Applying the **principles of The Testing Trophy** to structure our testing strategy, prioritizing highly reliable and quick integration and unit tests over slower end-to-end tests, which led to faster development cycles.
-- Gained clarity on **Testing Classifications** (Unit, Integration, End-to-End, etc.) to ensure we selected the right type of test for validating every specific part and function of the application.
-- Designing and building a scalable **backend architecture** on MongoDB.
-- Mastering the fundamental **Create, Read, Update, Delete (CRUD) operations** to manage resources efficiently and enable seamless communication between the client and server.
-- Using the **Next.js framework** to make the app fast by pre-rendering pages (SSR/SSG), and using its simple file structure to manage all the different web addresses (routing).
-- Mastering the **React component model** to build reusable UI elements, which significantly improved development speed and made the frontend application much easier to maintain.
-- Setting up **dynamic routing** to create clean URLs that automatically load different content (like a unique user profile or product page) based on the address.
-- Effectively **managing application state** using React hooks (like useState and useLocalStorage), ensuring the UI remains reactive and synchronized with underlying data changes across different components.
+- **General**
+  - Practicing and implementing the **DRY (Don’t Repeat Yourself) principle** as a refactoring method. We learned to reduce the repetition of code patterns, promoting reusability and maintainability, therefore creating more efficient, readable, and error-free code.
+  - Learned to **read, understand and review code of others**, strengthening our problem solving and attention to detail skills.
+  - Developed stronger problem solving skills by practicing understanding each tasks’ requirements, discussing potential different approaches, deciding on a final approach and doing **dry runs** before jumping straight to code.
+  - Learned how to present and keep our work in structured and understandable ways by using the right terminologies for naming and referring, creating concise file structures and dataflows.
+  - Becoming familiarized with the **Agile methodology framework** for project management, specifically the **SCRUM** method.
+- **Frontend and UX/UI**
+  - Using correct **HTML semantics** to structure the page and make it more accessible to anyone visiting it.
+  - Applying basic **UX/UI principles** (hierarchy, consistency, contrast, etc) to the design of the application to achieve not only aesthetically pleasing, but also excellent accessibility for all users.
+- **React**
+  - Mastering the **React component model** to build reusable UI elements, which significantly improved development speed and made the frontend application much easier to maintain.
+  - Setting up **dynamic routing** to create clean URLs that automatically load different content (like a unique user profile or product page) based on the address.
+  - Effectively **managing application state** using React hooks (like useState and useLocalStorage), ensuring the UI remains reactive and synchronized with underlying data changes across different components.
+- **Next.js**
+  - Using the **Next.js framework** to make the app fast by pre-rendering pages (SSR/SSG), and using its simple file structure to manage all the different web addresses (routing).
+- **Testing**
+  - Practicing **Test-Driven Development (TDD) and component testing** to catch bugs early, make requirements clearer before writing code, and safely update complex features with confidence.
+  - Applying the **principles of The Testing Trophy** to structure our testing strategy, prioritizing highly reliable and quick integration and unit tests over slower end-to-end tests, which led to faster development cycles.
+  - Gained clarity on **Testing Classifications** (Unit, Integration, End-to-End, etc.) to ensure we selected the right type of test for validating every specific part and function of the application.
+- **Backend**
+  - Designing and building a scalable **backend architecture** on MongoDB.
+  - Mastering the fundamental **Create, Read, Update, Delete (CRUD) operations** to manage resources efficiently and enable seamless communication between the client and server.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!--*********** Soft Skills ************-->
+<h3 id="soft-teamwork"> 🎭 Skills & Teamwork</h3>
+
+<h4>Interpersonal & Leadership Skills</h4>
+
+- Effectively **working in a team** of three, we established clear roles and leveraged our collective skills to meet project deadlines.
+
+- Maintained a supportive environment through **empathy and active listening** during daily check-ins and code review discussions, ensuring all ideas were genuinely heard and considered before making final decisions.
+
+- Contributed to the team's knowledge base through **proactive teaching and mentoring** sessions, clearly explaining complex technologies and best practices to ensure all members shared the same level of technical understanding.
+
+- Practiced early **talent management** by recognizing individual strengths and delegating tasks strategically, which maximized team efficiency and fostered specialized expertise among members.
+
+<h4>Project & Resource Management</h4>
+
+- Developed strong **resource management** skills by efficiently prioritizing tasks and utilizing project documentation and external libraries to resolve technical roadblocks without extending timelines.
+
+- Ensured high-quality delivery through strong **dependability and attention to detail**, guaranteeing committed tasks were completed on time and rigorously reviewed to meet project standards.
+
+- Mastered **self-organization and clear communication** by consistently documenting individual progress, managing personal workloads, and providing timely, transparent updates on task status to the entire team.
+
+<h4>Adaptability & Innovation</h4>
+
+- Practiced **creative thinking** to rapidly prototype and implement innovative technical solutions for unexpected problems, ensuring the final application features were both functional and optimized.
+
+- Cultivated **resilience, flexibility, and agility** to adapt quickly to last-minute technical pivots or changes in project scope, allowing the team to efficiently reprioritize and keep momentum steady.
+
+- Demonstrated **high motivation and self-awareness** by proactively seeking and applying constructive feedback from teammates, leading to continuous personal and technical improvement throughout the project lifecycle.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <h3 id="notes">📁 File Structure</h3>
 <img src="assets/file-structure.png" alt="MongoDB logo">
-<p>(Project's file structure)</p>
+<p align="center">(Project's file structure)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
