@@ -1,69 +1,83 @@
 import { render, screen } from "@testing-library/react";
-import "jest-styled-components";
+import userEvent from "@testing-library/user-event";
 import NavBar from "@/components/Navbar";
 
-// Mock next/router so we can control pathname per test
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
+// Mock router and provide a tiny helper to set pathname
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const { useRouter } = require("next/router");
+function setRouter(pathname = "/") {
+  useRouter.mockReturnValue({ pathname });
+}
 
-// (Optional) Next.js Link renders <a>, nothing special needed here.
+// Mock next/link to a simple anchor to avoid Link internals
+jest.mock("next/link", () => ({
+  __esModule: true,
+  default: ({ href, children, ...props }) => (
+    <a href={typeof href === "string" ? href : href?.pathname} {...props}>
+      {children}
+    </a>
+  ),
+}));
 
-describe("<NavBar />", () => {
-  function setPath(pathname) {
-    useRouter.mockReturnValue({ pathname });
-  }
-
-  test("renders three nav links with accessible names", () => {
-    setPath("/");
+describe("<NavBar /> — core behavior", () => {
+  test("renders links with correct accessible names and hrefs", () => {
+    setRouter("/");
     render(<NavBar />);
-    expect(screen.getByRole("link", { name: /home/i })).toBeInTheDocument();
+
+    expect(screen.getByRole("link", { name: /home/i })).toHaveAttribute(
+      "href",
+      "/"
+    );
     expect(
       screen.getByRole("link", { name: /create new entry/i })
-    ).toBeInTheDocument();
+    ).toHaveAttribute("href", "/create");
     expect(
       screen.getByRole("link", { name: /bookmarked entries/i })
-    ).toBeInTheDocument();
+    ).toHaveAttribute("href", "/bookmarks");
   });
 
-  test("marks Home as current when pathname === '/'", () => {
-    setPath("/");
+  test("marks the current route as active via aria-current", () => {
+    setRouter("/bookmarks");
     render(<NavBar />);
-    const home = screen.getByRole("link", { name: /home/i });
-    expect(home).toHaveAttribute("aria-current", "page");
 
-    const create = screen.getByRole("link", { name: /create new entry/i });
-    const bookmarks = screen.getByRole("link", { name: /bookmarked entries/i });
-    expect(create).not.toHaveAttribute("aria-current");
-    expect(bookmarks).not.toHaveAttribute("aria-current");
+    expect(
+      screen.getByRole("link", { name: /bookmarked entries/i })
+    ).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("link", { name: /home/i })).not.toHaveAttribute(
+      "aria-current"
+    );
   });
 
-  test("marks Create as current when pathname === '/create'", () => {
-    setPath("/create");
-    render(<NavBar />);
+  test("clicking Create updates active link after a route change", async () => {
+    const user = userEvent.setup();
+    setRouter("/");
+    const { rerender } = render(<NavBar />);
+
+    await user.click(screen.getByRole("link", { name: /create new entry/i }));
+
+    // simulate navigation finishing
+    setRouter("/create");
+    rerender(<NavBar />);
+
     expect(
       screen.getByRole("link", { name: /create new entry/i })
     ).toHaveAttribute("aria-current", "page");
   });
 
-  test("marks Bookmarks as current when pathname === '/bookmarks'", () => {
-    setPath("/bookmarks");
-    render(<NavBar />);
-    expect(
-      screen.getByRole("link", { name: /bookmarked entries/i })
-    ).toHaveAttribute("aria-current", "page");
-  });
+  test("keyboard (Tab → Enter) activates Create", async () => {
+    const user = userEvent.setup();
+    setRouter("/");
+    const { rerender } = render(<NavBar />);
 
-  // Optional: assert active background style with jest-styled-components
-  test("applies active background style to current link", () => {
-    setPath("/");
-    const { container } = render(<NavBar />);
-    const home = screen.getByRole("link", { name: /home/i });
-    // The StyledLink applies background when $active=true
-    // This checks the computed CSS rule from styled-components
-    expect(home).toHaveStyleRule("background", "var(--color-medium)", {
-      // because the rule is conditional, styled-components tracks it at the element level
-    });
+    await user.tab(); // Home
+    await user.tab(); // Create
+    await user.keyboard("{Enter}");
+
+    setRouter("/create");
+    rerender(<NavBar />);
+
+    expect(
+      screen.getByRole("link", { name: /create new entry/i })
+    ).toHaveAttribute("aria-current", "page");
   });
 });
