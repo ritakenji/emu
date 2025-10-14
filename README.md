@@ -138,6 +138,7 @@ In total, there are 4 pages to explore:
     <a href="https://nodejs.org/" target="_blank"><img src="assets/nodejs.png" alt="Logo"></a>
     <a href="https://react.dev/" target="_blank"><img src="assets/react.png" alt="Logo"></a>
     <a href="https://nextjs.org/" target="_blank"><img src="assets/nextjs.png" alt="Logo"></a>
+    <a href="https://jestjs.io/" target="_blank"><img src="assets/jest.png" alt="Logo"></a>
     <a href="https://www.mongodb.com/" target="_blank"><img src="assets/mongo.png" alt="Logo"></a>
 </p>
 <p>✨ HTML ✨ CSS ✨ JavaScript ✨ Node.js ✨ React ✨ Next.js ✨ MongoDB ✨</p>
