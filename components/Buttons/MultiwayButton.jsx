@@ -8,28 +8,36 @@ export default function MultiwayButton({ onClick, $variant, buttonText }) {
   );
 }
 const StyledMultiwayButton = styled.button`
-  background-color: white;
   padding: 0.8rem;
-  border-radius: 0.6rem;
-  color: black;
+  border-radius: 10px;
   text-decoration: none;
-  font-weight: bold;
-  border: none;
-  font-size: inherit;
   text-align: center;
+  border: 2px solid var(--color-primary);
   cursor: pointer;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+
+  ${({ $variant }) =>
+    $variant === "edit" &&
+    css`
+      background-color: var(--color-primary);
+      color: #fff;
+
+      &:hover {
+        border: 2px solid var(--color-primary-darker);
+        background-color: var(--color-primary-darker);
+      }
+    `}
 
   ${({ $variant }) =>
     $variant === "deleteAndCancel" &&
     css`
-      background-color: lightgray;
-      color: red;
-    `}
-  ${({ $variant }) =>
-    $variant === "edit" &&
-    css`
-      background-color: lightblue;
-      border: 1px solid black;
-      color: yellow;
+      color: var(--color-primary);
+      background-color: transparent;
+
+      &:hover {
+        color: #fff;
+        background-color: var(--color-primary);
+      }
     `}
 `;
