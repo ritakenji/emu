@@ -37,7 +37,11 @@
     </li>
     <li><a href="#technologies">Technologies</a></li>
     <li><a href="#preview">Preview</a></li>
-    <li><a href="#contributors">Contributors</a></li>
+    <li>
+      <a href="#contributors">Contributors</a></li>
+      <ul>
+        <li><a href="#reviewed-by">Reviewed By</a></li>
+      </ul>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -158,6 +162,15 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <a href="https://github.com/ritakenji/emu/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ritakenji/emu" />
 </a>
+
+<h3 id="reviewed-by">✅ Reviewed By</h3>
+
+<a href="https://github.com/EsraaQandel">
+  <img width="60" height="60"src="https://github.com/EsraaQandel.png"></a>
+<a href="https://github.com/Klausstille">
+  <img width="60" height="60"src="https://github.com/Klausstille.png"></a>
+<a href="https://github.com/F-Kirchhoff">
+  <img width="60" height="60"src="https://github.com/F-Kirchhoff.png"></a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
