@@ -171,6 +171,8 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
   <img width="60" height="60"src="https://github.com/Klausstille.png"></a>
 <a href="https://github.com/F-Kirchhoff">
   <img width="60" height="60"src="https://github.com/F-Kirchhoff.png"></a>
+<a href="https://github.com/roland-hufnagel">
+  <img width="60" height="60"src="https://github.com/roland-hufnagel.png"></a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
