@@ -139,7 +139,7 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 - Setting up **dynamic routing** to create clean URLs that automatically load different content (like a unique user profile or product page) based on the address.
 - Effectively **managing application state** using React hooks (like useState and useLocalStorage), ensuring the UI remains reactive and synchronized with underlying data changes across different components.
 
-<h3 id="notes">📁 Dataflow and File Structure</h3>
+<h3 id="notes">📁 File Structure</h3>
 <img src="assets/file-structure.png" alt="MongoDB logo">
 <p>(Project's file structure)</p>
 
@@ -181,13 +181,13 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <h3 id="reviewed-by">✅ Reviewed By</h3>
 
 <a href="https://github.com/EsraaQandel">
-  <img width="55" height="55"src="https://github.com/EsraaQandel.png"></a>
+  <img width="55" height="55" src="https://github.com/EsraaQandel.png"></a>
 <a href="https://github.com/Klausstille">
-  <img width="55" height="55"src="https://github.com/Klausstille.png"></a>
+  <img width="55" height="55" src="https://github.com/Klausstille.png"></a>
 <a href="https://github.com/F-Kirchhoff">
-  <img width="55" height="55"src="https://github.com/F-Kirchhoff.png"></a>
+  <img width="55" height="55" src="https://github.com/F-Kirchhoff.png"></a>
 <a href="https://github.com/roland-hufnagel">
-  <img width="55" height="55"src="https://github.com/roland-hufnagel.png"></a>
+  <img width="55" height="55" src="https://github.com/roland-hufnagel.png"></a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -198,9 +198,12 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 
 <h3 id="special-thanks">Special Thanks</h3>
 
-<a href="https://github.com/mgczarnievicz">
-  <img width="55" height="55"src="https://github.com/mgczarnievicz.png"></a>
-<p>As a group we would like to give special thanks to our main coach Gimena, who left the program before we had the chance to graduate. Thank you for all the knowledge, inspiration, motivation and support you gave us through the bootcamp!</p>
+<p>As a group we would like to give special thanks to our main coach Gimena, who left the program before we graduated. Thank you for all the knowledge, inspiration, motivation and support you gave us through the bootcamp!</p>
+<p align="center"><a href="https://github.com/mgczarnievicz">
+  <img width="55" height="55"src="https://github.com/mgczarnievicz.png"></a></p>
+<p align="center">✨ We will keep shining for you ✨</p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <h3 id="resources">Resources</h3>
 
