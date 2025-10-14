@@ -163,7 +163,6 @@ export default function EntryForm({
         type="datetime-local"
         defaultValue={toLocalDateTime(initialValues?.dateTime)}
       />
-
       <SubmitButton type="submit"> {buttonText} </SubmitButton>
     </FormContainer>
   );
