@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
-import { BookmarkIcon, House, Plus } from "lucide-react";
+import { Heart, House, Plus } from "lucide-react";
 
 export default function NavBar() {
   const { pathname } = useRouter();
@@ -76,6 +76,7 @@ const StyledHouse = styled(House)`
   ${iconCss}
   stroke: ${({ $active }) =>
     $active ? "var(--color-primary)" : "var(--color-medium)"};
+  stroke-width: 1.8px;
 `;
 
 const StyledCreate = styled(Plus)`
@@ -91,8 +92,9 @@ const StyledCreate = styled(Plus)`
   border: 6px solid var(--color-light);
 `;
 
-const StyledBookmark = styled(BookmarkIcon)`
+const StyledBookmark = styled(Heart)`
   ${iconCss}
   stroke: ${({ $active }) =>
     $active ? "var(--color-primary)" : "var(--color-medium)"};
+  stroke-width: 1.8px;
 `;
