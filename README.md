@@ -116,15 +116,22 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 
 <h2 id="learning-outcomes">🧠 Learning Outcomes</h2>
 
-- Using correct **HTML semantics** to structure the page and make it more accessible to anyone visiting it;
-- ...Agile Workflow -> SCRUM
-- ...TDD/Component testing --> x % code coverage
-- ...Backend
-- ...API and CRUD
-- ...React Dynamic routes
-- ...React
-- ...UX/UI principles
-- ...React State
+- Using correct **HTML semantics** to structure the page and make it more accessible to anyone visiting it.
+- Becoming familiarized with the **Agile methodology framework** for project management, specifically the **SCRUM** method.
+- Applying basic **UX/UI principles** (hierarchy, consistency, contrast, etc) to the design of the application to achieve not only aesthetically pleasing, but also excellent accessibility for all users.
+- Learned to **read, understand and review code of others**, strengthening our problem solving and attention to detail skills.
+- Practicing and implementing the **DRY (Don’t Repeat Yourself) principle** as a refactoring method. We learned to reduce the repetition of code patterns, promoting reusability and maintainability, therefore creating more efficient, readable, and error-free code.
+- Developed stronger problem solving skills by practicing understanding each tasks’ requirements, discussing potential different approaches, deciding on a final approach and doing **dry runs** before jumping straight to code.
+- Learned how to present and keep our work in structured and understandable ways by using the right terminologies for naming and refering, creating concise file structures and dataflows.
+- Practicing **Test-Driven Development (TDD) and component testing** to catch bugs early, make requirements clearer before writing code, and safely update complex features with confidence.
+- Applying the **principles of The Testing Trophy** to structure our testing strategy, prioritizing highly reliable and quick integration and unit tests over slower end-to-end tests, which led to faster development cycles.
+- Gained clarity on **Testing Classifications** (Unit, Integration, End-to-End, etc.) to ensure we selected the right type of test for validating every specific part and function of the application.
+- Designing and building a scalable **backend architecture** on MongoDB.
+- Mastering the fundamental **Create, Read, Update, Delete (CRUD) operations** to manage resources efficiently and enable seamless communication between the client and server.
+- Using the **Next.js framework** to make the app fast by pre-rendering pages (SSR/SSG), and using its simple file structure to manage all the different web addresses (routing).
+- Mastering the **React component model** to build reusable UI elements, which significantly improved development speed and made the frontend application much easier to maintain.
+- Setting up **dynamic routing** to create clean URLs that automatically load different content (like a unique user profile or product page) based on the address.
+- Effectively **managing application state** using React hooks (like useState and useLocalStorage), ensuring the UI remains reactive and synchronized with underlying data changes across different components.
 
 <h3 id="notes">📁 Dataflow and File Structure</h3>
 <p>[insert excalidraws here]</p>
@@ -136,16 +143,17 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <h2 id="technologies">💻 Technologies</h2>
 
 <p>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><img src="assets/html.png" alt="Logo"></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img src="assets/css.png" alt="Logo"></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="assets/JS.png" alt="Logo"></a>
-    <a href="https://nodejs.org/" target="_blank"><img src="assets/nodejs.png" alt="Logo"></a>
-    <a href="https://react.dev/" target="_blank"><img src="assets/react.png" alt="Logo"></a>
-    <a href="https://nextjs.org/" target="_blank"><img src="assets/nextjs.png" alt="Logo"></a>
-    <a href="https://jestjs.io/" target="_blank"><img src="assets/jest.png" alt="Logo"></a>
-    <a href="https://www.mongodb.com/" target="_blank"><img src="assets/mongo.png" alt="Logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><img src="assets/html.png" alt="HTML logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img src="assets/css.png" alt="CSS logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="assets/JS.png" alt="JavaScript logo"></a>
+    <a href="https://nodejs.org/" target="_blank"><img src="assets/nodejs.png" alt="NodeJS logo"></a>
+    <a href="https://react.dev/" target="_blank"><img src="assets/react.png" alt="React logo"></a>
+    <a href="https://nextjs.org/" target="_blank"><img src="assets/nextjs.png" alt="NextJS logo"></a>
+    <a href="https://jestjs.io/" target="_blank"><img src="assets/jest.png" alt="Jest logo"></a>
+    <a href="https://www.mongodb.com/" target="_blank"><img src="assets/mongo.png" alt="MongoDB logo"></a>
+    <a href="https://www.figma.com/" target="_blank"><img src="assets/figma.png" alt="Figma logo"></a>
 </p>
-<p>✨ HTML ✨ CSS ✨ JavaScript ✨ Node.js ✨ React ✨ Next.js ✨ Jest ✨ MongoDB ✨</p>
+<p>✨ HTML ✨ CSS ✨ JavaScript ✨ Node.js ✨ React ✨ Next.js ✨ Jest ✨ MongoDB ✨ Figma ✨</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -166,13 +174,13 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <h3 id="reviewed-by">✅ Reviewed By</h3>
 
 <a href="https://github.com/EsraaQandel">
-  <img width="60" height="60"src="https://github.com/EsraaQandel.png"></a>
+  <img width="55" height="55"src="https://github.com/EsraaQandel.png"></a>
 <a href="https://github.com/Klausstille">
-  <img width="60" height="60"src="https://github.com/Klausstille.png"></a>
+  <img width="55" height="55"src="https://github.com/Klausstille.png"></a>
 <a href="https://github.com/F-Kirchhoff">
-  <img width="60" height="60"src="https://github.com/F-Kirchhoff.png"></a>
+  <img width="55" height="55"src="https://github.com/F-Kirchhoff.png"></a>
 <a href="https://github.com/roland-hufnagel">
-  <img width="60" height="60"src="https://github.com/roland-hufnagel.png"></a>
+  <img width="55" height="55"src="https://github.com/roland-hufnagel.png"></a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -185,12 +193,25 @@ This space lists resources we found helpful in the creation and development of t
 
 - [Othneildrewb's README template](https://github.com/othneildrew/Best-README-Template#readme)
 - [Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Img Shields](https://shields.io)
+- [Shields.io](https://shields.io)
 - [Lucide Icons](https://lucide.dev/icons)
 - [Icons 8](https://icons8.com/)
 - [PageSpeed Insights](https://pagespeed.web.dev/)
 - [Web Active Learning Neuefisch](https://web-active-learning.vercel.app/documents/css-responsive)
 - [Contrib.rocks](https://contrib.rocks/)
+- [Excalidraw](https://excalidraw.com/)
+- [VSCode](https://code.visualstudio.com/)
+- [Gemni](https://gemini.google.com/app)
+- [ChatGPT](https://chatgpt.com)
+- [MDN](https://developer.mozilla.org/de/)
+- [W3schools](https://www.w3schools.com/)
+- [FreeCodeCamp](https://www.freecodecamp.org/learn)
+- [NPM packages:](https://www.npmjs.com/)
+  - [eslint](https://www.npmjs.com/package/eslint)
+  - [lucide-react](https://www.npmjs.com/package/lucide-react)
+  - [mongoose](https://www.npmjs.com/package/mongoose)
+  - [vercel](https://www.npmjs.com/package/vercel)
+  - among others
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
