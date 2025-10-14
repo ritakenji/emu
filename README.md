@@ -42,7 +42,13 @@
       <ul>
         <li><a href="#reviewed-by">Reviewed By</a></li>
       </ul>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li>
+      <a href="#acknowledgments">Acknowledgments</a>
+      <ul>
+        <li><a href="#special-thanks">Special Thanks</a></li>
+        <li><a href="#resources">Resources</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 </br>
@@ -134,7 +140,8 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 - Effectively **managing application state** using React hooks (like useState and useLocalStorage), ensuring the UI remains reactive and synchronized with underlying data changes across different components.
 
 <h3 id="notes">📁 Dataflow and File Structure</h3>
-<p>[insert excalidraws here]</p>
+<img src="assets/file-structure.png" alt="MongoDB logo">
+<p>(Project's file structure)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -143,15 +150,15 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <h2 id="technologies">💻 Technologies</h2>
 
 <p>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><img src="assets/html.png" alt="HTML logo"></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img src="assets/css.png" alt="CSS logo"></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="assets/JS.png" alt="JavaScript logo"></a>
-    <a href="https://nodejs.org/" target="_blank"><img src="assets/nodejs.png" alt="NodeJS logo"></a>
-    <a href="https://react.dev/" target="_blank"><img src="assets/react.png" alt="React logo"></a>
-    <a href="https://nextjs.org/" target="_blank"><img src="assets/nextjs.png" alt="NextJS logo"></a>
-    <a href="https://jestjs.io/" target="_blank"><img src="assets/jest.png" alt="Jest logo"></a>
-    <a href="https://www.mongodb.com/" target="_blank"><img src="assets/mongo.png" alt="MongoDB logo"></a>
-    <a href="https://www.figma.com/" target="_blank"><img src="assets/figma.png" alt="Figma logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><img src="assets/icons/html.png" alt="HTML logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img src="assets/icons/css.png" alt="CSS logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="assets/icons/JS.png" alt="JavaScript logo"></a>
+    <a href="https://nodejs.org/" target="_blank"><img src="assets/icons/nodejs.png" alt="NodeJS logo"></a>
+    <a href="https://react.dev/" target="_blank"><img src="assets/icons/react.png" alt="React logo"></a>
+    <a href="https://nextjs.org/" target="_blank"><img src="assets/icons/nextjs.png" alt="NextJS logo"></a>
+    <a href="https://jestjs.io/" target="_blank"><img src="assets/icons/jest.png" alt="Jest logo"></a>
+    <a href="https://www.mongodb.com/" target="_blank"><img src="assets/icons/mongo.png" alt="MongoDB logo"></a>
+    <a href="https://www.figma.com/" target="_blank"><img src="assets/icons/figma.png" alt="Figma logo"></a>
 </p>
 <p>✨ HTML ✨ CSS ✨ JavaScript ✨ Node.js ✨ React ✨ Next.js ✨ Jest ✨ MongoDB ✨ Figma ✨</p>
 
@@ -188,6 +195,14 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
  -->
 
 <h2 id="acknowledgments">🏅 Acknowledgments</h2>
+
+<h3 id="special-thanks">Special Thanks</h3>
+
+<a href="https://github.com/mgczarnievicz">
+  <img width="55" height="55"src="https://github.com/mgczarnievicz.png"></a>
+<p>As a group we would like to give special thanks to our main coach Gimena, who left the program before we had the chance to graduate. Thank you for all the knowledge, inspiration, motivation and support you gave us through the bootcamp!</p>
+
+<h3 id="resources">Resources</h3>
 
 This space lists resources we found helpful in the creation and development of this project, to which we would like to give credit to.
 
