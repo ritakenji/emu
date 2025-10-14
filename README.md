@@ -145,7 +145,7 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
     <a href="https://jestjs.io/" target="_blank"><img src="assets/jest.png" alt="Logo"></a>
     <a href="https://www.mongodb.com/" target="_blank"><img src="assets/mongo.png" alt="Logo"></a>
 </p>
-<p>✨ HTML ✨ CSS ✨ JavaScript ✨ Node.js ✨ React ✨ Next.js ✨ MongoDB ✨</p>
+<p>✨ HTML ✨ CSS ✨ JavaScript ✨ Node.js ✨ React ✨ Next.js ✨ Jest ✨ MongoDB ✨</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -179,27 +179,16 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 
 <h2 id="acknowledgments">🏅 Acknowledgments</h2>
 
-This space lists resources I found helpful in the creation and development of this project, to which I would like to give credit to.
-I am sure anyone could make great use of them for their own projects, especially if just now starting their coding journey!
+This space lists resources we found helpful in the creation and development of this project, to which we would like to give credit to.
 
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-- [Malven's Grid Cheatsheet](https://grid.malven.co/)
-- [Img Shields](https://shields.io)
 - [Othneildrewb's README template](https://github.com/othneildrew/Best-README-Template#readme)
-- [Font Awesome](https://fontawesome.com)
+- [Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Img Shields](https://shields.io)
 - [Lucide Icons](https://lucide.dev/icons)
 - [Icons 8](https://icons8.com/)
 - [PageSpeed Insights](https://pagespeed.web.dev/)
-- [Oh Shit Git](https://ohshitgit.com/)
-- [Html-Css-Js](https://html-css-js.com/css/generator/box-shadow/)
-- [Pokemon Palettes](http://pokepalettes.com/)
-- [CSS Gradient](https://cssgradient.io/)
-- [Get BEM](https://getbem.com/naming/)
-- [CSS Tricks](https://css-tricks.com/guides/)
 - [Web Active Learning Neuefisch](https://web-active-learning.vercel.app/documents/css-responsive)
-- [Steve Ayo's Functions 101](https://www.steveayo.com/blog/function-declaration-function-expression-arrow-function/)
+- [Contrib.rocks](https://contrib.rocks/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
