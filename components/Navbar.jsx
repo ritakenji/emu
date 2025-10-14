@@ -10,7 +10,7 @@ export default function NavBar() {
   const isCreate = pathname === "/create";
 
   return (
-    <Navigation role="navigation" aria-label="Main navigation">
+    <Navigation>
       <StyledNavLink
         href="/"
         aria-current={isHome ? "page" : undefined}
