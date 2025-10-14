@@ -1,14 +1,19 @@
 import styled, { css } from "styled-components";
 
-export default function MultiwayButton({ onClick, $variant, buttonText }) {
+export default function MultiwayButton({
+  onClick,
+  $variant,
+  buttonText,
+  type,
+}) {
   return (
-    <StyledMultiwayButton onClick={onClick} type="button" $variant={$variant}>
+    <StyledMultiwayButton onClick={onClick} type={type} $variant={$variant}>
       {buttonText}
     </StyledMultiwayButton>
   );
 }
 const StyledMultiwayButton = styled.button`
-  padding: 0.8rem;
+  padding: 8px 15px;
   border-radius: 10px;
   text-decoration: none;
   text-align: center;

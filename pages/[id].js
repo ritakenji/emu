@@ -123,11 +123,13 @@ export default function EntryPage() {
             initialValues={entry}
             onSubmit={editEntry}
             formTitle={"Edit Entry"}
+            type="button"
           ></EntryForm>
           <MultiwayButton
             onClick={() => setMode("default")}
             $variant="deleteAndCancel"
             buttonText="Cancel"
+            type="button"
           />
         </Modal>
       )}

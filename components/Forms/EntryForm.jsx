@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useSWR from "swr";
 import styled from "styled-components";
+import MultiwayButton from "../Buttons/MultiwayButton";
 
 import { toLocalDateTime } from "@/utils/helpers";
 
@@ -160,7 +161,13 @@ export default function EntryForm({
         defaultValue={toLocalDateTime(initialValues?.dateTime)}
       />
 
-      <SubmitButton type="submit"> {buttonText} </SubmitButton>
+      {/* <SubmitButton type="submit"> {buttonText} </SubmitButton> */}
+      <MultiwayButton
+        // onClick={() => setMode("default")}
+        type="submit"
+        $variant="edit"
+        buttonText={buttonText}
+      />
     </FormContainer>
   );
 }
