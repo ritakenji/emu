@@ -39,8 +39,8 @@ export default createGlobalStyle`
     --color-anger: #FFDFD9;
     --color-anger-dark: #E14700;
 
-    --color-contempt: #FFF4AF;
-    --color-contempt-dark: #8A6500;
+    --color-stress: #c6c6c6ff;
+    --color-stress-dark: #343434ff;
 
     --color-disgust: #C1EBC5;
     --color-disgust-dark: #0E6E30;
@@ -57,6 +57,9 @@ export default createGlobalStyle`
     --color-enjoyment: #FFD9F4;
     --color-enjoyment-dark: #DF0052;
 
+    --color-confidence: #FFF4AF;
+    --color-confidence-dark: #8A6500;
+
 
   }
 
@@ -65,14 +68,14 @@ export default createGlobalStyle`
 
   /* ---------------------emotion colours---------------------- */
 
-  .anger, .frustration, .bitterness, .humiliation, .disrespect, .jealousy, .contempt, .envy {
+  .anger, .frustration, .humiliation, .jealousy {
     background-color: var(--color-anger);
     color: var(--color-anger-dark);
   }
 
-  .tiredness, .stress, .boredom, .pressure, .overwhelm {
-    background-color: var(--color-contempt);
-    color: var(--color-contempt-dark);
+  .tiredness, .stress, .boredom, .overwhelm {
+    background-color: var(--color-stress);
+    color: var(--color-stress-dark);
   } 
   
   .disgust, .disappointment, .embarrassment, .judgement {
@@ -80,12 +83,12 @@ export default createGlobalStyle`
     color: var(--color-disgust-dark);
   }
   
-  .fear, .rejection, .insecurity, .anxiety, .worry, .humiliation {
+  .fear, .rejection, .insecurity, .anxiety {
     background-color: var(--color-fear);
     color: var(--color-fear-dark);
   }
 
-  .sadness, .hurt, .guilt, .despair, .vulnerability, .loneliness, .abandonment, .grief, .shame, .remorse {
+  .sadness, .guilt, .loneliness, .shame {
     background-color: var(--color-sadness);
     color: var(--color-sadness-dark);
   }
@@ -95,11 +98,15 @@ export default createGlobalStyle`
     color: var(--color-surprise-dark);
   }
 
-  .enjoyment, .happiness, .pride, .acceptance, .power, .peace, .trust, .optimism, .inspiration, .hope, .gratitude, .love, .courage, .respect, .confidence, .curiosity, .playfulness  {
+  .enjoyment, .happiness,  .peace, .trust, .optimism,  .hope, .gratitude, .love,    .curiosity  {
     background-color: var(--color-enjoyment);
     color: var(--color-enjoyment-dark);
   }
 
+  .pride, .power, .courage, .confidence, .respect, .inspiration {
+      background-color: var(--color-confidence);
+      color: var(--color-confidence-dark);
+  }
 
 
   /* ---------------------typo---------------------- */
