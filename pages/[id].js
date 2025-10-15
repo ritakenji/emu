@@ -129,7 +129,6 @@ export default function EntryPage() {
             onClick={() => setMode("default")}
             $variant="deleteAndCancel"
             buttonText="Cancel"
-            type="button"
           />
         </Modal>
       )}
