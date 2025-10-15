@@ -36,8 +36,8 @@ export default createGlobalStyle`
     --color-dark: #12256E;
     --color-medium: #9C9C9C;
 
-    --color-anger: #FFDFD9;
-    --color-anger-dark: #E14700;
+    --color-anger: #ffd9d9ff;
+    --color-anger-dark: #e10000ff;
 
     --color-stress: #c6c6c6ff;
     --color-stress-dark: #343434ff;
@@ -46,13 +46,13 @@ export default createGlobalStyle`
     --color-disgust-dark: #0E6E30;
 
     --color-fear: #D5D7FF;
-    --color-fear-dark: ##4815CA;
+    --color-fear-dark: #4815CA;
 
     --color-sadness: #CCE8FF;
     --color-sadness-dark: #0041BA;
 
     --color-surprise: #FFE9BD;
-    --color-surprise-dark: #DC6700;
+    --color-surprise-dark: #cd6000ff;
 
     --color-enjoyment: #FFD9F4;
     --color-enjoyment-dark: #DF0052;
@@ -83,7 +83,7 @@ export default createGlobalStyle`
     color: var(--color-disgust-dark);
   }
   
-  .fear, .rejection, .insecurity, .anxiety {
+  .fear, .rejection, .insecurity, .anxiety, .confusion {
     background-color: var(--color-fear);
     color: var(--color-fear-dark);
   }
@@ -93,12 +93,12 @@ export default createGlobalStyle`
     color: var(--color-sadness-dark);
   }
 
-  .surprise, .excitement, .amazement, .confusion {
+  .surprise, .excitement, .amazement {
     background-color: var(--color-surprise);
     color: var(--color-surprise-dark);
   }
 
-  .enjoyment, .happiness,  .peace, .trust, .optimism,  .hope, .gratitude, .love,    .curiosity  {
+  .enjoyment, .happiness, .peace, .trust, .optimism, .hope, .gratitude, .love, .curiosity  {
     background-color: var(--color-enjoyment);
     color: var(--color-enjoyment-dark);
   }
