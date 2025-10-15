@@ -17,7 +17,6 @@ export default createGlobalStyle`
     font-family: system-ui;
     color: var(--color-dark);
     font-family: "Inter", sans-serif;
-    background-color: var(--color-light)
   }
 
   /* ---------------------theme colours---------------------- */
@@ -40,8 +39,8 @@ export default createGlobalStyle`
     --color-anger: #FFDFD9;
     --color-anger-dark: #E14700;
 
-    --color-contempt: #FFF4AF;
-    --color-contempt-dark: #8A6500;
+    --color-stress: #c6c6c6ff;
+    --color-stress-dark: #343434ff;
 
     --color-disgust: #C1EBC5;
     --color-disgust-dark: #0E6E30;
@@ -58,6 +57,9 @@ export default createGlobalStyle`
     --color-enjoyment: #FFD9F4;
     --color-enjoyment-dark: #DF0052;
 
+    --color-confidence: #FFF4AF;
+    --color-confidence-dark: #8A6500;
+
 
   }
 
@@ -66,41 +68,45 @@ export default createGlobalStyle`
 
   /* ---------------------emotion colours---------------------- */
 
-  .anger {
+  .anger, .frustration, .humiliation, .jealousy {
     background-color: var(--color-anger);
     color: var(--color-anger-dark);
   }
 
-  .contempt {
-    background-color: var(--color-contempt);
-    color: var(--color-contempt-dark);
+  .tiredness, .stress, .boredom, .overwhelm {
+    background-color: var(--color-stress);
+    color: var(--color-stress-dark);
   } 
   
-  .disgust {
+  .disgust, .disappointment, .embarrassment, .judgement {
     background-color: var(--color-disgust);
     color: var(--color-disgust-dark);
   }
   
-  .fear {
+  .fear, .rejection, .insecurity, .anxiety {
     background-color: var(--color-fear);
     color: var(--color-fear-dark);
   }
 
-  .sadness {
+  .sadness, .guilt, .loneliness, .shame {
     background-color: var(--color-sadness);
     color: var(--color-sadness-dark);
   }
 
-  .surprise {
+  .surprise, .excitement, .amazement, .confusion {
     background-color: var(--color-surprise);
     color: var(--color-surprise-dark);
   }
 
-  .enjoyment {
+  .enjoyment, .happiness,  .peace, .trust, .optimism,  .hope, .gratitude, .love,    .curiosity  {
     background-color: var(--color-enjoyment);
     color: var(--color-enjoyment-dark);
   }
 
+  .pride, .power, .courage, .confidence, .respect, .inspiration {
+      background-color: var(--color-confidence);
+      color: var(--color-confidence-dark);
+  }
 
 
   /* ---------------------typo---------------------- */
