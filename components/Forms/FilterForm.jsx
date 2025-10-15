@@ -2,6 +2,8 @@ import useSWR from "swr";
 import { useRef } from "react";
 
 import MultiwayButton from "../Buttons/MultiwayButton";
+import { Funnel } from "lucide-react";
+import styled from "styled-components";
 
 export default function FilterForm({
   onSubmit,
@@ -46,8 +48,10 @@ export default function FilterForm({
     onSubmit(data);
   }
   return (
-    <form onSubmit={handleSubmit} ref={formRef}>
-      <label htmlFor="emotions">Filter: </label>
+    <StyledForm onSubmit={handleSubmit} ref={formRef}>
+      <StyledLabel htmlFor="emotions">
+        <Funnel />{" "}
+      </StyledLabel>
       <select
         name="emotions"
         id="emotions"
@@ -60,15 +64,25 @@ export default function FilterForm({
           </option>
         ))}
       </select>
-      <MultiwayButton type="submit" $variant="edit" buttonText="Apply" />
+      <MultiwayButton type="submit" $variant="primary" buttonText="Apply" />
       {selectedFilterEmotionId && selectedFilterEmotionId !== "reset" && (
         <MultiwayButton
           type="reset"
-          $variant="deleteAndCancel"
+          $variant="secondary"
           buttonText="Reset"
           onClick={resetForm}
         />
       )}
-    </form>
+    </StyledForm>
   );
 }
+
+const StyledForm = styled.form`
+  display: flex;
+  align-content: center;
+`;
+
+const StyledLabel = styled.label`
+  height: auto;
+  display: inline-block;
+`;
