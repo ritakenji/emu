@@ -88,12 +88,12 @@ export default function EntryPage() {
           <>
             <MultiwayButton
               onClick={() => setMode("edit")}
-              $variant="edit"
+              $variant="primary"
               buttonText="Edit"
             />
             <MultiwayButton
               onClick={() => setMode("delete")}
-              $variant="deleteAndCancel"
+              $variant="secondary"
               buttonText="Delete"
             />
           </>
@@ -101,17 +101,17 @@ export default function EntryPage() {
       </ButtonContainer>
       {mode === "delete" && (
         <Modal title="Delete entry" onClose={() => setMode("default")}>
-          <p>Are you sure you want to delete the entry?</p>
+          <ModalText>Are you sure you want to delete the entry?</ModalText>
           <ButtonBox>
             <MultiwayButton
-              onClick={deleteEntry}
-              $variant="deleteAndCancel"
-              buttonText="Delete"
+              onClick={() => setMode("default")}
+              $variant="secondary"
+              buttonText="Cancel"
             />
             <MultiwayButton
-              onClick={() => setMode("default")}
-              $variant="deleteAndCancel"
-              buttonText="Cancel"
+              onClick={deleteEntry}
+              $variant="primary"
+              buttonText="Delete"
             />
           </ButtonBox>
         </Modal>
@@ -127,7 +127,7 @@ export default function EntryPage() {
           ></EntryForm>
           <MultiwayButton
             onClick={() => setMode("default")}
-            $variant="deleteAndCancel"
+            $variant="secondary"
             buttonText="Cancel"
           />
         </Modal>
@@ -159,5 +159,14 @@ const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
 
 const ButtonBox = styled.div`
   display: flex;
-  gap: 1em;
+  justify-content: center;
+  gap: 1rem;
+`;
+
+const ModalText = styled.p`
+  font-weight: bold;
+  color: var(--color-dark);
+  text-align: center;
+  font-size: 1.3em;
+  margin: 0 0 2rem 0;
 `;
