@@ -80,6 +80,7 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 </br>
 
 - Located on the bottom of the viewport, the Navigation Bar allows the user to intuitively explore the app and locate themselves within it.
+- In total, there are 4 main pages the user can visit:
 
 - 🏠 **Home Page**: Browse a well-organised collection of emotion entries.
 
@@ -125,26 +126,37 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <h2 id="learning-outcomes">🧠 Learning Outcomes</h2>
 <h3 id="technical">🔩 Technical</h3>
 
-- **General**
+<h4>General</h4>
+
   - Practicing and implementing the **DRY (Don’t Repeat Yourself) principle** as a refactoring method. We learned to reduce the repetition of code patterns, promoting reusability and maintainability, therefore creating more efficient, readable, and error-free code.
   - Learned to **read, understand and review code of others**, strengthening our problem solving and attention to detail skills.
   - Developed stronger problem solving skills by practicing understanding each tasks’ requirements, discussing potential different approaches, deciding on a final approach and doing **dry runs** before jumping straight to code.
   - Learned how to present and keep our work in structured and understandable ways by using the right terminologies for naming and referring, creating concise file structures and dataflows.
   - Becoming familiarized with the **Agile methodology framework** for project management, specifically the **SCRUM** method.
-- **Frontend and UX/UI**
+    
+<h4>Frontend and UX/UI</h4>
+
   - Using correct **HTML semantics** to structure the page and make it more accessible to anyone visiting it.
   - Applying basic **UX/UI principles** (hierarchy, consistency, contrast, etc) to the design of the application to achieve not only aesthetically pleasing, but also excellent accessibility for all users.
-- **React**
+  
+<h4>React</h4>
+
   - Mastering the **React component model** to build reusable UI elements, which significantly improved development speed and made the frontend application much easier to maintain.
   - Setting up **dynamic routing** to create clean URLs that automatically load different content (like a unique user profile or product page) based on the address.
   - Effectively **managing application state** using React hooks (like useState and useLocalStorage), ensuring the UI remains reactive and synchronized with underlying data changes across different components.
-- **Next.js**
+    
+<h4>Next.js</h4>
+
   - Using the **Next.js framework** to make the app fast by pre-rendering pages (SSR/SSG), and using its simple file structure to manage all the different web addresses (routing).
-- **Testing**
+    
+<h4>Testing</h4>
+
   - Practicing **Test-Driven Development (TDD) and component testing** to catch bugs early, make requirements clearer before writing code, and safely update complex features with confidence.
   - Applying the **principles of The Testing Trophy** to structure our testing strategy, prioritizing highly reliable and quick integration and unit tests over slower end-to-end tests, which led to faster development cycles.
   - Gained clarity on **Testing Classifications** (Unit, Integration, End-to-End, etc.) to ensure we selected the right type of test for validating every specific part and function of the application.
-- **Backend**
+    
+<h4>Backend</h4>
+
   - Designing and building a scalable **backend architecture** on MongoDB.
   - Mastering the fundamental **Create, Read, Update, Delete (CRUD) operations** to manage resources efficiently and enable seamless communication between the client and server.
 
