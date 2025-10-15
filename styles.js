@@ -17,7 +17,6 @@ export default createGlobalStyle`
     font-family: system-ui;
     color: var(--color-dark);
     font-family: "Inter", sans-serif;
-    background-color: var(--color-light)
   }
 
   /* ---------------------theme colours---------------------- */
@@ -66,32 +65,39 @@ export default createGlobalStyle`
 
   /* ---------------------emotion colours---------------------- */
 
-  .anger {
+  .anger, .frustration, .bitterness, .humiliation, .disrespect, .jealousy, .contempt, .envy {
     background-color: var(--color-anger);
+    color: var(--color-anger-dark);
   }
 
-  .contempt {
-    background-color: var(--color-contempt)
+  .tiredness, .stress, .boredom, .pressure, .overwhelm {
+    background-color: var(--color-contempt);
+    color: var(--color-contempt-dark);
   } 
   
-  .disgust {
-    background-color: var(--color-disgust)
+  .disgust, .disappointment, .embarrassment, .judgement {
+    background-color: var(--color-disgust);
+    color: var(--color-disgust-dark);
   }
   
-  .fear {
-    background-color: var(--color-fear)
+  .fear, .rejection, .insecurity, .anxiety, .worry, .humiliation {
+    background-color: var(--color-fear);
+    color: var(--color-fear-dark);
   }
 
-  .sadness {
-    background-color: var(--color-sadness)
+  .sadness, .hurt, .guilt, .despair, .vulnerability, .loneliness, .abandonment, .grief, .shame, .remorse {
+    background-color: var(--color-sadness);
+    color: var(--color-sadness-dark);
   }
 
-  .surprise {
-    background-color: var(--color-surprise)
+  .surprise, .excitement, .amazement, .confusion {
+    background-color: var(--color-surprise);
+    color: var(--color-surprise-dark);
   }
 
-  .enjoyment {
-    background-color: var(--color-enjoyment)
+  .enjoyment, .happiness, .pride, .acceptance, .power, .peace, .trust, .optimism, .inspiration, .hope, .gratitude, .love, .courage, .respect, .confidence, .curiosity, .playfulness  {
+    background-color: var(--color-enjoyment);
+    color: var(--color-enjoyment-dark);
   }
 
 
