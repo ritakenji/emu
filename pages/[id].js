@@ -81,7 +81,10 @@ export default function EntryPage() {
           <EmotionList entry={entry} />
         </section>
         <p>Intensity: {entry.intensity}</p>
-        <p>Notes: {entry.notes}</p>
+        <NotesCard>
+          <NoteTitle>My notes: </NoteTitle>
+          <NoteText>{entry.notes}</NoteText>
+        </NotesCard>
       </DetailWrapper>
       <ButtonContainer>
         {mode === "default" && (
@@ -143,6 +146,22 @@ const HeaderWrapper = styled.header`
 const DetailWrapper = styled.article`
   position: relative;
   padding: 1.5rem;
+`;
+
+const NotesCard = styled.section`
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 15px;
+  filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
+`;
+
+const NoteTitle = styled.p`
+font-weight: bold;
+margin: 0 0 0.5rem 0;
+`;
+
+const NoteText = styled.p`
+margin: 0;
 `;
 
 const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
