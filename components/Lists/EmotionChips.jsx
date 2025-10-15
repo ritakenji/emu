@@ -21,4 +21,6 @@ const ChipsContainer = styled.section`
 const EmotionChip = styled.span`
   padding: 10px 15px;
   border-radius: 50px;
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
 `;

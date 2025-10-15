@@ -67,30 +67,37 @@ export default createGlobalStyle`
 
   .anger {
     background-color: var(--color-anger);
+    color: var(--color-anger-dark);
   }
 
   .contempt {
-    background-color: var(--color-contempt)
+    background-color: var(--color-contempt);
+    color: var(--color-contempt-dark);
   } 
   
   .disgust {
-    background-color: var(--color-disgust)
+    background-color: var(--color-disgust);
+    color: var(--color-disgust-dark);
   }
   
   .fear {
-    background-color: var(--color-fear)
+    background-color: var(--color-fear);
+    color: var(--color-fear-dark);
   }
 
   .sadness {
-    background-color: var(--color-sadness)
+    background-color: var(--color-sadness);
+    color: var(--color-sadness-dark);
   }
 
   .surprise {
-    background-color: var(--color-surprise)
+    background-color: var(--color-surprise);
+    color: var(--color-surprise-dark);
   }
 
   .enjoyment {
-    background-color: var(--color-enjoyment)
+    background-color: var(--color-enjoyment);
+    color: var(--color-enjoyment-dark);
   }
 
 
