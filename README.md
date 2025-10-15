@@ -11,7 +11,7 @@
 </br>
 <div align="center">
   <a href="https://emu-ecru.vercel.app/">
-    <img src="assets/emu-logo.png" alt="Logo">
+    <img  width="344" height="500" src="assets/emu-logo.png" alt="Logo">
   </a>
 
   <h2 align="center">⭐ EMU App ⭐</h2>
@@ -182,7 +182,7 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <h3 id="notes">📁 File Structure</h3>
-<img src="assets/file-structure.png" alt="MongoDB logo">
+<p align="center"><img width="402" height="1078" src="assets/file-structure.png" alt="MongoDB logo"></p>
 <p align="center">(Project's file structure)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
