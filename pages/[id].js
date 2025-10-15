@@ -101,7 +101,7 @@ export default function EntryPage() {
       </ButtonContainer>
       {mode === "delete" && (
         <Modal title="Delete entry" onClose={() => setMode("default")}>
-          <p>Are you sure you want to delete the entry?</p>
+          <ModalText>Are you sure you want to delete the entry?</ModalText>
           <ButtonBox>
             <MultiwayButton
               onClick={() => setMode("default")}
@@ -160,5 +160,13 @@ const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
 const ButtonBox = styled.div`
   display: flex;
   justify-content: center;
-  gap: 1em;
+  gap: 1rem;
+`;
+
+const ModalText = styled.p`
+  font-weight: bold;
+  color: var(--color-dark);
+  text-align: center;
+  font-size: 1.3em;
+  margin: 0 0 2rem 0;
 `;
