@@ -88,12 +88,12 @@ export default function EntryPage() {
           <>
             <MultiwayButton
               onClick={() => setMode("edit")}
-              $variant="edit"
+              $variant="primary"
               buttonText="Edit"
             />
             <MultiwayButton
               onClick={() => setMode("delete")}
-              $variant="deleteAndCancel"
+              $variant="secondary"
               buttonText="Delete"
             />
           </>
@@ -105,12 +105,12 @@ export default function EntryPage() {
           <ButtonBox>
             <MultiwayButton
               onClick={deleteEntry}
-              $variant="deleteAndCancel"
+              $variant="primary"
               buttonText="Delete"
             />
             <MultiwayButton
               onClick={() => setMode("default")}
-              $variant="deleteAndCancel"
+              $variant="secondary"
               buttonText="Cancel"
             />
           </ButtonBox>
@@ -127,7 +127,7 @@ export default function EntryPage() {
           ></EntryForm>
           <MultiwayButton
             onClick={() => setMode("default")}
-            $variant="deleteAndCancel"
+            $variant="secondary"
             buttonText="Cancel"
           />
         </Modal>

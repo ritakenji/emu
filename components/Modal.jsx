@@ -19,7 +19,7 @@ export default function Modal({ onClose, children }) {
 const Overlay = styled.div`
   position: fixed;
   inset: 0;
-  background: black;
+  background: #4363ED;
   opacity: 0.3;
   z-index: 999;
   cursor: pointer;
