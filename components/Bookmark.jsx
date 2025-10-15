@@ -38,14 +38,11 @@ export default function Bookmark({ id }) {
 }
 
 const StyledButton = styled.button`
-  position: absolute;
   border: none;
   background-color: transparent;
-  top: -15px;
-  right: 5px;
 `;
 
 const StyledBookmark = styled(BookmarkIcon)`
-  width: 40px;
-  height: 40px;
+  /* width: 40px;
+  height: 40px; */
 `;
