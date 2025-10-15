@@ -9,16 +9,24 @@ function setRouter(pathname = "/") {
   useRouter.mockReturnValue({ pathname });
 }
 
-// Mock next/link to a simple anchor to avoid Link internals
 jest.mock("next/link", () => ({
   __esModule: true,
-  default: ({ href, children, ...props }) => (
-    <a href={typeof href === "string" ? href : href?.pathname} {...props}>
-      {children}
-    </a>
-  ),
+  default: ({ href, children, onClick, ...props }) => {
+    const url = typeof href === "string" ? href : href?.pathname;
+    return (
+      <a
+        href={url}
+        onClick={(e) => {
+          onClick?.(e);
+          e.preventDefault();
+        }}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  },
 }));
-
 describe("<NavBar /> — core behavior", () => {
   test("renders links with correct accessible names and hrefs", () => {
     setRouter("/");
