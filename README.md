@@ -192,8 +192,8 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <h2 id="technologies">💻 Technologies</h2>
 
 <p>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><img src="assets/icons/html.png" alt="HTML logo"></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img src="assets/icons/css.png" alt="CSS logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><img src="assets/icons/HTML.png" alt="HTML logo"></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img src="assets/icons/CSS.png" alt="CSS logo"></a>
     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="assets/icons/JS.png" alt="JavaScript logo"></a>
     <a href="https://nodejs.org/" target="_blank"><img src="assets/icons/nodejs.png" alt="NodeJS logo"></a>
     <a href="https://react.dev/" target="_blank"><img src="assets/icons/react.png" alt="React logo"></a>
