@@ -159,5 +159,6 @@ const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
 
 const ButtonBox = styled.div`
   display: flex;
+  justify-content: center;
   gap: 1em;
 `;
