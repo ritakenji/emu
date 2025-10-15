@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
-import { BookmarkIcon, House, PlusCircle } from "lucide-react";
+import { Heart, House, Plus } from "lucide-react";
 
 export default function NavBar() {
   const { pathname } = useRouter();
@@ -10,37 +10,38 @@ export default function NavBar() {
   const isCreate = pathname === "/create";
 
   return (
-    <Navigation role="navigation" aria-label="Main navigation">
-      <StyledLink
+    <Navigation>
+      <StyledNavLink
         href="/"
         aria-current={isHome ? "page" : undefined}
         $active={isHome}
         aria-label="Home"
       >
         <StyledHouse $active={isHome} />
-      </StyledLink>
-      <StyledLink
+      </StyledNavLink>
+      <StyledNavButton
         href="/create"
         aria-current={isCreate ? "page" : undefined}
         $active={isCreate}
         aria-label="Create new entry"
       >
         <StyledCreate $active={isCreate} />
-      </StyledLink>
-      <StyledLink
+      </StyledNavButton>
+      <StyledNavLink
         href="/bookmarks"
         aria-current={isBookmarks ? "page" : undefined}
         $active={isBookmarks}
         aria-label="Bookmarked entries"
       >
         <StyledBookmark $active={isBookmarks} />
-      </StyledLink>
+      </StyledNavLink>
     </Navigation>
   );
 }
 
 const Navigation = styled.nav`
-  background-color: var(--color-light);
+  background-color: white;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-around;
   position: fixed;
@@ -49,16 +50,22 @@ const Navigation = styled.nav`
   width: 100%;
 `;
 
-const StyledLink = styled(Link)`
+const StyledNavLink = styled(Link)`
   padding: 0.7rem;
   flex-grow: 1;
   text-align: center;
-  ${({ $active }) =>
+  /* ${({ $active }) =>
     $active &&
     css`
       background: var(--color-medium);
-    `}
+    `} */
 `;
+
+const StyledNavButton = styled(Link)`
+  flex-grow: 0;
+  margin-top: -36px;
+`;
+
 const iconCss = css`
   width: 30px;
   height: 30px;
@@ -67,12 +74,27 @@ const iconCss = css`
 
 const StyledHouse = styled(House)`
   ${iconCss}
+  stroke: ${({ $active }) =>
+    $active ? "var(--color-primary)" : "var(--color-medium)"};
+  stroke-width: 1.8px;
 `;
 
-const StyledCreate = styled(PlusCircle)`
+const StyledCreate = styled(Plus)`
   ${iconCss}
+  background-color: var(--color-primary);
+  box-sizing: unset;
+  width: 40px;
+  height: 40px;
+  padding: 12px;
+  stroke: #fff;
+  stroke-width: 1.5px;
+  border-radius: 32px;
+  border: 6px solid var(--color-light);
 `;
 
-const StyledBookmark = styled(BookmarkIcon)`
+const StyledBookmark = styled(Heart)`
   ${iconCss}
+  stroke: ${({ $active }) =>
+    $active ? "var(--color-primary)" : "var(--color-medium)"};
+  stroke-width: 1.8px;
 `;

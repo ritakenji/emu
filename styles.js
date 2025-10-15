@@ -26,11 +26,11 @@ export default createGlobalStyle`
 
     --color-primary: #4363ED;
     --color-primary-lighter: color-mix(in oklab, var(--color-primary), white 65%);
-    --color-primary-darker: color-mix(in oklab, var(--color-primary), black 60%);
+    --color-primary-darker: color-mix(in oklab, var(--color-primary), black 20%);
 
     --color-secondary: #DF0052;
     --color-secondary-lighter: color-mix(in oklab, var(--color-secondary), white 65%);
-    --color-secondary-darker: color-mix(in oklab, var(--color-secondary), black 60%);
+    --color-secondary-darker: color-mix(in oklab, var(--color-secondary), black 20s%);
 
     --color-light: #EEF2FC;
     --color-dark: #12256E;
