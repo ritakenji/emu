@@ -161,13 +161,7 @@ export default function EntryForm({
         defaultValue={toLocalDateTime(initialValues?.dateTime)}
       />
 
-      {/* <SubmitButton type="submit"> {buttonText} </SubmitButton> */}
-      <MultiwayButton
-        // onClick={() => setMode("default")}
-        type="submit"
-        $variant="edit"
-        buttonText={buttonText}
-      />
+      <MultiwayButton type="submit" $variant="edit" buttonText={buttonText} />
     </FormContainer>
   );
 }
