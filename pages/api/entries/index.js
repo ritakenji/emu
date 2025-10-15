@@ -1,6 +1,7 @@
 import dbConnect from "@/db/connect";
 import Entry from "@/db/models/Entry";
 import Emotion from "@/db/models/Emotion"; //import to validate emotion IDs
+import mongoose from "mongoose"; // for ObjectId validation
 
 export default async function handler(request, response) {
   const allowed = ["GET", "POST"];
@@ -73,12 +74,32 @@ export default async function handler(request, response) {
     }
 
     //Verify all emotion IDs exist
-    const emotionIds = [...new Set(emotions.map(String))];
+    // Verify all emotion IDs exist (accept either plain ids or objects with _id)
+    const emotionIds = Array.isArray(emotions)
+      ? emotions
+          .map((emotion) =>
+            emotion && emotion._id ? String(emotion._id) : String(emotion)
+          )
+          .filter(Boolean)
+      : [];
+
+    if (!emotionIds.length) {
+      return response
+        .status(400)
+        .json({ message: "Select at least one emotion." });
+    }
+
+    if (!emotionIds.every((id) => mongoose.Types.ObjectId.isValid(id))) {
+      return response
+        .status(400)
+        .json({ message: "One or more emotion IDs are invalid." });
+    }
+
     const found = await Emotion.countDocuments({ _id: { $in: emotionIds } });
     if (found !== emotionIds.length) {
       return response
         .status(400)
-        .json({ message: "One or more emotion IDs are invalid." });
+        .json({ message: "One or more emotion IDs do not exist." });
     }
 
     //Normalize values before insert

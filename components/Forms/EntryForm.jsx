@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
 import styled from "styled-components";
 import MultiwayButton from "../Buttons/MultiwayButton";
@@ -14,6 +14,9 @@ export default function EntryForm({
   const [selectedTypes, setSelectedTypes] = useState(
     initialValues?.emotions || []
   );
+  useEffect(() => {
+    setSelectedTypes(initialValues?.emotions || []);
+  }, [initialValues]);
 
   const {
     data: emotions,
@@ -162,6 +165,7 @@ export default function EntryForm({
       />
 
       <MultiwayButton type="submit" $variant="edit" buttonText={buttonText} />
+
     </FormContainer>
   );
 }

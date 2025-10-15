@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 
-export default function Modal({ title, onClose, children }) {
+export default function Modal({ onClose, children }) {
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
@@ -10,10 +10,7 @@ export default function Modal({ title, onClose, children }) {
 
   return (
     <>
-      <Container aria-labelledby="modal-title">
-        <h2 id="modal-title">{title}</h2>
-        {children}
-      </Container>
+      <Container aria-labelledby="modal-title">{children}</Container>
       <Overlay onClick={onClose} aria-hidden="true" />
     </>
   );

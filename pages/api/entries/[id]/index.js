@@ -50,12 +50,21 @@ export default async function handler(request, response) {
         if (!Array.isArray(emotions) || emotions.length === 0) {
           errors.emotions = "Select at least one emotion.";
         } else {
-          const ids = [...new Set(emotions.map(String))];
-          const count = await Emotion.countDocuments({ _id: { $in: ids } });
-          if (count !== ids.length) {
+          // unwrap objects -> ids (accept either {_id: "..."} or plain string)
+          const ids = emotions
+            .map((e) => (e && e._id ? String(e._id) : String(e)))
+            .filter(Boolean);
+
+          // validate all are ObjectIds
+          if (!ids.every((id) => mongoose.Types.ObjectId.isValid(id))) {
             errors.emotions = "One or more emotion IDs are invalid.";
           } else {
-            updates.emotions = ids;
+            const count = await Emotion.countDocuments({ _id: { $in: ids } });
+            if (count !== ids.length) {
+              errors.emotions = "One or more emotion IDs do not exist.";
+            } else {
+              updates.emotions = [...new Set(ids)];
+            }
           }
         }
       }
