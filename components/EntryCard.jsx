@@ -1,4 +1,6 @@
 import Bookmark from "./Bookmark";
+import EmotionChips from "./Lists/EmotionChips";
+
 import styled from "styled-components";
 
 export default function EntryCard({ type, intensity, dateTime, id }) {
@@ -13,13 +15,14 @@ export default function EntryCard({ type, intensity, dateTime, id }) {
       <section>
         <p>{formattedDate}</p>
         <p>Type:</p>
-        <EmotionContainer>
+        <EmotionChips type={type} />
+        {/* <EmotionContainer>
           {type.map(({ _id, emotion }) => (
             <Emotionchips key={_id} className={emotion.toLowerCase()}>
               {emotion}
             </Emotionchips>
           ))}
-        </EmotionContainer>
+        </EmotionContainer> */}
       </section>
       <p>Intensity: {intensity}</p>
     </EntryCardWrapper>
@@ -33,14 +36,14 @@ const EntryCardWrapper = styled.div`
   background-color: var(--color-light);
 `;
 
-const Emotionchips = styled.span`
-  padding: 5px 8px;
-  border-radius: 5px;
-  margin: 0 5px;
-`;
+// const Emotionchips = styled.span`
+//   padding: 5px 8px;
+//   border-radius: 5px;
+//   margin: 0 5px;
+// `;
 
-const EmotionContainer = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-`;
+// const EmotionContainer = styled.section`
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: 0.5em;
+// `;
