@@ -1,12 +1,17 @@
 <a id="readme-top"></a>
 
+<div align="center">
+  
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
+
 [![LinkedIn][linkedin-shield1]][linkedin-url1]
 [![LinkedIn][linkedin-shield2]][linkedin-url2]
 [![LinkedIn][linkedin-shield3]][linkedin-url3]
+
+</div>
 
 </br>
 <div align="center">
