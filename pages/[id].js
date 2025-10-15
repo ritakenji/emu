@@ -104,14 +104,14 @@ export default function EntryPage() {
           <p>Are you sure you want to delete the entry?</p>
           <ButtonBox>
             <MultiwayButton
-              onClick={deleteEntry}
-              $variant="primary"
-              buttonText="Delete"
-            />
-            <MultiwayButton
               onClick={() => setMode("default")}
               $variant="secondary"
               buttonText="Cancel"
+            />
+            <MultiwayButton
+              onClick={deleteEntry}
+              $variant="primary"
+              buttonText="Delete"
             />
           </ButtonBox>
         </Modal>
