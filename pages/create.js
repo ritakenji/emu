@@ -4,6 +4,7 @@ import Head from "next/head";
 
 import EntryForm from "@/components/Forms/EntryForm";
 import NavBar from "@/components/Navbar";
+import BackButton from "@/components/Buttons/BackButton";
 
 export default function Create() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function Create() {
         <title>Add Entry</title>
       </Head>
       <Header>
-        <GoBackButton onClick={() => router.back()}>← Back</GoBackButton>
+        <BackButton />
       </Header>
       <Main>
         <EntryForm
@@ -54,14 +55,6 @@ export default function Create() {
   );
 }
 
-const GoBackButton = styled.button`
-  text-decoration: none;
-  color: inherit;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-`;
 const Header = styled.header`
   padding: 1rem 1.5rem 0;
 `;

@@ -1,6 +1,8 @@
 import useSWR from "swr";
 import { useRef } from "react";
 
+import MultiwayButton from "../Buttons/MultiwayButton";
+
 export default function FilterForm({
   onSubmit,
   selectedFilterEmotionId,
@@ -58,13 +60,14 @@ export default function FilterForm({
           </option>
         ))}
       </select>
-      <button name="apply" type="submit">
-        Apply
-      </button>
+      <MultiwayButton type="submit" $variant="edit" buttonText="Apply" />
       {selectedFilterEmotionId && selectedFilterEmotionId !== "reset" && (
-        <button type="reset" onClick={resetForm}>
-          Reset
-        </button>
+        <MultiwayButton
+          type="reset"
+          $variant="deleteAndCancel"
+          buttonText="Reset"
+          onClick={resetForm}
+        />
       )}
     </form>
   );
