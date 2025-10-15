@@ -77,7 +77,9 @@ export default async function handler(request, response) {
     // Verify all emotion IDs exist (accept either plain ids or objects with _id)
     const emotionIds = Array.isArray(emotions)
       ? emotions
-          .map((e) => (e && e._id ? String(e._id) : String(e)))
+          .map((emotion) =>
+            emotion && emotion._id ? String(emotion._id) : String(emotion)
+          )
           .filter(Boolean)
       : [];
 

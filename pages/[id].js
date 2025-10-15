@@ -36,7 +36,6 @@ export default function EntryPage() {
   });
 
   async function editEntry(entry) {
-    console.log("EDIT payload", entry);
     const response = await fetch(`/api/entries/${id}`, {
       method: "PUT",
       headers: {

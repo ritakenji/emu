@@ -72,7 +72,6 @@ export default function EntryForm({
       emotions: [...selectedTypes],
       ...data,
     };
-    console.log("SUBMIT payload", newObject);
 
     if (selectedTypes.length === 0) {
       alert("Please select at least one emotion.");
