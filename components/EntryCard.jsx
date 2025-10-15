@@ -1,4 +1,6 @@
 import Bookmark from "./Bookmark";
+import EmotionChips from "./Lists/EmotionChips";
+
 import styled from "styled-components";
 
 export default function EntryCard({ type, intensity, dateTime, id }) {
@@ -9,6 +11,7 @@ export default function EntryCard({ type, intensity, dateTime, id }) {
 
   return (
     <EntryCardWrapper>
+
       <EntryCardTab>
         <Bookmark id={id}></Bookmark>
         {formattedDate}
@@ -17,13 +20,7 @@ export default function EntryCard({ type, intensity, dateTime, id }) {
         <IntensityScale>
           <span>{intensity}</span> / 10
         </IntensityScale>
-        <EmotionContainer>
-          {type.map(({ _id, emotion }) => (
-            <Emotionchips key={_id} className={emotion.toLowerCase()}>
-              {emotion}
-            </Emotionchips>
-          ))}
-        </EmotionContainer>
+        <EmotionChips type={type} />
       </EntryCardBody>
     </EntryCardWrapper>
   );
@@ -64,16 +61,4 @@ const IntensityScale = styled.div`
   span {
     font-size: 48px;
   }
-`;
-
-const Emotionchips = styled.span`
-  padding: 5px 8px;
-  border-radius: 5px;
-  margin: 0 5px;
-`;
-
-const EmotionContainer = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
 `;
