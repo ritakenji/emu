@@ -44,4 +44,5 @@ const StyledButton = styled.button`
 
 const StyledBookmark = styled(Heart)`
   stroke-width: 1.8px;
+  cursor: pointer;
 `;
