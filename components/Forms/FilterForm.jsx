@@ -50,9 +50,9 @@ export default function FilterForm({
   return (
     <StyledForm onSubmit={handleSubmit} ref={formRef}>
       <StyledLabel htmlFor="emotions">
-        <Funnel />{" "}
+        <Funnel aria-label="filter entries" />{" "}
       </StyledLabel>
-      <select
+      <StyledDropdown
         name="emotions"
         id="emotions"
         aria-label="Filter entries by emotion"
@@ -63,7 +63,7 @@ export default function FilterForm({
             {emotion}
           </option>
         ))}
-      </select>
+      </StyledDropdown>
       <MultiwayButton type="submit" $variant="primary" buttonText="Apply" />
       {selectedFilterEmotionId && selectedFilterEmotionId !== "reset" && (
         <MultiwayButton
@@ -80,9 +80,24 @@ export default function FilterForm({
 const StyledForm = styled.form`
   display: flex;
   align-content: center;
+  gap: 8px;
 `;
 
 const StyledLabel = styled.label`
-  height: auto;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+`;
+
+const StyledDropdown = styled.select`
+  border: 2px solid var(--color-dark);
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 16px;
+  color: var(--color-dark);
+  background-color: transparent;
+  outline: none;
+
+  &:focus-visible {
+    border: 2px solid var(--color-dark);
+  }
 `;
