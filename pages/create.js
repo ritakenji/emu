@@ -9,14 +9,26 @@ import BackButton from "@/components/Buttons/BackButton";
 export default function Create() {
   const router = useRouter();
 
-  async function handleAddEntry(entry) {
+  async function handleAddEntry(formValues) {
     try {
+      const payload = {
+        // store only emotion IDs in DB
+        emotions: (formValues.emotions || []).map((e) => e._id),
+        intensity: Number(formValues.intensity),
+        notes: formValues.notes?.trim() || "",
+        dateTime: new Date(formValues.dateTime).toISOString(),
+        // include image, if present
+        ...(formValues.imageUrl ? { imageUrl: formValues.imageUrl } : {}),
+        ...(formValues.imagePublicId
+          ? { imagePublicId: formValues.imagePublicId }
+          : {}),
+      };
       const response = await fetch("/api/entries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(entry),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {

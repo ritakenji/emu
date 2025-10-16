@@ -37,9 +37,10 @@ export default async function handler(request, response) {
   try {
     await dbConnect();
     //Server-side validation to mirror front-end checks (Postman/curl can bypass UI).
-    const { emotions, dateTime, intensity, notes } = request.body ?? {};
+    const { emotions, dateTime, intensity, notes, imageUrl } =
+      request.body ?? {};
     const errors = {};
-
+    console.log("request body", request.body);
     // emotions must be a non-empty array
     if (!Array.isArray(emotions) || emotions.length === 0) {
       errors.emotions = "Select at least one emotion.";
@@ -108,6 +109,7 @@ export default async function handler(request, response) {
       dateTime: dt.toISOString(),
       intensity: parsedIntensity,
       notes: typeof notes === "string" ? notes.trim() : notes,
+      imageUrl: imageUrl ? imageUrl : "",
     });
 
     //Return 201 + created resource (more useful than plain status text)
