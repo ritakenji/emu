@@ -10,6 +10,7 @@ import EmotionList from "@/components/Lists/EmotionList";
 import EntryForm from "@/components/Forms/EntryForm";
 import Modal from "@/components/Modal";
 import MultiwayButton from "@/components/Buttons/MultiwayButton";
+import IntensityScale from "@/components/IntensityScale";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -70,18 +71,23 @@ export default function EntryPage() {
         ></meta>
         <title> Details Page</title>
       </Head>
+
       <HeaderWrapper>
         <BackButton />
         <h2>on {formattedDate}</h2>
         <h3>I was feeling...</h3>
       </HeaderWrapper>
+
       <DetailWrapper>
         <Bookmark id={id} />
+
         <section aria-labelledby="emotion-types">
           <h3 id="emotion-types">Type:</h3>
           <EmotionList entry={entry} />
         </section>
-        <p>{entry.intensity}/10</p>
+
+        <IntensityScale intensity={entry.intensity} />
+
         <NotesCard>
           <h4>My notes: </h4>
           <p>{entry.notes}</p>
