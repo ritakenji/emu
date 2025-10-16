@@ -64,4 +64,9 @@ const Container = styled.div.attrs({ role: "dialog", "aria-modal": "true" })`
 
   padding: 2rem;
   border-radius: 0.75rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 `;

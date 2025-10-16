@@ -289,4 +289,5 @@ const StyledRange = styled.div`
 const StyledImage = styled(Image)`
   max-width: 100%;
   align-self: center;
+  margin-top: 20px;
 `;

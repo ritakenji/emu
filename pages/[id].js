@@ -113,8 +113,8 @@ export default function EntryPage() {
           <p>{entry.notes}</p>
         </NotesCard>
 
- {entry.imageUrl && (
-          <Image
+        {entry.imageUrl && (
+          <StyledImage
             src={entry.imageUrl}
             alt="Entry image"
             width={600}
@@ -141,7 +141,6 @@ export default function EntryPage() {
             </>
           )}
         </ButtonContainer>
-       
       </DetailWrapper>
 
       {mode === "delete" && (
@@ -207,6 +206,8 @@ const HeaderWrapper = styled.header`
     text-align: center;
     font-weight: 500;
     margin: 36px 0 8px;
+    font-size: 16px;
+    color: var(--color-primary);
   }
 
   h3 {
@@ -269,6 +270,12 @@ const NotesCard = styled.section`
   p {
     margin: 0;
   }
+`;
+
+const StyledImage = styled(Image)`
+  max-width: 100%;
+  height: auto;
+  align-self: center;
 `;
 
 const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
