@@ -38,7 +38,6 @@ export default function Header() {
 
 const HeaderContainer = styled.div`
   text-align: center;
-  margin-bottom: 24px;
 
   * {
     font-family: "Jost", sans-serif;
