@@ -209,11 +209,11 @@ export default function EntryForm({
 const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
-  background-color: #fff;
+  /* background-color: #fff;
   padding: 36px 24px 44px;
   margin: 36px 0 48px;
   filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
-  border-radius: 20px;
+  border-radius: 20px; */
 
   h2 {
     text-align: center;
