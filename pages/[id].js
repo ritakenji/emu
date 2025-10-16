@@ -103,7 +103,6 @@ export default function EntryPage() {
         </IntensityContainer>
 
         <EmotionContainer aria-labelledby="emotion-types">
-          {/* <h3 id="emotion-types">Type:</h3> */}
           <StyledEmotionChips type={entry.emotions} />
         </EmotionContainer>
 
@@ -112,16 +111,17 @@ export default function EntryPage() {
           <p>{entry.notes}</p>
         </NotesCard>
 
- {entry.imageUrl && (
-          <Image
-            src={entry.imageUrl}
-            alt="Entry image"
-            width={600}
-            height={400}
-            quality={70}
-            style={{ borderRadius: 12, objectFit: "cover" }}
-            priority
-          />
+        {entry.imageUrl && (
+          <ImageContainer>
+            <UploadImage
+              src={entry.imageUrl}
+              alt="Entry image"
+              width={600}
+              height={400}
+              quality={70}
+              priority
+            />
+          </ImageContainer>
         )}
 
         <ButtonContainer>
@@ -140,7 +140,6 @@ export default function EntryPage() {
             </>
           )}
         </ButtonContainer>
-       
       </DetailWrapper>
 
       {mode === "delete" && (
@@ -291,4 +290,21 @@ const ModalText = styled.p`
   text-align: center;
   font-size: 21px;
   margin: 0 0 32px 0;
+`;
+
+const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  padding-bottom: 66.6%; 
+`;
+
+const UploadImage = styled(Image)`
+  border-radius: 12px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 `;
