@@ -175,7 +175,7 @@ export default function EntryForm({
         rows={4}
       />
       {initialValues?.imageUrl && (
-        <Image
+        <StyledImage
           src={initialValues.imageUrl}
           alt="Entry image"
           width={600}
@@ -284,4 +284,9 @@ const StyledRange = styled.div`
   display: flex;
   justify-content: space-between;
   margin: -5px -2px 0 4px;
+`;
+
+const StyledImage = styled(Image)`
+  max-width: 100%;
+  align-self: center;
 `;
