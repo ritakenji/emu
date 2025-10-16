@@ -32,8 +32,8 @@ const Container = styled.div.attrs({ role: "dialog", "aria-modal": "true" })`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
-  padding: 2rem 4rem;
+  padding: 32px 64px;
   border-radius: 0.75rem;
-  max-width: 40rem;
-  width: calc(100% - 2rem);
+  max-width: 640px;
+  width: calc(100% - 32px);
 `;

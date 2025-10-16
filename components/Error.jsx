@@ -26,7 +26,7 @@ const ErrorSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 1.2rem;
+  padding: 0 19px;
   font-family: "Jost", sans-serif;
   font-weight: 500;
   font-size: 24px;

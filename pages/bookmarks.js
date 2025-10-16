@@ -63,5 +63,5 @@ export default function Bookmarks() {
 }
 
 const Main = styled.main`
-  padding: 1rem 1.5rem 4rem;
+  padding: 16px 24px 64px;
 `;

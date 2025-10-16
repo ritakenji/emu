@@ -64,9 +64,6 @@ export default function Create() {
   );
 }
 
-const Header = styled.header`
-  padding: 1rem 1.5rem 0;
-`;
 const Main = styled.main`
-  padding: 0 1.5rem 4rem;
+  padding: 0 24px 64px;
 `;

@@ -181,7 +181,7 @@ export default function EntryPage() {
 }
 
 const HeaderWrapper = styled.header`
-  padding: 1.5rem 1.5rem;
+  padding: 24px;
 
   background-size: 100% 100%;
   background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px,
@@ -219,7 +219,7 @@ const HeaderWrapper = styled.header`
 
 const DetailWrapper = styled.article`
   position: relative;
-  padding: 4rem 1.5rem;
+  padding: 64px 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -256,14 +256,14 @@ const StyledEmotionChips = styled(EmotionChips)`
 `;
 
 const NotesCard = styled.section`
-  padding: 1.5rem;
+  padding: 24px;
   margin: 36px 0;
   background-color: white;
   border-radius: 15px;
   filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
   h4 {
     font-weight: bold;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 8px 0;
   }
   p {
     margin: 0;
@@ -274,7 +274,7 @@ const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 8px;
   align-items: center;
   margin-top: 72px;
 `;
@@ -282,13 +282,13 @@ const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
 const ButtonBox = styled.div`
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 16px;
 `;
 
 const ModalText = styled.p`
   font-weight: bold;
   color: var(--color-dark);
   text-align: center;
-  font-size: 1.3em;
-  margin: 0 0 2rem 0;
+  font-size: 21px;
+  margin: 0 0 32px 0;
 `;
