@@ -103,12 +103,12 @@ export default function EntryPage() {
               <MultiwayButton
                 onClick={() => setMode("edit")}
                 $variant="primary"
-                buttonText="Edit"
+                buttonText="Edit entry"
               />
               <MultiwayButton
                 onClick={() => setMode("delete")}
                 $variant="secondary"
-                buttonText="Delete"
+                buttonText="Delete entry"
               />
             </>
           )}
@@ -191,7 +191,7 @@ const HeaderWrapper = styled.header`
 
 const DetailWrapper = styled.article`
   position: relative;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 3rem;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -202,7 +202,7 @@ const IntensityContainer = styled.div`
   p {
     color: var(--color-primary);
     font-family: "Jost", sans-serif;
-    margin-right: 20px;
+    margin: 12px 20px 0 0;
   }
 `;
 
@@ -213,6 +213,7 @@ const StyledEmotionChips = styled(EmotionChips)`
 
 const NotesCard = styled.section`
   padding: 1.5rem;
+  margin: 36px 0;
   background-color: white;
   border-radius: 15px;
   filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
@@ -230,11 +231,8 @@ const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
   flex-direction: column;
   justify-content: space-between;
   gap: 0.5rem;
-
-  & > * {
-    flex-grow: 1;
-    text-align: center;
-  }
+  align-items: center;
+  margin-top: 72px;
 `;
 
 const ButtonBox = styled.div`
