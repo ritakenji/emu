@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -14,6 +15,7 @@ import MultiwayButton from "@/components/Buttons/MultiwayButton";
 export default function EntryPage() {
   const router = useRouter();
   const { id } = router.query;
+  const { data: session } = useSession();
 
   const {
     data: entry,
@@ -83,54 +85,58 @@ export default function EntryPage() {
         <p>Intensity: {entry.intensity}</p>
         <p>Notes: {entry.notes}</p>
       </DetailWrapper>
-      <ButtonContainer>
-        {mode === "default" && (
-          <>
-            <MultiwayButton
-              onClick={() => setMode("edit")}
-              $variant="edit"
-              buttonText="Edit"
-            />
-            <MultiwayButton
-              onClick={() => setMode("delete")}
-              $variant="deleteAndCancel"
-              buttonText="Delete"
-            />
-          </>
-        )}
-      </ButtonContainer>
-      {mode === "delete" && (
-        <Modal title="Delete entry" onClose={() => setMode("default")}>
-          <p>Are you sure you want to delete the entry?</p>
-          <ButtonBox>
-            <MultiwayButton
-              onClick={deleteEntry}
-              $variant="deleteAndCancel"
-              buttonText="Delete"
-            />
-            <MultiwayButton
-              onClick={() => setMode("default")}
-              $variant="deleteAndCancel"
-              buttonText="Cancel"
-            />
-          </ButtonBox>
-        </Modal>
-      )}
-      {mode === "edit" && (
-        <Modal title="Edit Entry" onClose={() => setMode("default")}>
-          <EntryForm
-            buttonText={"Update"}
-            initialValues={entry}
-            onSubmit={editEntry}
-            formTitle={"Edit Entry"}
-            type="button"
-          ></EntryForm>
-          <MultiwayButton
-            onClick={() => setMode("default")}
-            $variant="deleteAndCancel"
-            buttonText="Cancel"
-          />
-        </Modal>
+      {session && (
+        <>
+          <ButtonContainer>
+            {mode === "default" && (
+              <>
+                <MultiwayButton
+                  onClick={() => setMode("edit")}
+                  $variant="edit"
+                  buttonText="Edit"
+                />
+                <MultiwayButton
+                  onClick={() => setMode("delete")}
+                  $variant="deleteAndCancel"
+                  buttonText="Delete"
+                />
+              </>
+            )}
+          </ButtonContainer>
+          {mode === "delete" && (
+            <Modal title="Delete entry" onClose={() => setMode("default")}>
+              <p>Are you sure you want to delete the entry?</p>
+              <ButtonBox>
+                <MultiwayButton
+                  onClick={deleteEntry}
+                  $variant="deleteAndCancel"
+                  buttonText="Delete"
+                />
+                <MultiwayButton
+                  onClick={() => setMode("default")}
+                  $variant="deleteAndCancel"
+                  buttonText="Cancel"
+                />
+              </ButtonBox>
+            </Modal>
+          )}
+          {mode === "edit" && (
+            <Modal title="Edit Entry" onClose={() => setMode("default")}>
+              <EntryForm
+                buttonText={"Update"}
+                initialValues={entry}
+                onSubmit={editEntry}
+                formTitle={"Edit Entry"}
+                type="button"
+              ></EntryForm>
+              <MultiwayButton
+                onClick={() => setMode("default")}
+                $variant="deleteAndCancel"
+                buttonText="Cancel"
+              />
+            </Modal>
+          )}
+        </>
       )}
     </>
   );

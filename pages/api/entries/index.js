@@ -1,7 +1,10 @@
+import { getServerSession } from "next-auth/next";
+import mongoose from "mongoose"; // for ObjectId validation
+
+import { authOptions } from "../auth/[...nextauth]";
 import dbConnect from "@/db/connect";
 import Entry from "@/db/models/Entry";
 import Emotion from "@/db/models/Emotion"; //import to validate emotion IDs
-import mongoose from "mongoose"; // for ObjectId validation
 
 export default async function handler(request, response) {
   const allowed = ["GET", "POST"];
@@ -33,6 +36,10 @@ export default async function handler(request, response) {
     return response
       .status(415)
       .json({ message: "Unsupported Media Type: expected application/json" });
+  }
+  const session = await getServerSession(request, response, authOptions);
+  if (!session) {
+    return response.status(401).json({ status: "Not authorized" });
   }
   try {
     await dbConnect();

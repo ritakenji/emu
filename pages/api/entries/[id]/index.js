@@ -31,7 +31,10 @@ export default async function handler(request, response) {
       return response.status(500).json({ message: "Internal Server Error" });
     }
   }
-
+  const session = await getServerSession(request, response, authOptions);
+  if (!session) {
+    return response.status(401).json({ status: "Not authorized" });
+  }
   if (request.method === "PUT") {
     if (!request.headers["content-type"]?.includes("application/json")) {
       return response
