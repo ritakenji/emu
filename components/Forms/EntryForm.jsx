@@ -204,7 +204,7 @@ export default function EntryForm({
 
 const FormContainer = styled.form`
   display: grid;
-  gap: 0.5rem;
+  gap: 8px;
   background-color: #fff;
   padding: 36px 24px 44px;
   margin: 36px 0 48px;
