@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import EntryList from "@/components/Lists/EntryList";
 import NavBar from "@/components/Navbar";
+import Loading from "@/components/Loading";
 
 export default function Bookmarks() {
   const {
@@ -19,7 +20,7 @@ export default function Bookmarks() {
   });
 
   if (isLoading) {
-    return <p aria-live="polite">Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {

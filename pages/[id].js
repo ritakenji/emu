@@ -10,6 +10,7 @@ import EmotionList from "@/components/Lists/EmotionList";
 import EntryForm from "@/components/Forms/EntryForm";
 import Modal from "@/components/Modal";
 import MultiwayButton from "@/components/Buttons/MultiwayButton";
+import Loading from "@/components/Loading";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -27,8 +28,7 @@ export default function EntryPage() {
     return;
   }
 
-  if (!router.isReady || isLoading)
-    return <h2 aria-live="polite">Loading...</h2>;
+  if (!router.isReady || isLoading) return <Loading />;
   if (error) return <h2 aria-live="assertive">Failed to load entry</h2>;
   const formattedDate = new Date(entry.dateTime).toLocaleString("en-GB", {
     dateStyle: "medium",
@@ -156,12 +156,12 @@ const NotesCard = styled.section`
 `;
 
 const NoteTitle = styled.p`
-font-weight: bold;
-margin: 0 0 0.5rem 0;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
 `;
 
 const NoteText = styled.p`
-margin: 0;
+  margin: 0;
 `;
 
 const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
