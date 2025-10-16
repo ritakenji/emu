@@ -8,6 +8,7 @@ const entrySchema = new Schema({
   intensity: { type: Number, required: true },
   notes: { type: String, required: false },
   dateTime: { type: Date, required: true },
+  owner: { type: String, required: true },
 });
 
 const Entry = mongoose.models.Entry || mongoose.model("Entry", entrySchema);

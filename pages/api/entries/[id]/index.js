@@ -1,7 +1,11 @@
+import { getServerSession } from "next-auth/next";
+import { getToken } from "next-auth/jwt";
+import mongoose from "mongoose"; // validate ObjectId
+
+import { authOptions } from "../../auth/[...nextauth]";
 import dbConnect from "@/db/connect.js";
 import Entry from "@/db/models/Entry";
 import Emotion from "@/db/models/Emotion"; // validate emotion IDs on update
-import mongoose from "mongoose"; // validate ObjectId
 
 export default async function handler(request, response) {
   // Early guard: only allow these methods at this route
@@ -15,13 +19,25 @@ export default async function handler(request, response) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return response.status(400).json({ message: "Invalid entry id." });
   }
-
+  // ---------- GET: only return this id if owner is "default" OR current user ----------
   if (request.method === "GET") {
     try {
       await dbConnect();
 
-      const entry = await Entry.findById(id).populate("emotions").lean();
+      const token = await getToken({
+        req: request,
+        secret: process.env.NEXTAUTH_SECRET,
+      });
+      const userId = token?.sub;
+
+      const filter = userId
+        ? { _id: id, owner: { $in: [userId, "default"] } }
+        : { _id: id, owner: "default" };
+
+      const entry = await Entry.findOne(filter).populate("emotions").lean();
+
       if (!entry) {
+        // Hide non-owned documents
         return response.status(404).json({ status: "Not found" });
       }
 
@@ -31,10 +47,29 @@ export default async function handler(request, response) {
       return response.status(500).json({ message: "Internal Server Error" });
     }
   }
+  // ----- PUT/DELETE require auth + ownership -----
   const session = await getServerSession(request, response, authOptions);
   if (!session) {
     return response.status(401).json({ status: "Not authorized" });
   }
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
+  const userId = token?.sub;
+  if (!userId) {
+    return response.status(401).json({ status: "Not authorized" });
+  }
+
+  await dbConnect();
+  const existing = await Entry.findById(id).lean();
+  if (!existing) return response.status(404).json({ message: "Not found" });
+
+  // Ownership check
+  if (existing.owner !== userId) {
+    return response.status(403).json({ status: "Forbidden" });
+  }
+
   if (request.method === "PUT") {
     if (!request.headers["content-type"]?.includes("application/json")) {
       return response

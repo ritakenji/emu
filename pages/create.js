@@ -22,7 +22,11 @@ export default function Create() {
       });
 
       if (!response.ok) {
-        console.error("Failed to create entry");
+        let body = null;
+        try {
+          body = await response.json();
+        } catch {}
+        console.error("Failed to create entry", response.status, body);
         return;
       }
       router.push("/");
