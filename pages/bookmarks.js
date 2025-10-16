@@ -25,7 +25,12 @@ export default function Bookmarks() {
   }
 
   if (error) {
-    return <Error />;
+    return (
+      <Error
+        errorText="Sorry, we could not retrieve the entry data at the moment."
+        tryAgainText="Please try again later."
+      />
+    );
   }
 
   const bookmarkedEntries = entries.filter((entry) =>

@@ -12,6 +12,7 @@ import EntryForm from "@/components/Forms/EntryForm";
 import Modal from "@/components/Modal";
 import MultiwayButton from "@/components/Buttons/MultiwayButton";
 import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -30,7 +31,9 @@ export default function EntryPage() {
   }
 
   if (!router.isReady || isLoading) return <Loading />;
-  if (error) return <h2 aria-live="assertive">Failed to load entry</h2>;
+
+  if (error) return <Error errorText="Failed to load entries." />;
+
   const formattedDate = new Date(entry.dateTime).toLocaleString("en-GB", {
     dateStyle: "medium",
     timeStyle: "short",

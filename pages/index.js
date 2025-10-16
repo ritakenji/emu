@@ -27,7 +27,12 @@ export default function HomePage() {
   }
 
   if (error) {
-    return <Error />;
+    return (
+      <Error
+        errorText="Sorry, we could not retrieve the entry data at the moment."
+        tryAgainText="Please try again later."
+      />
+    );
   }
 
   const filteredEntries =

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-export default function Error() {
+export default function Error({errorText, tryAgainText}) {
   return (
     <ErrorSection>
       <Image
@@ -12,9 +12,9 @@ export default function Error() {
         loading="eager"
       />
       <p aria-live="assertive">
-        Sorry, we could not retrieve the entry data at the moment.
+        {errorText}
       </p>
-      <TryAgain aria-live="assertive">Please try again later.</TryAgain>
+      <TryAgain aria-live="assertive">{tryAgainText}</TryAgain>
     </ErrorSection>
   );
 }
