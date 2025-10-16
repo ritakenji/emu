@@ -49,14 +49,3 @@ const EntryCardBody = styled.div`
   margin-top: -6px;
 `;
 
-// const IntensityScale = styled.div`
-//   color: var(--color-primary);
-//   font-weight: 700;
-//   flex-shrink: 0;
-//   margin-right: 20px;
-//   line-height: 0.65;
-
-//   span {
-//     font-size: 48px;
-//   }
-// `;
