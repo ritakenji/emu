@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import NavBar from "@/components/Navbar";
 import EntryList from "@/components/Lists/EntryList";
 import FilterForm from "@/components/Forms/FilterForm";
+import Loading from "@/components/Loading";
 
 export default function HomePage() {
   const {
@@ -21,7 +22,7 @@ export default function HomePage() {
     useState("reset");
 
   if (isLoading) {
-    return <p aria-live="polite">Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {
