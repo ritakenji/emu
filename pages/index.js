@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import useSWR from "swr";
 import styled from "styled-components";
 
@@ -8,6 +7,7 @@ import Header from "@/components/Header";
 import NavBar from "@/components/Navbar";
 import EntryList from "@/components/Lists/EntryList";
 import FilterForm from "@/components/Forms/FilterForm";
+import Loading from "@/components/Loading";
 
 export default function HomePage() {
   const {
@@ -22,12 +22,7 @@ export default function HomePage() {
     useState("reset");
 
   if (isLoading) {
-    return (
-      <LoadingSection>
-        <Image src="/assets/emu-logo.png" alt="logo" height={171} width={119} />
-        <p aria-live="polite">Loading...</p>
-      </LoadingSection>
-    );
+    return <Loading />;
   }
 
   if (error) {
@@ -97,17 +92,4 @@ const Main = styled.main`
 `;
 const EmptyState = styled.p`
   margin: 0.75rem 0 1rem;
-`;
-
-const LoadingSection = styled.section`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: "Jost", sans-serif;
-  font-weight: 400;
-  font-size: 32px;
-  color: var(--color-primary);
 `;
