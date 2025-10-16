@@ -54,7 +54,7 @@ export default function Bookmarks() {
       {bookmark.length === 0 ? (
         <h2>No bookmarks yet</h2>
       ) : bookmarkedEntries.length === 0 ? (
-        <h2>No matches found</h2>
+        <h2>No bookmarks yet</h2>
       ) : (
         <EntryList entries={bookmarkedEntries} />
       )}
