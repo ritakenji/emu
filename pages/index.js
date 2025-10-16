@@ -8,6 +8,7 @@ import NavBar from "@/components/Navbar";
 import EntryList from "@/components/Lists/EntryList";
 import FilterForm from "@/components/Forms/FilterForm";
 import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 export default function HomePage() {
   const {
@@ -26,14 +27,7 @@ export default function HomePage() {
   }
 
   if (error) {
-    return (
-      <>
-        <p aria-live="assertive">
-          Sorry, we could not retrieve the entry data at the moment.
-        </p>
-        <p aria-live="assertive">Please try again later.</p>
-      </>
-    );
+    return <Error />;
   }
 
   const filteredEntries =

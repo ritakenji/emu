@@ -107,7 +107,6 @@ export default function EntryPage() {
             priority
           />
         )}
-
       </DetailWrapper>
       <ButtonContainer>
         {mode === "default" && (
