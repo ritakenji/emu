@@ -19,7 +19,7 @@ export default function Modal({ onClose, children }) {
 const Overlay = styled.div`
   position: fixed;
   inset: 0;
-  background: black;
+  background: #4363ED;
   opacity: 0.3;
   z-index: 999;
   cursor: pointer;
@@ -32,7 +32,7 @@ const Container = styled.div.attrs({ role: "dialog", "aria-modal": "true" })`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
-  padding: 2rem;
+  padding: 2rem 4rem;
   border-radius: 0.75rem;
   max-width: 40rem;
   width: calc(100% - 2rem);

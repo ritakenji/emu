@@ -54,11 +54,6 @@ const StyledNavLink = styled(Link)`
   padding: 0.7rem;
   flex-grow: 1;
   text-align: center;
-  /* ${({ $active }) =>
-    $active &&
-    css`
-      background: var(--color-medium);
-    `} */
 `;
 
 const StyledNavButton = styled(Link)`

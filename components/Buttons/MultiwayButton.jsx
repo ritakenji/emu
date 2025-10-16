@@ -23,7 +23,7 @@ const StyledMultiwayButton = styled.button`
   font-family: "Inter", sans-serif;
 
   ${({ $variant }) =>
-    $variant === "edit" &&
+    $variant === "primary" &&
     css`
       background-color: var(--color-primary);
       color: #fff;
@@ -35,7 +35,7 @@ const StyledMultiwayButton = styled.button`
     `}
 
   ${({ $variant }) =>
-    $variant === "deleteAndCancel" &&
+    $variant === "secondary" &&
     css`
       color: var(--color-primary);
       background-color: transparent;

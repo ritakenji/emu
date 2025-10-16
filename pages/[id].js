@@ -92,7 +92,10 @@ export default function EntryPage() {
           <EmotionList entry={entry} />
         </section>
         <p>Intensity: {entry.intensity}</p>
-        <p>Notes: {entry.notes}</p>
+        <NotesCard>
+          <NoteTitle>My notes: </NoteTitle>
+          <NoteText>{entry.notes}</NoteText>
+        </NotesCard>
         {entry.imageUrl && (
           <Image
             src={entry.imageUrl}
@@ -104,18 +107,19 @@ export default function EntryPage() {
             priority
           />
         )}
+
       </DetailWrapper>
       <ButtonContainer>
         {mode === "default" && (
           <>
             <MultiwayButton
               onClick={() => setMode("edit")}
-              $variant="edit"
+              $variant="primary"
               buttonText="Edit"
             />
             <MultiwayButton
               onClick={() => setMode("delete")}
-              $variant="deleteAndCancel"
+              $variant="secondary"
               buttonText="Delete"
             />
           </>
@@ -123,17 +127,17 @@ export default function EntryPage() {
       </ButtonContainer>
       {mode === "delete" && (
         <Modal title="Delete entry" onClose={() => setMode("default")}>
-          <p>Are you sure you want to delete the entry?</p>
+          <ModalText>Are you sure you want to delete the entry?</ModalText>
           <ButtonBox>
             <MultiwayButton
-              onClick={deleteEntry}
-              $variant="deleteAndCancel"
-              buttonText="Delete"
+              onClick={() => setMode("default")}
+              $variant="secondary"
+              buttonText="Cancel"
             />
             <MultiwayButton
-              onClick={() => setMode("default")}
-              $variant="deleteAndCancel"
-              buttonText="Cancel"
+              onClick={deleteEntry}
+              $variant="primary"
+              buttonText="Delete"
             />
           </ButtonBox>
         </Modal>
@@ -149,7 +153,7 @@ export default function EntryPage() {
           ></EntryForm>
           <MultiwayButton
             onClick={() => setMode("default")}
-            $variant="deleteAndCancel"
+            $variant="secondary"
             buttonText="Cancel"
           />
         </Modal>
@@ -167,6 +171,22 @@ const DetailWrapper = styled.article`
   padding: 1.5rem;
 `;
 
+const NotesCard = styled.section`
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 15px;
+  filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
+`;
+
+const NoteTitle = styled.p`
+font-weight: bold;
+margin: 0 0 0.5rem 0;
+`;
+
+const NoteText = styled.p`
+margin: 0;
+`;
+
 const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
   display: flex;
   flex-direction: column;
@@ -181,5 +201,14 @@ const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`
 
 const ButtonBox = styled.div`
   display: flex;
-  gap: 1em;
+  justify-content: center;
+  gap: 1rem;
+`;
+
+const ModalText = styled.p`
+  font-weight: bold;
+  color: var(--color-dark);
+  text-align: center;
+  font-size: 1.3em;
+  margin: 0 0 2rem 0;
 `;
