@@ -80,7 +80,9 @@ export default function EntryPage() {
       </HeaderWrapper>
 
       <DetailWrapper>
-        <Bookmark id={id} />
+        <BookmarkWrapper>
+          <Bookmark id={id} />
+        </BookmarkWrapper>
 
         <IntensityContainer>
           <IntensityScale intensity={entry.intensity} />
@@ -191,10 +193,26 @@ const HeaderWrapper = styled.header`
 
 const DetailWrapper = styled.article`
   position: relative;
-  padding: 1.5rem 1.5rem 3rem;
+  padding: 4rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 24px;
+`;
+
+const BookmarkWrapper = styled.div`
+  position: absolute;
+  top: -30px;
+  right: 30px;
+  padding: 12px;
+  border-radius: 28px;
+  background-color: #fff;
+  border: 6px solid var(--color-light);
+
+  button {
+    padding: 0 3px;
+    width: 36px;
+    height: 36px;
+  }
 `;
 
 const IntensityContainer = styled.div`
