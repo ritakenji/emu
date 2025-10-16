@@ -132,12 +132,6 @@ export default function EntryForm({
         required
         aria-describedby="intensity-help"
       />
-
-      <datalist id="intensity-ticks">
-        {ticks.map((t) => (
-          <option key={t} value={t} label={String(t)} />
-        ))}
-      </datalist>
       <StyledRange>
         {ticks.map((t) => (
           <span key={t}>{t}</span>
@@ -164,8 +158,11 @@ export default function EntryForm({
         defaultValue={toLocalDateTime(initialValues?.dateTime)}
       />
 
-      <MultiwayButton type="submit" $variant="edit" buttonText={buttonText} />
-
+      <MultiwayButton
+        type="submit"
+        $variant="primary"
+        buttonText={buttonText}
+      />
     </FormContainer>
   );
 }
@@ -173,65 +170,79 @@ export default function EntryForm({
 const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
+  background-color: #fff;
+  padding: 36px 24px 44px;
+  margin-bottom: 48px;
+  filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
+  border-radius: 20px;
+
+  h2 {
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  button {
+    margin-top: 24px;
+    justify-self: center;
+  }
 `;
+
+const Legend = styled.legend`
+  font-weight: bold;
+  margin: 16px 0;
+`;
+const Label = styled.label`
+  font-weight: bold;
+  margin: 24px 0 6px;
+`;
+
 const Fieldset = styled.fieldset`
   border: 0;
   padding: 0;
   margin: 0;
 `;
 
-const Legend = styled.legend`
-  font-weight: bold;
-  margin-bottom: 0.25rem;
-`;
-
 const OptionsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
+  gap: 16px 12px;
   list-style: none;
   padding: 0;
   margin: 0;
+
+  label {
+    font-weight: 400;
+  }
 `;
 
-const Input = styled.input`
-  padding: 0.5rem;
+const Textarea = styled.textarea`
+  padding: 16px;
   font-size: inherit;
-  border: 1px solid black;
+  border: none;
   border-radius: 0.5rem;
+  background-color: var(--color-light);
+`;
+const Input = styled.input`
+  padding: 16px;
+  font-size: inherit;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--color-light);
 `;
 
 const Checkbox = styled(Input)`
   margin-right: 0.35rem;
-  width: auto;
-  height: auto;
-  padding: 0;
-  border-radius: 0.25rem;
 `;
 
 const Range = styled.input`
   width: 100%;
 `;
 
-const Label = styled.label`
-  font-weight: bold;
-`;
-
-const Textarea = styled.textarea`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  resize: vertical;
-`;
-
 const StyledRange = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
-  font-size: 14px;
-`;
-
-const SubmitButton = styled.button`
-  margin-top: 0.5rem;
+  margin: -5px -2px 0 4px;
 `;
