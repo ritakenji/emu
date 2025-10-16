@@ -2,12 +2,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import { Heart, House, Plus } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 export default function NavBar() {
   const { pathname } = useRouter();
   const isHome = pathname === "/";
   const isBookmarks = pathname === "/bookmarks";
   const isCreate = pathname === "/create";
+  const { data: session } = useSession();
 
   return (
     <Navigation>
@@ -19,14 +21,16 @@ export default function NavBar() {
       >
         <StyledHouse $active={isHome} />
       </StyledNavLink>
-      <StyledNavButton
-        href="/create"
-        aria-current={isCreate ? "page" : undefined}
-        $active={isCreate}
-        aria-label="Create new entry"
-      >
-        <StyledCreate $active={isCreate} />
-      </StyledNavButton>
+      {session && (
+        <StyledNavButton
+          href="/create"
+          aria-current={isCreate ? "page" : undefined}
+          $active={isCreate}
+          aria-label="Create new entry"
+        >
+          <StyledCreate $active={isCreate} />
+        </StyledNavButton>
+      )}
       <StyledNavLink
         href="/bookmarks"
         aria-current={isBookmarks ? "page" : undefined}

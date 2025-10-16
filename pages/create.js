@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Head from "next/head";
+import { useSession } from "next-auth/react";
 
 import EntryForm from "@/components/Forms/EntryForm";
 import NavBar from "@/components/Navbar";
@@ -8,6 +9,7 @@ import BackButton from "@/components/Buttons/BackButton";
 
 export default function Create() {
   const router = useRouter();
+  const { status } = useSession();
 
   async function handleAddEntry(entry) {
     try {
@@ -28,7 +30,9 @@ export default function Create() {
       console.error("Failed to add entry:", e);
     }
   }
-
+  if (status !== "authenticated") {
+    return <h2>Access denied!</h2>;
+  }
   return (
     <>
       <Head>
