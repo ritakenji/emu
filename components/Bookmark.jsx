@@ -1,6 +1,6 @@
-import { BookmarkIcon } from "lucide-react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
+import { Heart } from "lucide-react";
 
 export default function Bookmark({ id }) {
   const [bookmark, setBookmark] = useLocalStorageState("bookmark", {
@@ -29,9 +29,9 @@ export default function Bookmark({ id }) {
       }}
     >
       {bookmark.includes(id) ? (
-        <StyledBookmark fill="black" />
+        <StyledBookmark fill="var(--color-primary)" stroke="var(--color-primary)"/>
       ) : (
-        <StyledBookmark fill="white" />
+        <StyledBookmark fill="white" stroke="var(--color-medium)"/>
       )}
     </StyledButton>
   );
@@ -42,7 +42,6 @@ const StyledButton = styled.button`
   background-color: transparent;
 `;
 
-const StyledBookmark = styled(BookmarkIcon)`
-  /* width: 40px;
-  height: 40px; */
+const StyledBookmark = styled(Heart)`
+  stroke-width: 1.8px;
 `;
