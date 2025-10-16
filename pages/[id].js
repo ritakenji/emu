@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Head from "next/head";
-import Image from "next/image";
 
 import BackButton from "@/components/Buttons/BackButton";
 import Bookmark from "@/components/Bookmark";
@@ -31,28 +30,19 @@ export default function EntryPage() {
 
   if (!router.isReady || isLoading) return <Loading />;
   if (error) return <h2 aria-live="assertive">Failed to load entry</h2>;
+
   const formattedDate = new Date(entry.dateTime).toLocaleString("en-GB", {
     dateStyle: "medium",
     timeStyle: "short",
   });
 
-  async function editEntry(formValues) {
-    const payload = {
-      emotions: (formValues.emotions || []).map((e) => e._id),
-      intensity: Number(formValues.intensity),
-      notes: formValues.notes?.trim() || "",
-      dateTime: new Date(formValues.dateTime).toISOString(),
-      ...(formValues.imageUrl ? { imageUrl: formValues.imageUrl } : {}),
-      ...(formValues.imagePublicId
-        ? { imagePublicId: formValues.imagePublicId }
-        : {}),
-    };
+  async function editEntry(entry) {
     const response = await fetch(`/api/entries/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(entry),
     });
 
     if (response.ok) {
@@ -96,18 +86,6 @@ export default function EntryPage() {
           <NoteTitle>My notes: </NoteTitle>
           <NoteText>{entry.notes}</NoteText>
         </NotesCard>
-        {entry.imageUrl && (
-          <Image
-            src={entry.imageUrl}
-            alt="Entry image"
-            width={600}
-            height={400}
-            quality={70}
-            style={{ borderRadius: 12, objectFit: "cover" }}
-            priority
-          />
-        )}
-
       </DetailWrapper>
       <ButtonContainer>
         {mode === "default" && (
