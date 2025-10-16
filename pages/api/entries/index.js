@@ -40,7 +40,6 @@ export default async function handler(request, response) {
     const { emotions, dateTime, intensity, notes, imageUrl } =
       request.body ?? {};
     const errors = {};
-    console.log("request body", request.body);
     // emotions must be a non-empty array
     if (!Array.isArray(emotions) || emotions.length === 0) {
       errors.emotions = "Select at least one emotion.";
