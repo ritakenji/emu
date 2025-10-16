@@ -61,7 +61,6 @@ export default function HomePage() {
           <title>Homepage</title>
         </Head>
         <Header />
-        <h1>Emotion Entry List</h1>
 
         {entries.length !== 0 && (
           <FilterForm
@@ -87,7 +86,7 @@ export default function HomePage() {
 }
 
 const Main = styled.main`
-  padding: 4rem 1.5rem;
+  padding: 1.5rem 1.5rem 4rem;
 `;
 const EmptyState = styled.p`
   margin: 0.75rem 0 1rem;

@@ -1,25 +1,63 @@
 import styled from "styled-components";
+import Image from "next/image";
 
 export default function Header() {
+  const now = new Date();
+
+  const formattedDate = now.toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
+
+  const hours = now.getHours();
+  let greeting;
+  if (hours < 12) {
+    greeting = "Good morning";
+  } else if (hours < 18) {
+    greeting = "Good afternoon";
+  } else {
+    greeting = "Good evening";
+  }
+
   return (
-    <HeaderBar>
-      <Title>Emu App</Title>
-    </HeaderBar>
+    <HeaderContainer>
+      <Image
+        src="/assets/emu-logo.png"
+        alt="logo"
+        height={98}
+        width={68}
+        loading="eager"
+      />
+      <h5>{formattedDate}</h5>
+      <h2>{greeting}, Rita</h2>
+      <p>How are you feeling today?</p>
+    </HeaderContainer>
   );
 }
 
-const HeaderBar = styled.header`
-  background-color: var(--color-medium);
-  margin: 0;
-  padding: 0.7;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 20;
-`;
-
-const Title = styled.h1`
+const HeaderContainer = styled.div`
   text-align: center;
-  font-size: 1.5rem;
+  margin-bottom: 24px;
+
+  * {
+    font-family: "Jost", sans-serif;
+    margin: 0;
+  }
+
+  h5 {
+    color: var(--color-primary);
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 24px;
+  }
+
+  h2 {
+    font-weight: 350;
+  }
+
+  p {
+    font-size: 24px;
+    font-weight: 350;
+  }
 `;
