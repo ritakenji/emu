@@ -184,8 +184,10 @@ export default function EntryForm({
           priority
         />
       )}
-      <Label htmlFor="image">Photo (optional)</Label>
-      <Input id="image" name="image" type="file" accept="image/*" />
+      <Label htmlFor="image">Photo</Label>
+      <FileInputWrapper>
+        <ImageInput id="image" name="image" type="file" accept="image/*" />
+      </FileInputWrapper>
       <Label htmlFor="dateTime" aria-required="true">
         Date and Time *
       </Label>
@@ -209,11 +211,6 @@ export default function EntryForm({
 const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
-  /* background-color: #fff;
-  padding: 36px 24px 44px;
-  margin: 36px 0 48px;
-  filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
-  border-radius: 20px; */
 
   h2 {
     text-align: center;
@@ -290,4 +287,15 @@ const StyledImage = styled(Image)`
   max-width: 100%;
   align-self: center;
   margin-top: 20px;
+`;
+const FileInputWrapper = styled.div`
+  width: 100%;
+  max-width: 100%;
+  display: block;
+`;
+const ImageInput = styled(Input)`
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 `;
