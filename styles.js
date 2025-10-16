@@ -131,9 +131,4 @@ export default createGlobalStyle`
     font-size: 18px;
     color: var(--color-dark);
   }
-  h2 {
-    font-family: "Jost", sans-serif;
-    font-size: 16px;
-    color: var(--color-primary);
-  }
 `;
