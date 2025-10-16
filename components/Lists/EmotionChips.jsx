@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export default function EmotionChips({ type }) {
+export default function EmotionChips({ type, className }) {
   return (
-    <ChipsContainer>
+    <ChipsContainer className={className}>
       {type.map(({ _id, emotion }) => (
         <EmotionChip key={_id} className={emotion.toLowerCase()}>
           {emotion}

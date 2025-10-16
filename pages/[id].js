@@ -11,6 +11,7 @@ import EntryForm from "@/components/Forms/EntryForm";
 import Modal from "@/components/Modal";
 import MultiwayButton from "@/components/Buttons/MultiwayButton";
 import IntensityScale from "@/components/IntensityScale";
+import EmotionChips from "@/components/Lists/EmotionChips";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -81,12 +82,15 @@ export default function EntryPage() {
       <DetailWrapper>
         <Bookmark id={id} />
 
-        <section aria-labelledby="emotion-types">
-          <h3 id="emotion-types">Type:</h3>
-          <EmotionList entry={entry} />
-        </section>
+        <IntensityContainer>
+          <IntensityScale intensity={entry.intensity} />
+          <p>Intensity</p>
+        </IntensityContainer>
 
-        <IntensityScale intensity={entry.intensity} />
+        <EmotionContainer aria-labelledby="emotion-types">
+          {/* <h3 id="emotion-types">Type:</h3> */}
+          <StyledEmotionChips type={entry.emotions} />
+        </EmotionContainer>
 
         <NotesCard>
           <h4>My notes: </h4>
@@ -188,6 +192,23 @@ const HeaderWrapper = styled.header`
 const DetailWrapper = styled.article`
   position: relative;
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const IntensityContainer = styled.div`
+  text-align: center;
+  p {
+    color: var(--color-primary);
+    font-family: "Jost", sans-serif;
+    margin-right: 20px;
+  }
+`;
+
+const EmotionContainer = styled.div``;
+const StyledEmotionChips = styled(EmotionChips)`
+  justify-content: center;
 `;
 
 const NotesCard = styled.section`
@@ -195,12 +216,10 @@ const NotesCard = styled.section`
   background-color: white;
   border-radius: 15px;
   filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
-
   h4 {
     font-weight: bold;
     margin: 0 0 0.5rem 0;
   }
-
   p {
     margin: 0;
   }
