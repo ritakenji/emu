@@ -283,11 +283,13 @@ This space lists resources we found helpful in the creation and development of t
 - [MDN](https://developer.mozilla.org/de/)
 - [W3schools](https://www.w3schools.com/)
 - [FreeCodeCamp](https://www.freecodecamp.org/learn)
+- [Cloudinary](https://cloudinary.com/)
 - [NPM packages:](https://www.npmjs.com/)
   - [eslint](https://www.npmjs.com/package/eslint)
   - [lucide-react](https://www.npmjs.com/package/lucide-react)
   - [mongoose](https://www.npmjs.com/package/mongoose)
   - [vercel](https://www.npmjs.com/package/vercel)
+  - [cloudinary](https://www.npmjs.com/package/cloudinary)
   - among others
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
