@@ -2,6 +2,13 @@ import dbConnect from "@/db/connect.js";
 import Entry from "@/db/models/Entry";
 import Emotion from "@/db/models/Emotion"; // validate emotion IDs on update
 import mongoose from "mongoose"; // validate ObjectId
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export default async function handler(request, response) {
   // Early guard: only allow these methods at this route
@@ -42,7 +49,8 @@ export default async function handler(request, response) {
     try {
       await dbConnect();
 
-      const { emotions, intensity, dateTime, notes } = request.body ?? {};
+      const { emotions, intensity, dateTime, notes, imageUrl } =
+        request.body ?? {};
       const updates = {};
       const errors = {};
 
@@ -101,10 +109,14 @@ export default async function handler(request, response) {
           .json({ message: "Validation failed", errors });
       }
 
-      const updated = await Entry.findByIdAndUpdate(id, updates, {
-        new: true,
-        runValidators: true,
-      })
+      const updated = await Entry.findByIdAndUpdate(
+        id,
+        { ...updates, imageUrl },
+        {
+          new: true,
+          runValidators: true,
+        }
+      )
         .populate("emotions")
         .lean();
 
@@ -131,10 +143,24 @@ export default async function handler(request, response) {
     try {
       await dbConnect();
 
-      const deleted = await Entry.findByIdAndDelete(id);
-      if (!deleted) {
+      // 1) Find the entry first so we know the public_id to remove
+      const entry = await Entry.findById(id).lean();
+      if (!entry) {
         return response.status(404).json({ status: "Not found" });
       }
+
+      // 2) If it has a Cloudinary asset, delete it
+      if (entry.imagePublicId) {
+        try {
+          await cloudinary.uploader.destroy(entry.imagePublicId);
+        } catch (e) {
+          // Log but don't fail deletion of the DB entry
+          console.error("Cloudinary destroy failed:", e);
+        }
+      }
+
+      // 3) Delete the MongoDB document
+      await Entry.findByIdAndDelete(id);
 
       return response.status(204).end();
     } catch (error) {

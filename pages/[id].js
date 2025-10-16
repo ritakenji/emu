@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import Head from "next/head";
+import Image from "next/image";
 
 import BackButton from "@/components/Buttons/BackButton";
 import Bookmark from "@/components/Bookmark";
@@ -12,6 +13,7 @@ import Modal from "@/components/Modal";
 import MultiwayButton from "@/components/Buttons/MultiwayButton";
 import IntensityScale from "@/components/IntensityScale";
 import EmotionChips from "@/components/Lists/EmotionChips";
+import Loading from "@/components/Loading";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -29,21 +31,30 @@ export default function EntryPage() {
     return;
   }
 
-  if (!router.isReady || isLoading)
-    return <h2 aria-live="polite">Loading...</h2>;
+  if (!router.isReady || isLoading) return <Loading />;
   if (error) return <h2 aria-live="assertive">Failed to load entry</h2>;
   const formattedDate = new Date(entry.dateTime).toLocaleString("en-GB", {
     dateStyle: "medium",
     timeStyle: "short",
   });
 
-  async function editEntry(entry) {
+  async function editEntry(formValues) {
+    const payload = {
+      emotions: (formValues.emotions || []).map((e) => e._id),
+      intensity: Number(formValues.intensity),
+      notes: formValues.notes?.trim() || "",
+      dateTime: new Date(formValues.dateTime).toISOString(),
+      ...(formValues.imageUrl ? { imageUrl: formValues.imageUrl } : {}),
+      ...(formValues.imagePublicId
+        ? { imagePublicId: formValues.imagePublicId }
+        : {}),
+    };
     const response = await fetch(`/api/entries/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(entry),
+      body: JSON.stringify(payload),
     });
 
     if (response.ok) {
@@ -99,6 +110,18 @@ export default function EntryPage() {
           <p>{entry.notes}</p>
         </NotesCard>
 
+ {entry.imageUrl && (
+          <Image
+            src={entry.imageUrl}
+            alt="Entry image"
+            width={600}
+            height={400}
+            quality={70}
+            style={{ borderRadius: 12, objectFit: "cover" }}
+            priority
+          />
+        )}
+
         <ButtonContainer>
           {mode === "default" && (
             <>
@@ -115,6 +138,7 @@ export default function EntryPage() {
             </>
           )}
         </ButtonContainer>
+       
       </DetailWrapper>
 
       {mode === "delete" && (
