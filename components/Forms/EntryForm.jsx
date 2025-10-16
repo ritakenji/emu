@@ -261,19 +261,19 @@ const Textarea = styled.textarea`
   padding: 16px;
   font-size: inherit;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   background-color: var(--color-light);
 `;
 const Input = styled.input`
   padding: 16px;
   font-size: inherit;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   background-color: var(--color-light);
 `;
 
 const Checkbox = styled(Input)`
-  margin-right: 0.35rem;
+  margin-right: 5px;
 `;
 
 const Range = styled.input`
