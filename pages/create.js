@@ -52,14 +52,11 @@ export default function Create() {
         ></meta>
         <title>Add Entry</title>
       </Head>
-      <Header>
-        <BackButton />
-      </Header>
       <Main>
         <EntryForm
           onSubmit={handleAddEntry}
           buttonText={"Submit"}
-          formTitle={"Add Entry"}
+          formTitle={"Create new entry"}
         />
       </Main>
       <NavBar />
