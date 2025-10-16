@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import useSWR from "swr";
 import styled from "styled-components";
 import MultiwayButton from "../Buttons/MultiwayButton";
+import Image from "next/image";
 
 import { toLocalDateTime } from "@/utils/helpers";
 
@@ -18,6 +19,7 @@ export default function EntryForm({
     setSelectedTypes(initialValues?.emotions || []);
   }, [initialValues]);
 
+  const [isUploading, setIsUploading] = useState(false);
   const {
     data: emotions,
     isLoading,
@@ -64,7 +66,7 @@ export default function EntryForm({
     }
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
@@ -73,7 +75,6 @@ export default function EntryForm({
       emotions: [...selectedTypes],
       ...data,
     };
-
     if (selectedTypes.length === 0) {
       alert("Please select at least one emotion.");
       return;
@@ -82,6 +83,30 @@ export default function EntryForm({
     if (!data.dateTime) {
       alert("Please select date and time.");
       return;
+    }
+    const file = formData.get("image");
+    if (file && file instanceof File && file.size > 0) {
+      setIsUploading(true);
+      try {
+        const uploadData = new FormData();
+        uploadData.append("file", file);
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          body: uploadData,
+        });
+        if (!res.ok) {
+          const msg = await res.text().catch(() => res.statusText);
+          throw new Error(`Upload failed (${res.status}): ${msg}`);
+        }
+        const { secure_url, url, public_id } = await res.json();
+        newObject.imageUrl = secure_url || url;
+        newObject.imagePublicId = public_id;
+      } catch (e) {
+        alert(`Image upload failed. ${e?.message || ""}`);
+        setIsUploading(false);
+        return;
+      }
+      setIsUploading(false);
     }
 
     onSubmit(newObject);
@@ -116,7 +141,6 @@ export default function EntryForm({
           })}
         </OptionsList>
       </Fieldset>
-
       <Label htmlFor="intensity" aria-required="true">
         Intensity *
       </Label>
@@ -132,14 +156,17 @@ export default function EntryForm({
         required
         aria-describedby="intensity-help"
       />
+      <datalist id="intensity-ticks">
+        {ticks.map((t) => (
+          <option key={t} value={t} label={String(t)} />
+        ))}
+      </datalist>
       <StyledRange>
         {ticks.map((t) => (
           <span key={t}>{t}</span>
         ))}
       </StyledRange>
-
       <Label htmlFor="notes">Notes</Label>
-
       <Textarea
         id="notes"
         name="notes"
@@ -147,7 +174,18 @@ export default function EntryForm({
         defaultValue={initialValues?.notes}
         rows={4}
       />
-
+      {initialValues?.imageUrl && (
+        <Image
+          src={initialValues.imageUrl}
+          alt="Entry image"
+          width={600}
+          height={400}
+          style={{ borderRadius: 12, objectFit: "cover" }}
+          priority
+        />
+      )}
+      <Label htmlFor="image">Photo (optional)</Label>
+      <Input id="image" name="image" type="file" accept="image/*" />
       <Label htmlFor="dateTime" aria-required="true">
         Date and Time *
       </Label>
@@ -161,7 +199,8 @@ export default function EntryForm({
       <MultiwayButton
         type="submit"
         $variant="primary"
-        buttonText={buttonText}
+        buttonText={isUploading ? "Uploading…" : buttonText}
+        disabled={isUploading}
       />
     </FormContainer>
   );
