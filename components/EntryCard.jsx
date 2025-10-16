@@ -1,5 +1,6 @@
 import Bookmark from "./Bookmark";
 import EmotionChips from "./Lists/EmotionChips";
+import IntensityScale from "./IntensityScale";
 
 import styled from "styled-components";
 
@@ -11,15 +12,12 @@ export default function EntryCard({ type, intensity, dateTime, id }) {
 
   return (
     <EntryCardWrapper>
-
       <EntryCardTab>
         <Bookmark id={id}></Bookmark>
         {formattedDate}
       </EntryCardTab>
       <EntryCardBody>
-        <IntensityScale>
-          <span>{intensity}</span> / 10
-        </IntensityScale>
+        <IntensityScale intensity={intensity} />
         <EmotionChips type={type} />
       </EntryCardBody>
     </EntryCardWrapper>
@@ -51,14 +49,3 @@ const EntryCardBody = styled.div`
   margin-top: -6px;
 `;
 
-const IntensityScale = styled.div`
-  color: var(--color-primary);
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-right: 20px;
-  line-height: 0.65;
-
-  span {
-    font-size: 48px;
-  }
-`;
