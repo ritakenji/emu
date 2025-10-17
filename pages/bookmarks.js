@@ -63,10 +63,10 @@ export default function Bookmarks() {
 }
 
 const Main = styled.main`
-  padding: 1rem 1.5rem 4rem;
+  padding: 1rem 1.5rem 6rem;
 `;
 
 const BookmarkHeader = styled.h1`
-text-align: center;
-padding: 2.5rem;
+  text-align: center;
+  padding: 2.5rem;
 `;
