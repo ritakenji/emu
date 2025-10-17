@@ -144,7 +144,11 @@ export default function EntryPage() {
       </DetailWrapper>
 
       {mode === "delete" && (
-        <Modal title="Delete entry" onClose={() => setMode("default")}>
+        <Modal
+          $variant="delete"
+          title="Delete entry"
+          onClose={() => setMode("default")}
+        >
           <ModalText>Are you sure you want to delete the entry?</ModalText>
           <ButtonBox>
             <MultiwayButton

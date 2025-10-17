@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export default function Modal({ onClose, children }) {
+export default function Modal({ onClose, children, $variant }) {
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
@@ -36,7 +36,9 @@ export default function Modal({ onClose, children }) {
 
   return (
     <>
-      <Container aria-labelledby="modal-title">{children}</Container>
+      <Container aria-labelledby="modal-title" $variant={$variant}>
+        {children}
+      </Container>
       <Overlay onClick={onClose} aria-hidden="true" />
     </>
   );
@@ -45,8 +47,8 @@ export default function Modal({ onClose, children }) {
 const Overlay = styled.div`
   position: fixed;
   inset: 0;
-  background: #4363ed;
-  opacity: 0.3;
+  background: var(--color-dark);
+  opacity: 0.7;
   z-index: 999;
   cursor: pointer;
 `;
@@ -69,4 +71,21 @@ const Container = styled.div.attrs({ role: "dialog", "aria-modal": "true" })`
   flex-direction: column;
   align-items: center;
   gap: 12px;
+
+  @media (min-width: 768px) {
+    inset: 40px;
+    max-width: 600px;
+    margin: auto;
+    border-radius: 1rem;
+    padding: 3rem;
+  }
+
+  ${({ $variant }) =>
+    $variant === "delete" &&
+    css`
+      inset: unset !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+    `}
 `;

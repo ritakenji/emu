@@ -53,7 +53,7 @@ const HeaderContainer = styled.div`
     color: var(--color-primary);
     font-weight: 500;
     font-size: 16px;
-    margin-top: 24px;
+    margin-top: 42px;
   }
 
   h2 {
