@@ -7,7 +7,7 @@ export default function Bookmark({
   initialBookmarked = false,
   disabled = false,
 }) {
-  const [bookmarked, setBookmarked] = useState(Boolean(initialBookmarked));
+  const [bookmarked, setBookmarked] = useState(initialBookmarked);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -36,8 +36,7 @@ export default function Bookmark({
       }
       const data = await res.json();
       if (data?.entry?.bookmarked !== undefined) {
-        setBookmarked(Boolean(data.entry.bookmarked));
-        //onServerConfirm?.(Boolean(data.entry.bookmarked));
+        setBookmarked(data.entry.bookmarked);
       }
     } catch (err) {
       setBookmarked(!next);

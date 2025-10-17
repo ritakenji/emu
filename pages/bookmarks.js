@@ -18,12 +18,7 @@ export default function Bookmarks() {
     fallbackData: [],
   });
 
-  /* const [bookmark] = useLocalStorageState("bookmark", {
-    defaultValue: [],
-  }); */
-
   const bookmarkedEntries = entries.filter((entry) => entry.bookmarked);
-  console.log("bookmarkedEntries", bookmarkedEntries);
 
   if (isLoading) {
     return <Loading />;
