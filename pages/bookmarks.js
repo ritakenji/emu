@@ -46,7 +46,7 @@ export default function Bookmarks() {
       </Head>
 
       <BookmarkHeader>Bookmarked entries</BookmarkHeader>
-      {bookmark.length === 0 || bookmarkedEntries.length === 0 ? (
+      {bookmarkedEntries.length === 0 ? (
         <NoBookmarksWrapper>
           <Image
             src="/assets/emu-bookmark-logo.png"
