@@ -5,6 +5,8 @@ import MultiwayButton from "../Buttons/MultiwayButton";
 import Image from "next/image";
 
 import { toLocalDateTime } from "@/utils/helpers";
+import Loading from "../Loading";
+import Error from "../Error";
 
 export default function EntryForm({
   onSubmit,
@@ -33,22 +35,16 @@ export default function EntryForm({
   };
 
   if (isLoading) {
-    return (
-      <p role="status" aria-live="polite">
-        Loading...
-      </p>
-    );
+    return <Loading />;
   }
 
   if (error) {
     return (
-      <>
-        <p aria-live="assertive">
-          Sorry, we could not retrieve the entry data at the moment.
-        </p>
-        <p aria-live="assertive">Please try again later.</p>
-      </>
-    );
+          <Error
+            errorText="Sorry, we could not retrieve the entry data at the moment."
+            tryAgainText="Please try again later."
+          />
+        );
   }
 
   if (!emotions) {
@@ -258,19 +254,19 @@ const Textarea = styled.textarea`
   padding: 16px;
   font-size: inherit;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   background-color: var(--color-light);
 `;
 const Input = styled.input`
   padding: 16px;
   font-size: inherit;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   background-color: var(--color-light);
 `;
 
 const Checkbox = styled(Input)`
-  margin-right: 0.35rem;
+  margin-right: 5px;
 `;
 
 const Range = styled.input`

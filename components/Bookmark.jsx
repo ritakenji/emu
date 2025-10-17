@@ -29,7 +29,7 @@ export default function Bookmark({ id }) {
       }}
     >
       {bookmark.includes(id) ? (
-        <StyledBookmark fill="var(--color-primary)" stroke="var(--color-primary)"/>
+        <StyledBookmark fill="var(--color-dark)" stroke="var(--color-dark)"/>
       ) : (
         <StyledBookmark fill="white" stroke="var(--color-medium)"/>
       )}

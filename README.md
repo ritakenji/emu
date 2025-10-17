@@ -89,6 +89,7 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 
 - 🏠 **Home Page**: Browse a well-organised collection of emotion entries.
 
+  - Header greeting text behaves dynamically, according on the time of the day (Good morning/afternoon/evening).
   - The collection is ordered chronologically with the newest entries starting from the top.
   - Each emotion entry shows the date and time it was created on, the emotions felt in that moment and their intensity.
   - Emotion types are visually distinct, using different colours to differentiate them.
@@ -117,6 +118,7 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
   - Date and time field is pre-set to show date and time format as DD-MM-YYYY, --:--, but adjustable by the user.
   - The emotions are selected from the existing emotions list via a checkbox.
   - The emotion intensity is selectable on a scale of 1 to 10.
+  - User can upload an image from their computer to be shown on the entry.
   - Form submission with any empty mandatory fields is blocked, and clear validation messages indicate the fields that need completion.
   - Upon submission, the new emotion entry is added to the top of the emotion entries list.
 

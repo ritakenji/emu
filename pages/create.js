@@ -75,5 +75,5 @@ const FormContainer = styled.div`
 `;
 
 const Main = styled.main`
-  padding: 0 1.5rem 4rem;
+  padding: 0 24px 64px;
 `;

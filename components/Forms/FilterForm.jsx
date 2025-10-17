@@ -2,6 +2,8 @@ import useSWR from "swr";
 import { useRef } from "react";
 
 import MultiwayButton from "../Buttons/MultiwayButton";
+import Loading from "../Loading";
+import Error from "../Error";
 import { Funnel } from "lucide-react";
 import styled from "styled-components";
 
@@ -25,16 +27,16 @@ export default function FilterForm({
   }
 
   if (isLoading) {
-    return <p aria-live="polite">Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {
     return (
-      <div aria-live="assertive">
-        <p>Sorry, we could not retrieve the entry data at the moment.</p>
-        <p>Please try again later.</p>
-      </div>
-    );
+          <Error
+            errorText="Sorry, we could not retrieve the entry data at the moment."
+            tryAgainText="Please try again later."
+          />
+        );
   }
 
   if (!emotions) {
