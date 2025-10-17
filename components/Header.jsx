@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
   const now = new Date();
+  const { data: session } = useSession();
+  const firstName = session?.user?.name?.split(" ")[0] || "my peep";
 
   const formattedDate = now.toLocaleDateString("en-GB", {
     weekday: "long",
@@ -30,7 +33,9 @@ export default function Header() {
         loading="eager"
       />
       <h5>{formattedDate}</h5>
-      <h2>{greeting}, Rita</h2>
+      <h2>
+        {greeting}, {firstName}
+      </h2>
       <p>How are you feeling today?</p>
     </HeaderContainer>
   );
