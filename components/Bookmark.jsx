@@ -53,7 +53,10 @@ export default function Bookmark({
       aria-pressed={bookmarked}
       aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
       title={bookmarked ? "Remove bookmark" : "Add bookmark"}
-      onClick={toggle}
+      onClick={(event) => {
+        event.preventDefault();
+        toggle();
+      }}
       disabled={loading || disabled}
     >
       {bookmarked ? (
