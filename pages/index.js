@@ -87,7 +87,7 @@ export default function HomePage() {
 }
 
 const Main = styled.main`
-  padding: 32px 24px 96px; // padding: 2rem 1.5rem 6rem;
+  padding: 32px 24px 96px; 
 `;
 
 const EmptyState = styled.p`
