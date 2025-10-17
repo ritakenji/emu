@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -18,6 +19,8 @@ import Error from "@/components/Error";
 export default function EntryPage() {
   const router = useRouter();
   const { id } = router.query;
+  const { data: session } = useSession();
+  const userOwnsEntry = session?.user?.id && entry?.owner === session.user.id;
 
   const {
     data: entry,
@@ -122,7 +125,7 @@ export default function EntryPage() {
             priority
           />
         )}
-
+{userOwnsEntry && (
         <ButtonContainer>
           {mode === "default" && (
             <>
@@ -139,6 +142,7 @@ export default function EntryPage() {
             </>
           )}
         </ButtonContainer>
+)};
       </DetailWrapper>
 
       {mode === "delete" && (

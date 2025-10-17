@@ -1,3 +1,4 @@
+import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
 
@@ -15,12 +16,13 @@ const fetcher = async (input, init) => {
 const swrConfig = { fetcher };
 
 export default function App({ Component, pageProps }) {
+  const { session, ...rest } = pageProps;
   return (
-    <>
+    <SessionProvider session={session}>
       <SWRConfig value={swrConfig}>
         <GlobalStyle />
-        <Component {...pageProps} />
+        <Component {...rest} />
       </SWRConfig>
-    </>
+    </SessionProvider>
   );
 }

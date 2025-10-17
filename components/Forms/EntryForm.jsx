@@ -29,10 +29,12 @@ export default function EntryForm({
   } = useSWR("/api/emotions", {
     fallbackData: [],
   });
+  const getId = (e) => (e && e._id ? String(e._id) : String(e));
 
-  const isSelected = (_id) => {
-    return selectedTypes.some((selectedEmotion) => selectedEmotion._id === _id);
-  };
+  const isSelected = (_id) =>
+    selectedTypes.some(
+      (selectedEmotion) => getId(selectedEmotion) === String(_id)
+    );
 
   if (isLoading) {
     return <Loading />;
@@ -47,18 +49,18 @@ export default function EntryForm({
         );
   }
 
-  if (!emotions) {
-    return;
-  }
+  if (!emotions) return null;
 
   function handleCheckbox(event) {
     const { value: _id, checked } = event.target;
-    const selectedEmotionObject = emotions.find((e) => e._id === _id);
+    const selectedEmotionObject = emotions.find(
+      (e) => String(e._id) === String(_id)
+    );
 
     if (checked && selectedEmotionObject && !isSelected(_id)) {
       setSelectedTypes((prev) => [...prev, selectedEmotionObject]);
     } else if (!checked) {
-      setSelectedTypes((prev) => prev.filter((e) => e._id !== _id));
+      setSelectedTypes((prev) => prev.filter((e) => getId(e) !== String(_id)));
     }
   }
 
@@ -67,9 +69,9 @@ export default function EntryForm({
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    const newObject = {
-      emotions: [...selectedTypes],
+    const payload = {
       ...data,
+      emotions: selectedTypes.map(getId),
     };
     if (selectedTypes.length === 0) {
       alert("Please select at least one emotion.");
@@ -105,7 +107,7 @@ export default function EntryForm({
       setIsUploading(false);
     }
 
-    onSubmit(newObject);
+    onSubmit(payload);
   }
 
   const ticks = [];
@@ -128,8 +130,8 @@ export default function EntryForm({
                   id={inputId}
                   name="type"
                   type="checkbox"
-                  value={_id}
-                  checked={isSelected(_id)}
+                  value={String(_id)}
+                  checked={isSelected(String(_id))}
                 />
                 <Label htmlFor={inputId}>{emotion}</Label>
               </li>
@@ -193,6 +195,7 @@ export default function EntryForm({
         type="datetime-local"
         defaultValue={toLocalDateTime(initialValues?.dateTime)}
       />
+
 
       <MultiwayButton
         type="submit"

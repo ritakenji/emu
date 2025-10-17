@@ -1,7 +1,11 @@
+import { getServerSession } from "next-auth/next";
+import { getToken } from "next-auth/jwt";
+import mongoose from "mongoose"; // for ObjectId validation
+
+import { authOptions } from "../auth/[...nextauth]";
 import dbConnect from "@/db/connect";
 import Entry from "@/db/models/Entry";
 import Emotion from "@/db/models/Emotion"; //import to validate emotion IDs
-import mongoose from "mongoose"; // for ObjectId validation
 
 export default async function handler(request, response) {
   const allowed = ["GET", "POST"];
@@ -9,12 +13,23 @@ export default async function handler(request, response) {
     return response.status(405).json({ status: "Method Not Allowed" });
   }
 
+  // -------- GET: show default; if logged in, include user's own too --------
   if (request.method === "GET") {
     try {
       //connect inside try for consistent 500 handling
       await dbConnect();
+      // Try to read token (if logged in => filter by owner; else show defaults)
+      const token = await getToken({
+        req: request,
+        secret: process.env.NEXTAUTH_SECRET,
+      });
+      const userId = token?.sub;
+
+      const query = userId
+        ? { owner: { $in: [userId, "default"] } }
+        : { owner: "default" };
       //Use lean() for faster, lighter read returning plain js objects instead of full Mongoose documents
-      const entries = await Entry.find()
+      const entries = await Entry.find(query)
         .populate("emotions")
         .sort({ dateTime: -1 })
         .lean();
@@ -27,12 +42,24 @@ export default async function handler(request, response) {
     }
   }
 
-  // request.method === "POST"
-  //Optional but recommended—enforce JSON bodies for create.
+  // -------- POST: protected, always set owner = userId --------
   if (!request.headers["content-type"]?.includes("application/json")) {
     return response
       .status(415)
       .json({ message: "Unsupported Media Type: expected application/json" });
+  }
+  const session = await getServerSession(request, response, authOptions);
+  if (!session) {
+    return response.status(401).json({ status: "Not authorized" });
+  }
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
+  const userId = token?.sub;
+  // Get user id from token
+  if (!userId) {
+    return response.status(401).json({ status: "Not authorized" });
   }
   try {
     await dbConnect();
@@ -108,6 +135,7 @@ export default async function handler(request, response) {
       dateTime: dt.toISOString(),
       intensity: parsedIntensity,
       notes: typeof notes === "string" ? notes.trim() : notes,
+      owner: userId,
       imageUrl: imageUrl ? imageUrl : "",
     });
 
