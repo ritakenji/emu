@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import useSWR from "swr";
 import useLocalStorageState from "use-local-storage-state";
 import styled from "styled-components";
@@ -52,11 +53,13 @@ export default function Bookmarks() {
       <BookmarkHeader>Bookmarked entries</BookmarkHeader>
       {bookmark.length === 0 ? (
         <NoBookmarksWrapper>
+          
           <h2>No bookmarks yet.</h2>
           <p>Please bookmark an entry.</p>
         </NoBookmarksWrapper>
       ) : bookmarkedEntries.length === 0 ? (
         <NoBookmarksWrapper>
+          <Image src="/assets/emu-logo-bookmark.png" alt="logo" height={171} width={119} loading="eager" />
           <h2>No bookmarks yet.</h2>
           <p>Please bookmark an entry.</p>
         </NoBookmarksWrapper>
