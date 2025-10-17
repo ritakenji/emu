@@ -28,7 +28,6 @@ export default function EntryPage() {
   } = useSWR(id ? `/api/entries/${id}` : null, { fallbackData: {} });
   const userOwnsEntry = session?.user?.id && entry?.owner === session?.user?.id;
 
-  const userOwnsEntry = session?.user?.id && entry?.owner === session?.user?.id;
 
   const [mode, setMode] = useState("default");
 
