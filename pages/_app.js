@@ -1,7 +1,6 @@
 import { SessionProvider } from "next-auth/react";
 import { SWRConfig } from "swr";
 import GlobalStyle from "../styles";
-import UserAccess from "@/components/UserAccess";
 
 const fetcher = async (input, init) => {
   const response = await fetch(input, init);
@@ -22,9 +21,6 @@ export default function App({ Component, pageProps }) {
     <SessionProvider session={session}>
       <SWRConfig value={swrConfig}>
         <GlobalStyle />
-        <header style={{ padding: "5rem 0" }}>
-          <UserAccess />
-        </header>
         <Component {...rest} />
       </SWRConfig>
     </SessionProvider>

@@ -16,6 +16,7 @@ export default function EntryPage() {
   const router = useRouter();
   const { id } = router.query;
   const { data: session } = useSession();
+  const userOwnsEntry = session?.user?.id && entry?.owner === session.user.id;
 
   const {
     data: entry,
@@ -85,7 +86,7 @@ export default function EntryPage() {
         <p>Intensity: {entry.intensity}</p>
         <p>Notes: {entry.notes}</p>
       </DetailWrapper>
-      {session && (
+      {userOwnsEntry && (
         <>
           <ButtonContainer>
             {mode === "default" && (

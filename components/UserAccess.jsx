@@ -4,9 +4,10 @@ export default function UserAccess() {
   const { data: session } = useSession();
 
   if (session) {
+    const firstName = session.user.name.split(" ")[0] || "User";
     return (
       <>
-        Signed in as {session.user.email} <br />
+        Signed in as {firstName} <br />
         <button onClick={() => signOut()}>Sign out</button>
       </>
     );
