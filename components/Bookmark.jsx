@@ -61,7 +61,7 @@ export default function Bookmark({
       {bookmarked ? (
         <StyledBookmark fill="var(--color-dark)" stroke="var(--color-dark)" />
       ) : (
-        <StyledBookmark fill="white" stroke="var(--color-medium)" />
+        <StyledBookmark fill="white" stroke="var(--color-dark)" />
       )}
     </StyledButton>
   );
