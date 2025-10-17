@@ -84,12 +84,14 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 </div>
 </br>
 
+- Visitor can sign in to the application using GitHub to create their own emotional entries.
 - Located on the bottom of the viewport, the Navigation Bar allows the user to intuitively explore the app and locate themselves within it.
 - In total, there are 4 main pages the user can visit:
 
 - 🏠 **Home Page**: Browse a well-organised collection of emotion entries.
 
-  - Header greeting text behaves dynamically, according on the time of the day (Good morning/afternoon/evening).
+  - Header greeting text behaves dynamically, according to the time of the day it will greet user with 'Good morning', 'Good afternoon' or 'Good evening'.
+  - If user is logged in, header greeting text calls user by their name.
   - The collection is ordered chronologically with the newest entries starting from the top.
   - Each emotion entry shows the date and time it was created on, the emotions felt in that moment and their intensity.
   - Emotion types are visually distinct, using different colours to differentiate them.
