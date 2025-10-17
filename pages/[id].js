@@ -112,16 +112,15 @@ export default function EntryPage() {
         </NotesCard>
 
         {entry.imageUrl && (
-          <ImageContainer>
-            <UploadImage
-              src={entry.imageUrl}
-              alt="Entry image"
-              width={600}
-              height={400}
-              quality={70}
-              priority
-            />
-          </ImageContainer>
+          <StyledImage
+            src={entry.imageUrl}
+            alt="Entry image"
+            width={600}
+            height={400}
+            quality={70}
+            style={{ borderRadius: 12, objectFit: "cover" }}
+            priority
+          />
         )}
 
         <ButtonContainer>
@@ -205,6 +204,8 @@ const HeaderWrapper = styled.header`
     text-align: center;
     font-weight: 500;
     margin: 36px 0 8px;
+    font-size: 16px;
+    color: var(--color-primary);
   }
 
   h3 {
@@ -267,6 +268,12 @@ const NotesCard = styled.section`
   p {
     margin: 0;
   }
+`;
+
+const StyledImage = styled(Image)`
+  max-width: 100%;
+  height: auto;
+  align-self: center;
 `;
 
 const ButtonContainer = styled.section.attrs({ "aria-label": "Entry actions" })`

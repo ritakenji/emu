@@ -53,16 +53,26 @@ export default function Create() {
         <title>Add Entry</title>
       </Head>
       <Main>
-        <EntryForm
-          onSubmit={handleAddEntry}
-          buttonText={"Submit"}
-          formTitle={"Create new entry"}
-        />
+        <FormContainer>
+          <EntryForm
+            onSubmit={handleAddEntry}
+            buttonText={"Submit"}
+            formTitle={"Create new entry"}
+          />
+        </FormContainer>
       </Main>
       <NavBar />
     </>
   );
 }
+
+const FormContainer = styled.div`
+  background-color: #fff;
+  padding: 36px 24px 44px;
+  margin: 36px 0 48px;
+  filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
+  border-radius: 20px;
+`;
 
 const Main = styled.main`
   padding: 0 24px 64px;
