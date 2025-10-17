@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth/next";
 import { getToken } from "next-auth/jwt";
-import mongoose from "mongoose"; // validate ObjectId
 
 import { authOptions } from "../../auth/[...nextauth]";
 import dbConnect from "@/db/connect.js";
