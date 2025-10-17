@@ -20,13 +20,14 @@ export default function EntryPage() {
   const router = useRouter();
   const { id } = router.query;
   const { data: session } = useSession();
-  const userOwnsEntry = session?.user?.id && entry?.owner === session?.user?.id;
 
   const {
     data: entry,
     isLoading,
     error,
   } = useSWR(id ? `/api/entries/${id}` : null, { fallbackData: {} });
+
+  const userOwnsEntry = session?.user?.id && entry?.owner === session?.user?.id;
 
   const [mode, setMode] = useState("default");
 
