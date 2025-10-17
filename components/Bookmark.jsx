@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Heart } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -50,7 +50,7 @@ export default function Bookmark({
     <StyledButton
       type="button"
       aria-pressed={bookmarked}
-      aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
+      aria-label={bookmarked ? "Remove bookmark" : "Add "}
       title={bookmarked ? "Remove bookmark" : "Add bookmark"}
       onClick={(event) => {
         event.preventDefault();
