@@ -51,9 +51,15 @@ export default function Bookmarks() {
 
       <BookmarkHeader>Bookmarked entries</BookmarkHeader>
       {bookmark.length === 0 ? (
-        <h2>No bookmarks yet</h2>
+        <NoBookmarksWrapper>
+          <h2>No bookmarks yet.</h2>
+          <p>Please bookmark an entry.</p>
+        </NoBookmarksWrapper>
       ) : bookmarkedEntries.length === 0 ? (
-        <h2>No bookmarks yet</h2>
+        <NoBookmarksWrapper>
+          <h2>No bookmarks yet.</h2>
+          <p>Please bookmark an entry.</p>
+        </NoBookmarksWrapper>
       ) : (
         <EntryList entries={bookmarkedEntries} />
       )}
@@ -69,4 +75,15 @@ const Main = styled.main`
 const BookmarkHeader = styled.h1`
   text-align: center;
   padding: 2.5rem;
+`;
+
+const NoBookmarksWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
 `;
