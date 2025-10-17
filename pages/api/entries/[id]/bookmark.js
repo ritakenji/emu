@@ -1,5 +1,3 @@
-// pages/api/entries/[id]/bookmark.js
-import { getSession } from "next-auth/react";
 import Entry from "@/db/models/Entry";
 import dbConnect from "@/db/connect";
 
