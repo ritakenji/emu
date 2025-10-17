@@ -285,6 +285,7 @@ const StyledImage = styled(Image)`
   max-width: 100%;
   align-self: center;
   margin-top: 20px;
+  height: auto;
 `;
 const FileInputWrapper = styled.div`
   width: 100%;
