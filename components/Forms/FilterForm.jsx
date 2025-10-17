@@ -32,11 +32,11 @@ export default function FilterForm({
 
   if (error) {
     return (
-          <Error
-            errorText="Sorry, we could not retrieve the entry data at the moment."
-            tryAgainText="Please try again later."
-          />
-        );
+      <Error
+        errorText="Sorry, we could not retrieve the entry data at the moment."
+        tryAgainText="Please try again later."
+      />
+    );
   }
 
   if (!emotions) {
@@ -83,7 +83,7 @@ const StyledForm = styled.form`
   display: flex;
   align-content: center;
   gap: 8px;
-  margin: 42px 0 24px;
+  margin: 64px 0 24px;
 `;
 
 const StyledLabel = styled.label`

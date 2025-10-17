@@ -23,7 +23,7 @@ export default function EntryCard({
         {owner !== "default" && (
           <Bookmark id={id} initialBookmarked={bookmarked} />
         )}
-        {formattedDate}
+        <span>{formattedDate}</span>
       </EntryCardTab>
       <EntryCardBody>
         <IntensityScale intensity={intensity} />
@@ -44,8 +44,8 @@ const EntryCardTab = styled.div`
   align-items: center;
   font-weight: 700;
 
-  button {
-    margin-right: 6px;
+  span {
+    padding-left: 8px;
   }
 `;
 
