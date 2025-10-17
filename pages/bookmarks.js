@@ -5,6 +5,8 @@ import styled from "styled-components";
 
 import EntryList from "@/components/Lists/EntryList";
 import NavBar from "@/components/Navbar";
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 export default function Bookmarks() {
   const {
@@ -19,17 +21,15 @@ export default function Bookmarks() {
   });
 
   if (isLoading) {
-    return <p aria-live="polite">Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {
     return (
-      <>
-        <p aria-live="assertive">
-          Sorry, we could not retrieve the entry data at the moment.
-        </p>
-        <p aria-live="assertive">Please try again later.</p>
-      </>
+      <Error
+        errorText="Sorry, we could not retrieve the entry data at the moment."
+        tryAgainText="Please try again later."
+      />
     );
   }
 
@@ -49,11 +49,11 @@ export default function Bookmarks() {
         <title>Bookmarks</title>
       </Head>
 
-      <h1>Bookmarked entries</h1>
+      <BookmarkHeader>Bookmarked entries</BookmarkHeader>
       {bookmark.length === 0 ? (
         <h2>No bookmarks yet</h2>
       ) : bookmarkedEntries.length === 0 ? (
-        <h2>No matches found</h2>
+        <h2>No bookmarks yet</h2>
       ) : (
         <EntryList entries={bookmarkedEntries} />
       )}
@@ -63,5 +63,10 @@ export default function Bookmarks() {
 }
 
 const Main = styled.main`
-  padding: 1rem 1.5rem 4rem;
+  padding: 1rem 1.5rem 6rem;
+`;
+
+const BookmarkHeader = styled.h1`
+  text-align: center;
+  padding: 2.5rem;
 `;

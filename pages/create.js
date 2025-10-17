@@ -11,14 +11,26 @@ export default function Create() {
   const router = useRouter();
   const { status } = useSession();
 
-  async function handleAddEntry(entry) {
+  async function handleAddEntry(formValues) {
     try {
+      const payload = {
+        // store only emotion IDs in DB
+        emotions: (formValues.emotions || []).map((e) => e._id),
+        intensity: Number(formValues.intensity),
+        notes: formValues.notes?.trim() || "",
+        dateTime: new Date(formValues.dateTime).toISOString(),
+        // include image, if present
+        ...(formValues.imageUrl ? { imageUrl: formValues.imageUrl } : {}),
+        ...(formValues.imagePublicId
+          ? { imagePublicId: formValues.imagePublicId }
+          : {}),
+      };
       const response = await fetch("/api/entries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(entry),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -48,24 +60,28 @@ export default function Create() {
         ></meta>
         <title>Add Entry</title>
       </Head>
-      <Header>
-        <BackButton />
-      </Header>
       <Main>
-        <EntryForm
-          onSubmit={handleAddEntry}
-          buttonText={"Submit"}
-          formTitle={"Add Entry"}
-        />
+        <FormContainer>
+          <EntryForm
+            onSubmit={handleAddEntry}
+            buttonText={"Submit"}
+            formTitle={"Create new entry"}
+          />
+        </FormContainer>
       </Main>
       <NavBar />
     </>
   );
 }
 
-const Header = styled.header`
-  padding: 1rem 1.5rem 0;
+const FormContainer = styled.div`
+  background-color: #fff;
+  padding: 36px 24px 44px;
+  margin: 36px 0 48px;
+  filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.08));
+  border-radius: 20px;
 `;
+
 const Main = styled.main`
-  padding: 0 1.5rem 4rem;
+  padding: 0 24px 64px;
 `;

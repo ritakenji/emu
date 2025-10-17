@@ -7,6 +7,8 @@ import Header from "@/components/Header";
 import NavBar from "@/components/Navbar";
 import EntryList from "@/components/Lists/EntryList";
 import FilterForm from "@/components/Forms/FilterForm";
+import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 export default function HomePage() {
   const {
@@ -21,17 +23,15 @@ export default function HomePage() {
     useState("reset");
 
   if (isLoading) {
-    return <p aria-live="polite">Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {
     return (
-      <>
-        <p aria-live="assertive">
-          Sorry, we could not retrieve the entry data at the moment.
-        </p>
-        <p aria-live="assertive">Please try again later.</p>
-      </>
+      <Error
+        errorText="Sorry, we could not retrieve the entry data at the moment."
+        tryAgainText="Please try again later."
+      />
     );
   }
 
@@ -60,8 +60,8 @@ export default function HomePage() {
           ></meta>
           <title>Homepage</title>
         </Head>
+
         <Header />
-        <h1>Emotion Entry List</h1>
 
         {entries.length !== 0 && (
           <FilterForm
@@ -87,8 +87,9 @@ export default function HomePage() {
 }
 
 const Main = styled.main`
-  padding: 4rem 1.5rem;
+  padding: 32px 24px 96px; // padding: 2rem 1.5rem 6rem;
 `;
+
 const EmptyState = styled.p`
-  margin: 0.75rem 0 1rem;
+  margin: 12px 0 16px;
 `;

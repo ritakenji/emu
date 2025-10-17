@@ -1,4 +1,3 @@
-// test/EntryForm.core.test.jsx
 import {
   render,
   screen,
@@ -58,8 +57,14 @@ describe("<EntryForm /> — core behavior", () => {
     expect(sad).not.toBeChecked();
 
     // select & deselect
-    await user.click(happy);
+    await act(async () => {
+      await user.click(happy);
+    });
     await waitFor(() => expect(happy).toBeChecked());
+    await act(async () => {
+      await user.click(happy);
+    });
+    await waitFor(() => expect(happy).not.toBeChecked());
   });
 
   test("2) blocks submit when validation fails (no emotion OR no date)", async () => {
@@ -82,8 +87,11 @@ describe("<EntryForm /> — core behavior", () => {
     );
     expect(onSubmit).not.toHaveBeenCalled();
 
-    // Select one emotion, still no date → alert & no submit
-    await user.click(screen.getByLabelText("Happy"));
+    const happy = screen.getByLabelText("Happy");
+    await act(async () => {
+      await user.click(happy);
+    });
+    await waitFor(() => expect(happy).toBeChecked());
     await user.click(screen.getByRole("button", { name: /save/i }));
     expect(alertSpy).toHaveBeenCalledWith("Please select date and time.");
     expect(onSubmit).not.toHaveBeenCalled();
@@ -103,7 +111,11 @@ describe("<EntryForm /> — core behavior", () => {
     );
 
     // Select emotion
-    await user.click(screen.getByLabelText("Happy"));
+    const happy = screen.getByLabelText("Happy");
+    await act(async () => {
+      await user.click(happy);
+    });
+    await waitFor(() => expect(happy).toBeChecked());
 
     // Change intensity (optional; default is 5)
     const intensity = screen.getByLabelText(/intensity/i, {

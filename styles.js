@@ -37,26 +37,29 @@ export default createGlobalStyle`
     --color-dark: #12256E;
     --color-medium: #9C9C9C;
 
-    --color-anger: #FFDFD9;
-    --color-anger-dark: #E14700;
+    --color-anger: #ffd9d9ff;
+    --color-anger-dark: #e10000ff;
 
-    --color-contempt: #FFF4AF;
-    --color-contempt-dark: #8A6500;
+    --color-stress: #c6c6c6ff;
+    --color-stress-dark: #343434ff;
 
     --color-disgust: #C1EBC5;
     --color-disgust-dark: #0E6E30;
 
     --color-fear: #D5D7FF;
-    --color-fear-dark: ##4815CA;
+    --color-fear-dark: #4815CA;
 
     --color-sadness: #CCE8FF;
     --color-sadness-dark: #0041BA;
 
     --color-surprise: #FFE9BD;
-    --color-surprise-dark: #DC6700;
+    --color-surprise-dark: #cd6000ff;
 
     --color-enjoyment: #FFD9F4;
     --color-enjoyment-dark: #DF0052;
+
+    --color-confidence: #FFF4AF;
+    --color-confidence-dark: #8A6500;
 
 
   }
@@ -66,34 +69,45 @@ export default createGlobalStyle`
 
   /* ---------------------emotion colours---------------------- */
 
-  .anger {
+  .anger, .frustration, .humiliation, .jealousy {
     background-color: var(--color-anger);
+    color: var(--color-anger-dark);
   }
 
-  .contempt {
-    background-color: var(--color-contempt)
+  .tiredness, .stress, .boredom, .overwhelm {
+    background-color: var(--color-stress);
+    color: var(--color-stress-dark);
   } 
   
-  .disgust {
-    background-color: var(--color-disgust)
+  .disgust, .disappointment, .embarrassment, .judgement {
+    background-color: var(--color-disgust);
+    color: var(--color-disgust-dark);
   }
   
-  .fear {
-    background-color: var(--color-fear)
+  .fear, .rejection, .insecurity, .anxiety, .confusion {
+    background-color: var(--color-fear);
+    color: var(--color-fear-dark);
   }
 
-  .sadness {
-    background-color: var(--color-sadness)
+  .sadness, .guilt, .loneliness, .shame {
+    background-color: var(--color-sadness);
+    color: var(--color-sadness-dark);
   }
 
-  .surprise {
-    background-color: var(--color-surprise)
+  .surprise, .excitement, .amazement {
+    background-color: var(--color-surprise);
+    color: var(--color-surprise-dark);
   }
 
-  .enjoyment {
-    background-color: var(--color-enjoyment)
+  .enjoyment, .happiness, .peace, .trust, .optimism, .hope, .gratitude, .love, .curiosity  {
+    background-color: var(--color-enjoyment);
+    color: var(--color-enjoyment-dark);
   }
 
+  .pride, .power, .courage, .confidence, .respect, .inspiration {
+      background-color: var(--color-confidence);
+      color: var(--color-confidence-dark);
+  }
 
 
   /* ---------------------typo---------------------- */
@@ -117,10 +131,5 @@ export default createGlobalStyle`
   h3 {
     font-size: 18px;
     color: var(--color-dark);
-  }
-  h2 {
-    font-family: "Jost", sans-serif;
-    font-size: 16px;
-    color: var(--color-primary);
   }
 `;

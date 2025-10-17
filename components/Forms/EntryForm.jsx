@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import useSWR from "swr";
 import styled from "styled-components";
 import MultiwayButton from "../Buttons/MultiwayButton";
+import Image from "next/image";
 
 import { toLocalDateTime } from "@/utils/helpers";
+import Loading from "../Loading";
+import Error from "../Error";
 
 export default function EntryForm({
   onSubmit,
@@ -18,6 +21,7 @@ export default function EntryForm({
     setSelectedTypes(initialValues?.emotions || []);
   }, [initialValues]);
 
+  const [isUploading, setIsUploading] = useState(false);
   const {
     data: emotions,
     isLoading,
@@ -33,22 +37,16 @@ export default function EntryForm({
     );
 
   if (isLoading) {
-    return (
-      <p role="status" aria-live="polite">
-        Loading...
-      </p>
-    );
+    return <Loading />;
   }
 
   if (error) {
     return (
-      <>
-        <p aria-live="assertive">
-          Sorry, we could not retrieve the entry data at the moment.
-        </p>
-        <p aria-live="assertive">Please try again later.</p>
-      </>
-    );
+          <Error
+            errorText="Sorry, we could not retrieve the entry data at the moment."
+            tryAgainText="Please try again later."
+          />
+        );
   }
 
   if (!emotions) return null;
@@ -66,7 +64,7 @@ export default function EntryForm({
     }
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
@@ -75,7 +73,6 @@ export default function EntryForm({
       ...data,
       emotions: selectedTypes.map(getId),
     };
-
     if (selectedTypes.length === 0) {
       alert("Please select at least one emotion.");
       return;
@@ -84,6 +81,30 @@ export default function EntryForm({
     if (!data.dateTime) {
       alert("Please select date and time.");
       return;
+    }
+    const file = formData.get("image");
+    if (file && file instanceof File && file.size > 0) {
+      setIsUploading(true);
+      try {
+        const uploadData = new FormData();
+        uploadData.append("file", file);
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          body: uploadData,
+        });
+        if (!res.ok) {
+          const msg = await res.text().catch(() => res.statusText);
+          throw new Error(`Upload failed (${res.status}): ${msg}`);
+        }
+        const { secure_url, url, public_id } = await res.json();
+        newObject.imageUrl = secure_url || url;
+        newObject.imagePublicId = public_id;
+      } catch (e) {
+        alert(`Image upload failed. ${e?.message || ""}`);
+        setIsUploading(false);
+        return;
+      }
+      setIsUploading(false);
     }
 
     onSubmit(payload);
@@ -118,7 +139,6 @@ export default function EntryForm({
           })}
         </OptionsList>
       </Fieldset>
-
       <Label htmlFor="intensity" aria-required="true">
         Intensity *
       </Label>
@@ -134,7 +154,6 @@ export default function EntryForm({
         required
         aria-describedby="intensity-help"
       />
-
       <datalist id="intensity-ticks">
         {ticks.map((t) => (
           <option key={t} value={t} label={String(t)} />
@@ -145,9 +164,7 @@ export default function EntryForm({
           <span key={t}>{t}</span>
         ))}
       </StyledRange>
-
       <Label htmlFor="notes">Notes</Label>
-
       <Textarea
         id="notes"
         name="notes"
@@ -155,7 +172,20 @@ export default function EntryForm({
         defaultValue={initialValues?.notes}
         rows={4}
       />
-
+      {initialValues?.imageUrl && (
+        <StyledImage
+          src={initialValues.imageUrl}
+          alt="Entry image"
+          width={600}
+          height={400}
+          style={{ borderRadius: 12, objectFit: "cover" }}
+          priority
+        />
+      )}
+      <Label htmlFor="image">Photo</Label>
+      <FileInputWrapper>
+        <ImageInput id="image" name="image" type="file" accept="image/*" />
+      </FileInputWrapper>
       <Label htmlFor="dateTime" aria-required="true">
         Date and Time *
       </Label>
@@ -166,7 +196,13 @@ export default function EntryForm({
         defaultValue={toLocalDateTime(initialValues?.dateTime)}
       />
 
-      <MultiwayButton type="submit" $variant="edit" buttonText={buttonText} />
+
+      <MultiwayButton
+        type="submit"
+        $variant="primary"
+        buttonText={isUploading ? "Uploading…" : buttonText}
+        disabled={isUploading}
+      />
     </FormContainer>
   );
 }
@@ -174,65 +210,91 @@ export default function EntryForm({
 const FormContainer = styled.form`
   display: grid;
   gap: 0.5rem;
+
+  h2 {
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  button {
+    margin-top: 24px;
+    justify-self: center;
+  }
 `;
+
+const Legend = styled.legend`
+  font-weight: bold;
+  margin: 16px 0;
+`;
+const Label = styled.label`
+  font-weight: bold;
+  margin: 24px 0 6px;
+`;
+
 const Fieldset = styled.fieldset`
   border: 0;
   padding: 0;
   margin: 0;
 `;
 
-const Legend = styled.legend`
-  font-weight: bold;
-  margin-bottom: 0.25rem;
-`;
-
 const OptionsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
+  gap: 16px 12px;
   list-style: none;
   padding: 0;
   margin: 0;
+
+  label {
+    font-weight: 400;
+  }
 `;
 
-const Input = styled.input`
-  padding: 0.5rem;
+const Textarea = styled.textarea`
+  padding: 16px;
   font-size: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-light);
+`;
+const Input = styled.input`
+  padding: 16px;
+  font-size: inherit;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-light);
 `;
 
 const Checkbox = styled(Input)`
-  margin-right: 0.35rem;
-  width: auto;
-  height: auto;
-  padding: 0;
-  border-radius: 0.25rem;
+  margin-right: 5px;
 `;
 
 const Range = styled.input`
   width: 100%;
 `;
 
-const Label = styled.label`
-  font-weight: bold;
-`;
-
-const Textarea = styled.textarea`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  resize: vertical;
-`;
-
 const StyledRange = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
-  font-size: 14px;
+  margin: -5px -2px 0 4px;
 `;
 
-const SubmitButton = styled.button`
-  margin-top: 0.5rem;
+const StyledImage = styled(Image)`
+  max-width: 100%;
+  align-self: center;
+  margin-top: 20px;
+`;
+const FileInputWrapper = styled.div`
+  width: 100%;
+  max-width: 100%;
+  display: block;
+`;
+const ImageInput = styled(Input)`
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 `;
