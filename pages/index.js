@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import useSWR from "swr";
 import styled from "styled-components";
@@ -21,6 +22,8 @@ export default function HomePage() {
 
   const [selectedFilterEmotionId, setSelectedFilterEmotionId] =
     useState("reset");
+
+  const { data: session } = useSession();
 
   if (isLoading) {
     return <Loading />;
@@ -81,13 +84,13 @@ export default function HomePage() {
           <EntryList entries={filteredEntries} />
         )}
       </Main>
-      <NavBar />
+      {session && <NavBar />}
     </>
   );
 }
 
 const Main = styled.main`
-  padding: 32px 24px 96px; 
+  padding: 32px 24px 96px;
 `;
 
 const EmptyState = styled.p`
