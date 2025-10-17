@@ -17,9 +17,13 @@ export default function Bookmarks() {
   } = useSWR("/api/entries", {
     fallbackData: [],
   });
-  const [bookmark] = useLocalStorageState("bookmark", {
+
+  /* const [bookmark] = useLocalStorageState("bookmark", {
     defaultValue: [],
-  });
+  }); */
+
+  const bookmarkedEntries = entries.filter((entry) => entry.bookmarked);
+  console.log("bookmarkedEntries", bookmarkedEntries);
 
   if (isLoading) {
     return <Loading />;
@@ -33,10 +37,6 @@ export default function Bookmarks() {
       />
     );
   }
-
-  const bookmarkedEntries = entries.filter((entry) =>
-    bookmark.includes(entry._id)
-  );
 
   return (
     <Main>

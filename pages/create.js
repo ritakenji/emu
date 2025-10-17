@@ -15,7 +15,7 @@ export default function Create() {
     try {
       const payload = {
         // store only emotion IDs in DB
-        emotions: (formValues.emotions || []).map((e) => e._id),
+        emotions: formValues.emotions || [],
         intensity: Number(formValues.intensity),
         notes: formValues.notes?.trim() || "",
         dateTime: new Date(formValues.dateTime).toISOString(),

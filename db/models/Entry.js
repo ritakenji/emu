@@ -10,6 +10,7 @@ const entrySchema = new Schema({
   dateTime: { type: Date, required: true },
   owner: { type: String, required: true },
   imageUrl: { type: String, required: false },
+  bookmarked: { type: Boolean, default: false },
 });
 
 const Entry = mongoose.models.Entry || mongoose.model("Entry", entrySchema);

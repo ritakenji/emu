@@ -1,37 +1,68 @@
 import styled, { css } from "styled-components";
-import useLocalStorageState from "use-local-storage-state";
 import { Heart } from "lucide-react";
+import { useState, useEffect } from "react";
 
-export default function Bookmark({ id }) {
-  const [bookmark, setBookmark] = useLocalStorageState("bookmark", {
-    defaultValue: [],
-  });
+export default function Bookmark({
+  id,
+  initialBookmarked = false,
+  disabled = false,
+}) {
+  const [bookmarked, setBookmarked] = useState(Boolean(initialBookmarked));
+  const [loading, setLoading] = useState(false);
 
-  const isBookmarked = bookmark.includes(id);
+  useEffect(() => {
+    setBookmarked(Boolean(initialBookmarked));
+  }, [initialBookmarked]);
 
-  function handleToggleBookmark() {
-    setBookmark((prevState) =>
-      prevState.includes(id)
-        ? prevState.filter((bookmarkId) => bookmarkId !== id)
-        : [...prevState, id]
-    );
-  }
+  const toggle = async () => {
+    if (disabled || loading) return;
+    const next = !bookmarked;
+
+    // optimistic UI
+    setBookmarked(next);
+    setLoading(true);
+
+    try {
+      const res = await fetch(`/api/entries/${id}/bookmark`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bookmarked: next }),
+      });
+
+      if (!res.ok) {
+        // revert on failure
+        setBookmarked(!next);
+        console.error(await res.text());
+      }
+      const data = await res.json();
+      if (data?.entry?.bookmarked !== undefined) {
+        setBookmarked(Boolean(data.entry.bookmarked));
+        //onServerConfirm?.(Boolean(data.entry.bookmarked));
+      }
+    } catch (err) {
+      setBookmarked(!next);
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <StyledButton
       type="button"
-      aria-pressed={isBookmarked}
-      aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
-      title={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+      aria-pressed={bookmarked}
+      aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
+      title={bookmarked ? "Remove bookmark" : "Add bookmark"}
       onClick={(event) => {
         event.preventDefault();
-        handleToggleBookmark();
+        toggle();
       }}
+      disabled={loading || disabled}
     >
-      {bookmark.includes(id) ? (
-        <StyledBookmark fill="var(--color-dark)" stroke="var(--color-dark)"/>
+      {bookmarked ? (
+        <StyledBookmark fill="var(--color-dark)" stroke="var(--color-dark)" />
       ) : (
-        <StyledBookmark fill="white" stroke="var(--color-medium)"/>
+        <StyledBookmark fill="white" stroke="var(--color-medium)" />
       )}
     </StyledButton>
   );
