@@ -4,7 +4,14 @@ import IntensityScale from "./IntensityScale";
 
 import styled from "styled-components";
 
-export default function EntryCard({ type, intensity, dateTime, id }) {
+export default function EntryCard({
+  type,
+  intensity,
+  dateTime,
+  id,
+  owner,
+  bookmarked,
+}) {
   const formattedDate = new Date(dateTime).toLocaleString("en-GB", {
     dateStyle: "medium",
     timeStyle: "short",
@@ -13,7 +20,9 @@ export default function EntryCard({ type, intensity, dateTime, id }) {
   return (
     <EntryCardWrapper>
       <EntryCardTab>
-        <Bookmark id={id}></Bookmark>
+        {owner !== "default" && (
+          <Bookmark id={id} initialBookmarked={bookmarked} />
+        )}
         {formattedDate}
       </EntryCardTab>
       <EntryCardBody>
@@ -48,4 +57,3 @@ const EntryCardBody = styled.div`
   align-items: flex-start;
   margin-top: -6px;
 `;
-

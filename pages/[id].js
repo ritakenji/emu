@@ -20,13 +20,13 @@ export default function EntryPage() {
   const router = useRouter();
   const { id } = router.query;
   const { data: session } = useSession();
-  const userOwnsEntry = session?.user?.id && entry?.owner === session.user.id;
 
   const {
     data: entry,
     isLoading,
     error,
   } = useSWR(id ? `/api/entries/${id}` : null, { fallbackData: {} });
+  const userOwnsEntry = session?.user?.id && entry?.owner === session?.user?.id;
 
   const [mode, setMode] = useState("default");
 
@@ -99,21 +99,17 @@ export default function EntryPage() {
         <BookmarkWrapper>
           <Bookmark id={id} />
         </BookmarkWrapper>
-
         <IntensityContainer>
           <IntensityScale intensity={entry.intensity} />
           <p>Intensity</p>
         </IntensityContainer>
-
         <EmotionContainer aria-labelledby="emotion-types">
           <StyledEmotionChips type={entry.emotions} />
         </EmotionContainer>
-
         <NotesCard>
           <h4>My notes: </h4>
           <p>{entry.notes}</p>
         </NotesCard>
-
         {entry.imageUrl && (
           <StyledImage
             src={entry.imageUrl}
@@ -125,24 +121,25 @@ export default function EntryPage() {
             priority
           />
         )}
-{userOwnsEntry && (
-        <ButtonContainer>
-          {mode === "default" && (
-            <>
-              <MultiwayButton
-                onClick={() => setMode("edit")}
-                $variant="primary"
-                buttonText="Edit entry"
-              />
-              <MultiwayButton
-                onClick={() => setMode("delete")}
-                $variant="secondary"
-                buttonText="Delete entry"
-              />
-            </>
-          )}
-        </ButtonContainer>
-)};
+        {userOwnsEntry && (
+          <ButtonContainer>
+            {mode === "default" && (
+              <>
+                <MultiwayButton
+                  onClick={() => setMode("edit")}
+                  $variant="primary"
+                  buttonText="Edit entry"
+                />
+                <MultiwayButton
+                  onClick={() => setMode("delete")}
+                  $variant="secondary"
+                  buttonText="Delete entry"
+                />
+              </>
+            )}
+          </ButtonContainer>
+        )}
+        ;
       </DetailWrapper>
 
       {mode === "delete" && (
@@ -310,7 +307,7 @@ const ImageContainer = styled.div`
   margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
-  padding-bottom: 66.6%; 
+  padding-bottom: 66.6%;
 `;
 
 const UploadImage = styled(Image)`
