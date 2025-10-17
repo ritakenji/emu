@@ -83,6 +83,7 @@ const StyledForm = styled.form`
   display: flex;
   align-content: center;
   gap: 8px;
+  margin: 42px 0 24px;
 `;
 
 const StyledLabel = styled.label`

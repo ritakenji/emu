@@ -49,7 +49,7 @@ export default function Bookmarks() {
         <title>Bookmarks</title>
       </Head>
 
-      <h1>Bookmarked entries</h1>
+      <BookmarkHeader>Bookmarked entries</BookmarkHeader>
       {bookmark.length === 0 ? (
         <h2>No bookmarks yet</h2>
       ) : bookmarkedEntries.length === 0 ? (
@@ -64,4 +64,9 @@ export default function Bookmarks() {
 
 const Main = styled.main`
   padding: 16px 24px 64px;
+`;
+
+const BookmarkHeader = styled.h1`
+text-align: center;
+padding: 2.5rem;
 `;
