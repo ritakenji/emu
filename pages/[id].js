@@ -26,8 +26,8 @@ export default function EntryPage() {
     isLoading,
     error,
   } = useSWR(id ? `/api/entries/${id}` : null, { fallbackData: {} });
-
   const userOwnsEntry = session?.user?.id && entry?.owner === session?.user?.id;
+
 
   const [mode, setMode] = useState("default");
 
@@ -46,7 +46,7 @@ export default function EntryPage() {
 
   async function editEntry(formValues) {
     const payload = {
-      emotions: (formValues.emotions || []).map((e) => e._id),
+      emotions: formValues.emotions || [],
       intensity: Number(formValues.intensity),
       notes: formValues.notes?.trim() || "",
       dateTime: new Date(formValues.dateTime).toISOString(),
@@ -97,9 +97,11 @@ export default function EntryPage() {
       </HeaderWrapper>
 
       <DetailWrapper>
-        <BookmarkWrapper>
-          <Bookmark id={id} />
-        </BookmarkWrapper>
+        {userOwnsEntry && (
+          <BookmarkWrapper>
+            <Bookmark id={id} />
+          </BookmarkWrapper>
+        )}
         <IntensityContainer>
           <IntensityScale intensity={entry.intensity} />
           <p>Intensity</p>

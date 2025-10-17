@@ -42,11 +42,11 @@ export default function EntryForm({
 
   if (error) {
     return (
-          <Error
-            errorText="Sorry, we could not retrieve the entry data at the moment."
-            tryAgainText="Please try again later."
-          />
-        );
+      <Error
+        errorText="Sorry, we could not retrieve the entry data at the moment."
+        tryAgainText="Please try again later."
+      />
+    );
   }
 
   if (!emotions) return null;
@@ -97,8 +97,8 @@ export default function EntryForm({
           throw new Error(`Upload failed (${res.status}): ${msg}`);
         }
         const { secure_url, url, public_id } = await res.json();
-        newObject.imageUrl = secure_url || url;
-        newObject.imagePublicId = public_id;
+        payload.imageUrl = secure_url || url;
+        payload.imagePublicId = public_id;
       } catch (e) {
         alert(`Image upload failed. ${e?.message || ""}`);
         setIsUploading(false);
@@ -195,7 +195,6 @@ export default function EntryForm({
         type="datetime-local"
         defaultValue={toLocalDateTime(initialValues?.dateTime)}
       />
-
 
       <MultiwayButton
         type="submit"

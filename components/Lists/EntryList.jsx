@@ -20,6 +20,8 @@ export default function EntryList({ entries }) {
                 intensity={entry.intensity}
                 dateTime={entry.dateTime}
                 id={entry._id}
+                owner={entry.owner}
+                bookmarked={entry.bookmarked}
               />
             </EntryDetailsLink>
           </li>
