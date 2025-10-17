@@ -4,7 +4,13 @@ import styled from "styled-components";
 export default function Loading() {
   return (
     <LoadingSection>
-      <Image src="/assets/emu-logo.png" alt="logo" height={171} width={119} loading="eager" />
+      <Image
+        src="/assets/emu-load-logo.png"
+        alt="Loading logo"
+        height={302}
+        width={170}
+        loading="eager"
+      />
       <p aria-live="polite">Loading...</p>
     </LoadingSection>
   );

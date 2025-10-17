@@ -1,19 +1,17 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-export default function Error({errorText, tryAgainText}) {
+export default function Error({ errorText, tryAgainText }) {
   return (
     <ErrorSection>
       <Image
-        src="/assets/emu-logo.png"
-        alt="logo"
-        height={171}
-        width={119}
+        src="/assets/emu-error-logo.png"
+        alt="Error logo"
+        height={144}
+        width={203}
         loading="eager"
       />
-      <p aria-live="assertive">
-        {errorText}
-      </p>
+      <p aria-live="assertive">{errorText}</p>
       <TryAgain aria-live="assertive">{tryAgainText}</TryAgain>
     </ErrorSection>
   );
