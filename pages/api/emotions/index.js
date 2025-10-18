@@ -1,4 +1,3 @@
-// pages/api/emotions/index.js
 import dbConnect from "@/db/connect";
 import Emotion from "@/db/models/Emotion";
 

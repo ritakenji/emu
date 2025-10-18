@@ -9,20 +9,12 @@ export default async function handler(req, res) {
 
     const { id } = req.query;
     const { bookmarked } = req.body;
-    console.log("req.body", req.body);
     if (typeof bookmarked !== "boolean") {
       return res.status(400).json({ error: "`bookmarked` must be boolean" });
     }
 
-    // Optional: enforce business rules server-side too
     const entry = await Entry.findById(id).lean();
     if (!entry) return res.status(404).json({ error: "Not found" });
-
-    // Example ownership guard (adapt to your model, e.g., comparing userId):
-    // if (entry.userId !== session.user.id) return res.status(403).json({ error: "Forbidden" });
-
-    // If you never want “default” entries to be bookmarkable, refuse updates:
-    // if (entry.owner === "default") return res.status(403).json({ error: "Default entries cannot be bookmarked" });
 
     const updated = await Entry.findByIdAndUpdate(
       id,

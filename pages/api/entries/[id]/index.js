@@ -4,8 +4,8 @@ import { getToken } from "next-auth/jwt";
 import { authOptions } from "../../auth/[...nextauth]";
 import dbConnect from "@/db/connect.js";
 import Entry from "@/db/models/Entry";
-import Emotion from "@/db/models/Emotion"; // validate emotion IDs on update
-import mongoose from "mongoose"; // validate ObjectId
+import Emotion from "@/db/models/Emotion"; 
+import mongoose from "mongoose"; 
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
@@ -15,18 +15,18 @@ cloudinary.config({
 });
 
 export default async function handler(request, response) {
-  // Early guard: only allow these methods at this route
+
   const allowed = ["GET", "PUT", "DELETE"];
   if (!allowed.includes(request.method)) {
     return response.status(405).json({ status: "Method Not Allowed" });
   }
 
-  // Validate the path param after method is known to be supported
+
   const { id } = request.query;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return response.status(400).json({ message: "Invalid entry id." });
   }
-  // ---------- GET: only return this id if owner is "default" OR current user ----------
+
   if (request.method === "GET") {
     try {
       await dbConnect();
@@ -44,7 +44,6 @@ export default async function handler(request, response) {
       const entry = await Entry.findOne(filter).populate("emotions").lean();
 
       if (!entry) {
-        // Hide non-owned documents
         return response.status(404).json({ status: "Not found" });
       }
 
@@ -54,7 +53,7 @@ export default async function handler(request, response) {
       return response.status(500).json({ message: "Internal Server Error" });
     }
   }
-  // ----- PUT/DELETE require auth + ownership -----
+
   const session = await getServerSession(request, response, authOptions);
   if (!session) {
     return response.status(401).json({ status: "Not authorized" });
@@ -72,7 +71,6 @@ export default async function handler(request, response) {
   const existing = await Entry.findById(id).lean();
   if (!existing) return response.status(404).json({ message: "Not found" });
 
-  // Ownership check
   if (existing.owner !== userId) {
     return response.status(403).json({ status: "Forbidden" });
   }
@@ -96,12 +94,10 @@ export default async function handler(request, response) {
         if (!Array.isArray(emotions) || emotions.length === 0) {
           errors.emotions = "Select at least one emotion.";
         } else {
-          // unwrap objects -> ids (accept either {_id: "..."} or plain string)
           const ids = emotions
             .map((e) => (e && e._id ? String(e._id) : String(e)))
             .filter(Boolean);
 
-          // validate all are ObjectIds
           if (!ids.every((id) => mongoose.Types.ObjectId.isValid(id))) {
             errors.emotions = "One or more emotion IDs are invalid.";
           } else {
@@ -181,23 +177,19 @@ export default async function handler(request, response) {
     try {
       await dbConnect();
 
-      // 1) Find the entry first so we know the public_id to remove
       const entry = await Entry.findById(id).lean();
       if (!entry) {
         return response.status(404).json({ status: "Not found" });
       }
 
-      // 2) If it has a Cloudinary asset, delete it
       if (entry.imagePublicId) {
         try {
           await cloudinary.uploader.destroy(entry.imagePublicId);
         } catch (e) {
-          // Log but don't fail deletion of the DB entry
           console.error("Cloudinary destroy failed:", e);
         }
       }
 
-      // 3) Delete the MongoDB document
       await Entry.findByIdAndDelete(id);
 
       return response.status(204).end();
