@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import useSWR from "swr";
-import useLocalStorageState from "use-local-storage-state";
 import styled from "styled-components";
 
 import EntryList from "@/components/Lists/EntryList";
 import NavBar from "@/components/Navbar";
+import ScrollBackUpButton from "@/components/Buttons/ScrollBackUpButton";
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
 
@@ -61,6 +61,7 @@ export default function Bookmarks() {
       ) : (
         <EntryList entries={bookmarkedEntries} />
       )}
+      <ScrollBackUpButton/>
       <NavBar />
     </Main>
   );

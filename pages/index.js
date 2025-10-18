@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 import Header from "@/components/Header";
 import NavBar from "@/components/Navbar";
+import ScrollBackUpButton from "@/components/Buttons/ScrollBackUpButton";
 import EntryList from "@/components/Lists/EntryList";
 import FilterForm from "@/components/Forms/FilterForm";
 import Loading from "@/components/Loading";
@@ -84,6 +85,7 @@ export default function HomePage() {
           <EntryList entries={filteredEntries} />
         )}
       </Main>
+      <ScrollBackUpButton/>
       {session && <NavBar />}
     </>
   );
