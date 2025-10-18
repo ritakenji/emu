@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 
 import EntryForm from "@/components/Forms/EntryForm";
 import NavBar from "@/components/Navbar";
-import BackButton from "@/components/Buttons/BackButton";
 
 export default function Create() {
   const router = useRouter();
@@ -14,12 +13,10 @@ export default function Create() {
   async function handleAddEntry(formValues) {
     try {
       const payload = {
-        // store only emotion IDs in DB
         emotions: formValues.emotions || [],
         intensity: Number(formValues.intensity),
         notes: formValues.notes?.trim() || "",
         dateTime: new Date(formValues.dateTime).toISOString(),
-        // include image, if present
         ...(formValues.imageUrl ? { imageUrl: formValues.imageUrl } : {}),
         ...(formValues.imagePublicId
           ? { imagePublicId: formValues.imagePublicId }

@@ -8,13 +8,12 @@ export default function ScrollBackUpButton() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // for a smooth scrolling effect
+      behavior: "smooth",
     });
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show button if page scroll is more than 300px
       if (window.scrollY > 300) {
         setShowScrollButton(true);
       } else {
@@ -22,10 +21,8 @@ export default function ScrollBackUpButton() {
       }
     };
 
-    // Attach the scroll event listener
     window.addEventListener("scroll", handleScroll);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
