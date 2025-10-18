@@ -11,7 +11,6 @@ cloudinary.v2.config(/* {
 export const config = {
   api: { bodyParser: false },
 };
-console.log("Cloudinary cloud name", process.env.CLOUDINARY_CLOUD_NAME);
 
 function parseForm(req) {
   const form = formidable({

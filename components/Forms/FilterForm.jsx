@@ -46,7 +46,6 @@ export default function FilterForm({
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log("FilterForm data", data);
     onSubmit(data);
   }
   return (

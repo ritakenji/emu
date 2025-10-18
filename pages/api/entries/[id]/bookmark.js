@@ -9,7 +9,6 @@ export default async function handler(req, res) {
 
     const { id } = req.query;
     const { bookmarked } = req.body;
-    console.log("req.body", req.body);
     if (typeof bookmarked !== "boolean") {
       return res.status(400).json({ error: "`bookmarked` must be boolean" });
     }
