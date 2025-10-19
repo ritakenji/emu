@@ -78,7 +78,9 @@ export default async function handler(request, response) {
     }
 
     if (typeof notes === "string" && notes.length > 1000) {
-      errors.notes = "Notes must be 1000 characters or fewer.";
+      return response
+        .status(400)
+        .json({ message: "Notes must be 1000 characters or fewer.", errors });
     }
 
     if (Object.keys(errors).length) {
