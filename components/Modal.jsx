@@ -72,6 +72,10 @@ const Container = styled.div.attrs({ role: "dialog", "aria-modal": "true" })`
   align-items: center;
   gap: 12px;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   @media (min-width: 768px) {
     inset: 40px;
     max-width: 600px;

@@ -41,7 +41,7 @@ export default function ScrollBackUpButton() {
 
 const ScrollButton = styled.button`
   position: fixed;
-  bottom: 100px;
+  bottom: 81px;
   right: 25px;
   background-color: var(--color-primary);
   color: white;
