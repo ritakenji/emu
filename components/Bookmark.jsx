@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Heart } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useSWRConfig } from "swr";
 
 export default function Bookmark({
   id,
@@ -9,6 +10,7 @@ export default function Bookmark({
 }) {
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
   const [loading, setLoading] = useState(false);
+  const { mutate } = useSWRConfig();
 
   useEffect(() => {
     setBookmarked(Boolean(initialBookmarked));
@@ -22,6 +24,13 @@ export default function Bookmark({
     setBookmarked(next);
     setLoading(true);
 
+    mutate(
+      "/api/entries",
+      (prev = []) =>
+        prev.map((e) => (e._id === id ? { ...e, bookmarked: next } : e)),
+      { revalidate: false, populateCache: true, rollbackOnError: true }
+    );
+
     try {
       const res = await fetch(`/api/entries/${id}/bookmark`, {
         method: "PUT",
@@ -29,15 +38,16 @@ export default function Bookmark({
         body: JSON.stringify({ bookmarked: next }),
       });
 
-      if (!res.ok) {
-        // revert on failure
-        setBookmarked(!next);
-        console.error(await res.text());
-      }
+      if (!res.ok) throw new Error(await res.text());
+
       const data = await res.json();
-      if (data?.entry?.bookmarked !== undefined) {
-        setBookmarked(data.entry.bookmarked);
-      }
+      const serverValue = data?.entry?.bookmarked ?? next;
+
+      setBookmarked(serverValue);
+
+      // 4) Revalidate to pull the truth from server
+      mutate("/api/entries");
+      mutate(`/api/entries/${id}`);
     } catch (err) {
       setBookmarked(!next);
       console.error(err);
