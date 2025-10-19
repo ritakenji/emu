@@ -77,6 +77,10 @@ export default function EntryForm({
       alert("Please select at least one emotion.");
       return;
     }
+    if (payload.notes.length > 1000) {
+      alert("Notes can't be longer than 1000 characters");
+      return;
+    }
 
     if (!data.dateTime) {
       alert("Please select date and time.");
