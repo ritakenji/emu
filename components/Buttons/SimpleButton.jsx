@@ -1,16 +1,15 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { MoveLeft } from "lucide-react";
 
-export default function BackButton() {
+export default function SimpleButton({ onClick, ariaText, children }) {
   const router = useRouter();
   return (
-    <StyledBackButton aria-label="Go back" onClick={() => router.back()}>
-      <MoveLeft aria-hidden="true" /> &nbsp; Back{" "}
-    </StyledBackButton>
+    <StyledSimpleButton aria-label={ariaText} onClick={onClick}>
+      {children}
+    </StyledSimpleButton>
   );
 }
-const StyledBackButton = styled.button`
+const StyledSimpleButton = styled.button`
   text-decoration: none;
   color: inherit;
   background-color: transparent;

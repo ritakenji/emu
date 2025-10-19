@@ -5,8 +5,8 @@ import useSWR from "swr";
 import styled from "styled-components";
 import Head from "next/head";
 import Image from "next/image";
+import { MoveLeft } from "lucide-react";
 
-import BackButton from "@/components/Buttons/BackButton";
 import Bookmark from "@/components/Bookmark";
 import EntryForm from "@/components/Forms/EntryForm";
 import Modal from "@/components/Modal";
@@ -15,6 +15,7 @@ import IntensityScale from "@/components/IntensityScale";
 import EmotionChips from "@/components/Lists/EmotionChips";
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
+import SimpleButton from "@/components/Buttons/SimpleButton";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -90,7 +91,9 @@ export default function EntryPage() {
       </Head>
 
       <HeaderWrapper>
-        <BackButton />
+        <SimpleButton onClick={() => router.back()} ariaText="Go back">
+          <MoveLeft aria-hidden="true" /> &nbsp; Back{" "}
+        </SimpleButton>
         <h2>on {formattedDate}</h2>
         <h3>I was feeling...</h3>
       </HeaderWrapper>
