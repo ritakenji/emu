@@ -23,7 +23,7 @@ export default async function handler(request, response) {
       const userId = token?.sub;
 
       const query = userId
-        ? { owner: { $in: [userId, "default"] } }
+        ? { owner: { $in: [userId] } }
         : { owner: "default" };
       const entries = await Entry.find(query)
         .populate("emotions")
