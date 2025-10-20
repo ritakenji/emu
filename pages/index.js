@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
 import useSWR from "swr";
 import styled from "styled-components";
 
@@ -77,15 +78,26 @@ export default function HomePage() {
 
         {filteredEntries.length === 0 ? (
           <EmptyState as="h2">
-            {entries.length === 0
-              ? "Please add an entry …"
-              : "No entries match this filter."}
+            {entries.length === 0 ? (
+              <NoBookmarksWrapper>
+                <Image
+                  src="/assets/emu-edit_create-logo.png"
+                  alt="bookmark logo"
+                  height={231}
+                  width={180}
+                  loading="eager"
+                />
+                <h2>Please add an entry...</h2>
+              </NoBookmarksWrapper>
+            ) : (
+              "No entries match this filter."
+            )}
           </EmptyState>
         ) : (
           <EntryList entries={filteredEntries} />
         )}
       </Main>
-      <ScrollBackUpButton/>
+      <ScrollBackUpButton />
       {session && <NavBar />}
     </>
   );
@@ -97,4 +109,16 @@ const Main = styled.main`
 
 const EmptyState = styled.p`
   margin: 12px 0 16px;
+`;
+
+const NoBookmarksWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 72px;
+
+  h2 {
+    margin: 0;
+  }
 `;
