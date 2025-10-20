@@ -92,6 +92,7 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 - 🏠 **Home Page**: Browse a well-organised collection of emotion entries.
 
   - Header greeting text behaves dynamically, according to the time of the day it will greet user with 'Good morning', 'Good afternoon' or 'Good evening'.
+  - If not logged in, homepage shows only default entries given as example to visitors. After logging in, default entries are hidden and only personal entries are visible.
   - If user is logged in, header greeting text calls user by their name.
   - The collection is ordered chronologically with the newest entries starting from the top.
   - Each emotion entry shows the date and time it was created on, the emotions felt in that moment and their intensity.
