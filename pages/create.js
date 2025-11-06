@@ -11,6 +11,7 @@ export default function Create() {
   const { status } = useSession();
 
   async function handleAddEntry(formValues) {
+    console.log("formValues", formValues);
     try {
       const payload = {
         emotions: formValues.emotions || [],
