@@ -79,7 +79,7 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 </br>
 <div align="center">
   <a href="https://emu-ecru.vercel.app/">
-    <img src="assets/mobile-preview.jpg" alt="mobile preview">
+    <img src="assets/emu_detail_mockup.png" alt="mobile preview">
   </a>
 </div>
 </br>
@@ -231,6 +231,12 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 
 <!-- ******************************************************** PREVIEW ************************************************* -->
 <h2 id="preview">🔍 Preview</h2>
+
+<div align="center">
+ <a href="https://emu-ecru.vercel.app/">
+    <img src="assets/emu_home_mockup.png" alt="mobile preview">
+  </a>
+</div>
 <p>[Insert screenshots or a GIF of your application in action, this should include not just the "happy path" but edge cases as well (what happens when there's an error? Etc). Remember to add clear titles for each image.]</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
