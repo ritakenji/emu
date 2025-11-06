@@ -1,48 +1,25 @@
-// test/Bookmark.core.test.jsx
 import React from "react";
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { SWRConfig } from "swr";
 import Bookmark from "@/components/Bookmark";
 
-/** ---------- Refactored Mock State Control ---------- **/
-
-let mockBookmarkState = []; // The state the component "reads"
-let mockSetBookmarkState; // The jest function to spy on the component's state updates
-
-/**
- * Refactored Mock: Controls the state read and spies on the state writes.
- */
-jest.mock("use-local-storage-state", () => ({
-  __esModule: true,
-  // The default export is a hook that returns [state, setState]
-  default: () => [mockBookmarkState, mockSetBookmarkState],
-}));
-
-/** ---------- Mocks (Unchanged) ---------- **/
-
-// Mock lucide-react so StyledBookmark renders a simple svg we can assert on
 jest.mock("lucide-react", () => ({
   __esModule: true,
-  BookmarkIcon: ({ fill, ...rest }) => (
-    <svg data-testid="bookmark-icon" fill={fill} {...rest} />
+  Heart: ({ "data-testid": dtid, ...rest }) => (
+    <svg data-testid={dtid || "bookmark-icon"} {...rest} />
   ),
 }));
 
-/** ---------- Setup/Teardown ---------- **/
-
+// Simple fetch mock that echoes back the requested next state
 beforeEach(() => {
-  // 1. Reset the internal state for each test
-  mockBookmarkState = [];
-
-  // 2. Initialize the setter as a spy function that also updates the mock state
-  mockSetBookmarkState = jest.fn((newStateOrFn) => {
-    if (typeof newStateOrFn === "function") {
-      // If a function is passed (e.g., prevState => newState), execute it
-      mockBookmarkState = newStateOrFn(mockBookmarkState);
-    } else {
-      // Otherwise, just set the new state
-      mockBookmarkState = newStateOrFn;
-    }
+  global.fetch = jest.fn(async (url, opts) => {
+    const body = opts?.body ? JSON.parse(opts.body) : {};
+    return {
+      ok: true,
+      json: async () => ({ entry: { bookmarked: !!body.bookmarked } }),
+      text: async () => "ok",
+    };
   });
 });
 
@@ -50,12 +27,16 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-/** ---------- Tests (Refactored) ---------- **/
+// Helper to render with isolated SWR cache
+function renderWithSWR(ui) {
+  return render(
+    <SWRConfig value={{ provider: () => new Map() }}>{ui}</SWRConfig>
+  );
+}
 
 describe("<Bookmark /> — core behavior", () => {
   test("initially unbookmarked with correct aria + icon fill", () => {
-    // mockBookmarkState starts as [] (unbookmarked)
-    render(<Bookmark id="abc" />);
+    renderWithSWR(<Bookmark id="abc" initialBookmarked={false} />);
 
     const btn = screen.getByRole("button");
     const icon = screen.getByTestId("bookmark-icon");
@@ -63,79 +44,60 @@ describe("<Bookmark /> — core behavior", () => {
     expect(btn).toHaveAttribute("aria-pressed", "false");
     expect(btn).toHaveAttribute("aria-label", "Add bookmark");
     expect(icon).toHaveAttribute("fill", "white");
-
-    // No assertion on persistence, adhering to teacher feedback
   });
 
-  test("click toggles to bookmarked: aria + icon update; setter called correctly", async () => {
+  test("click toggles to bookmarked: aria + icon update", async () => {
     const user = userEvent.setup();
-    // Capture the 'rerender' function
-    const { rerender } = render(<Bookmark id="abc" />);
+    renderWithSWR(<Bookmark id="abc" initialBookmarked={false} />);
 
     const btn = screen.getByRole("button");
+    const iconBefore = screen.getByTestId("bookmark-icon");
+    expect(iconBefore).toHaveAttribute("fill", "white");
 
     await act(async () => {
       await user.click(btn);
-      // CRITICAL FIX: Manually force a re-render to pick up the updated mockBookmarkState
-      rerender(<Bookmark id="abc" />);
     });
 
-    const icon = screen.getByTestId("bookmark-icon");
-
-    // UI Assertions
+    const iconAfter = screen.getByTestId("bookmark-icon");
     expect(btn).toHaveAttribute("aria-pressed", "true");
     expect(btn).toHaveAttribute("aria-label", "Remove bookmark");
-    expect(icon).toHaveAttribute("fill", "black");
+    expect(iconAfter).toHaveAttribute("fill", "var(--color-dark)");
 
-    // Mock Setter Assertion
-    expect(mockSetBookmarkState).toHaveBeenCalledTimes(1);
-    expect(mockBookmarkState).toEqual(["abc"]);
+    // fetch called once with PUT
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch.mock.calls[0][0]).toMatch(
+      /\/api\/entries\/abc\/bookmark$/
+    );
+    expect(global.fetch.mock.calls[0][1].method).toBe("PUT");
   });
 
-  test("second click removes bookmark: aria + icon revert; setter called correctly", async () => {
+  test("second click removes bookmark: aria + icon revert", async () => {
     const user = userEvent.setup();
-    // Capture the 'rerender' function
-    const { rerender } = render(<Bookmark id="abc" />);
+    renderWithSWR(<Bookmark id="abc" initialBookmarked={false} />);
 
     const btn = screen.getByRole("button");
 
     await act(async () => {
-      await user.click(btn); // 1. Add
-      rerender(<Bookmark id="abc" />); // Update UI after first click
-
-      await user.click(btn); // 2. Remove
-      rerender(<Bookmark id="abc" />); // Update UI after second click
+      await user.click(btn); // add
+      await user.click(btn); // remove
     });
 
     const icon = screen.getByTestId("bookmark-icon");
-
-    // UI Assertions
     expect(btn).toHaveAttribute("aria-pressed", "false");
     expect(btn).toHaveAttribute("aria-label", "Add bookmark");
     expect(icon).toHaveAttribute("fill", "white");
 
-    // Mock Setter Assertion: Two clicks means two calls
-    expect(mockSetBookmarkState).toHaveBeenCalledTimes(2);
-
-    // Verify the state was updated back to empty in our mock environment
-    expect(mockBookmarkState).toEqual([]);
+    expect(global.fetch).toHaveBeenCalledTimes(2);
   });
 
-  test("starts bookmarked when id exists in mock state", () => {
-    // Manually set the mock state to simulate a bookmarked item
-    mockBookmarkState = ["abc", "xyz"];
-
-    render(<Bookmark id="abc" />);
+  test("starts bookmarked when initialBookmarked=true", () => {
+    renderWithSWR(<Bookmark id="abc" initialBookmarked={true} />);
 
     const btn = screen.getByRole("button");
     const icon = screen.getByTestId("bookmark-icon");
 
-    // UI Assertions
     expect(btn).toHaveAttribute("aria-pressed", "true");
     expect(btn).toHaveAttribute("aria-label", "Remove bookmark");
-    expect(icon).toHaveAttribute("fill", "black");
-
-    // State should be unchanged
-    expect(mockBookmarkState).toEqual(["abc", "xyz"]);
+    expect(icon).toHaveAttribute("fill", "var(--color-dark)");
   });
 });

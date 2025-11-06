@@ -45,7 +45,6 @@ export default function Bookmark({
 
       setBookmarked(serverValue);
 
-      // 4) Revalidate to pull the truth from server
       mutate("/api/entries");
       mutate(`/api/entries/${id}`);
     } catch (err) {
@@ -60,7 +59,7 @@ export default function Bookmark({
     <StyledButton
       type="button"
       aria-pressed={bookmarked}
-      aria-label={bookmarked ? "Remove bookmark" : "Add "}
+      aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
       title={bookmarked ? "Remove bookmark" : "Add bookmark"}
       onClick={(event) => {
         event.preventDefault();
@@ -69,9 +68,17 @@ export default function Bookmark({
       disabled={loading || disabled}
     >
       {bookmarked ? (
-        <StyledBookmark fill="var(--color-dark)" stroke="var(--color-dark)" />
+        <StyledBookmark
+          data-testid="bookmark-icon"
+          fill="var(--color-dark)"
+          stroke="var(--color-dark)"
+        />
       ) : (
-        <StyledBookmark fill="white" stroke="var(--color-dark)" />
+        <StyledBookmark
+          data-testid="bookmark-icon"
+          fill="white"
+          stroke="var(--color-dark)"
+        />
       )}
     </StyledButton>
   );
