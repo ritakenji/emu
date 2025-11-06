@@ -235,9 +235,27 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
 <div align="center">
  <a href="https://emu-ecru.vercel.app/">
     <img src="assets/emu_home_mockup.png" alt="mobile preview">
-  </a>
+ </a>
 </div>
-<p>[Insert screenshots or a GIF of your application in action, this should include not just the "happy path" but edge cases as well (what happens when there's an error? Etc). Remember to add clear titles for each image.]</p>
+
+<h3>Video Demo</h3>
+<div align="center">
+  
+[![Video Demo](https://emu-ecru.vercel.app/_next/image?url=%2Fassets%2Femu-logo.png&w=256&q=75)](https://github.com/user-attachments/assets/26889b2a-b414-4e2a-9ea8-68d5456bcd5d)
+  
+</div>
+
+<h3>Edge Cases</h3>
+<div align="center">
+  <img src="assets/edgecase-fields-preview.png" alt="required form fields edgecase preview">
+  <p>(The user will be prompted to fill <b>Emotions</b> and <b>Date and Time</b> form fields in before clicking <b>Submit</b>.)</p>
+  </br>
+  
+  </br>
+  <img src="assets/error_preview.png" alt="error page edgecase preview">
+  <p>(The error <b>"Failed to load entries"</b> will show when the app is unable to fetch a specific entry.)</p>
+  
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
