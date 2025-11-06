@@ -45,8 +45,8 @@
     <li><a href="#technologies">Technologies</a></li>
     <li><a href="#preview">Preview</a>
       <ul>
-        <li><a href="video-demo">Video Demo</a></li>
-        <li><a href="edge-cases">Edge Cases</a></li>
+        <li><a href="#video-demo">Video Demo</a></li>
+        <li><a href="#edge-cases">Edge Cases</a></li>
       </ul>
     </li>
     <li>
