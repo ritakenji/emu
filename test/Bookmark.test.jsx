@@ -1,7 +1,8 @@
 import React from "react";
-import { render, screen, act } from "@testing-library/react";
+import { render, screen, act, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SWRConfig } from "swr";
+
 import Bookmark from "@/components/Bookmark";
 
 jest.mock("lucide-react", () => ({
@@ -77,10 +78,24 @@ describe("<Bookmark /> — core behavior", () => {
 
     const btn = screen.getByRole("button");
 
-    await act(async () => {
-      await user.click(btn); // add
-      await user.click(btn); // remove
-    });
+    // 1) First click => becomes bookmarked and sets loading (button disabled)
+    +(await user.click(btn));
+    +(
+      // Ensure pressed state showed up
+      (+(await screen.findByRole("button", { pressed: true })))
+    );
+    +(
+      // Wait until loading clears so the 2nd click isn't ignored
+      (+(await waitFor(() => expect(btn).not.toBeDisabled())))
+    );
+    +(
+      // 2) Now the second click will be processed
+      (+(await user.click(btn)))
+    );
+    +(
+      // Wait for reverted state
+      (+(await screen.findByRole("button", { pressed: false })))
+    );
 
     const icon = screen.getByTestId("bookmark-icon");
     expect(btn).toHaveAttribute("aria-pressed", "false");

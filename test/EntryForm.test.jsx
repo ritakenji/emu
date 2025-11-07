@@ -144,6 +144,6 @@ describe("<EntryForm /> — core behavior", () => {
       dateTime: "2025-10-10T12:30",
     });
     // Emotions contains the full object for "Happy"
-    expect(payload.emotions).toEqual([EMOTIONS[0]]);
+    expect(payload.emotions).toEqual([EMOTIONS[0]._id]);
   });
 });

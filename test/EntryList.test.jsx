@@ -1,15 +1,12 @@
-// test/EntryList.core.test.jsx
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 
 import EntryList from "../components/Lists/EntryList";
 
-// ---- Router + Link mocks ----
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const { useRouter } = require("next/router");
 
-// Make <Link> a simple <a> and simulate SPA navigation by calling router.push
 jest.mock("next/link", () => ({
   __esModule: true,
   default: React.forwardRef(function MockNextLink(
@@ -21,8 +18,8 @@ jest.mock("next/link", () => ({
     const url = typeof href === "string" ? href : href?.pathname || "";
     function handleClick(e) {
       onClick?.(e);
-      e?.preventDefault?.(); // avoid jsdom navigation
-      router?.push?.(url, {}, {}); // observable navigation intent
+      e?.preventDefault?.();
+      router?.push?.(url, {}, {});
     }
     return (
       <a ref={ref} href={url} onClick={handleClick} {...props}>
@@ -31,9 +28,14 @@ jest.mock("next/link", () => ({
     );
   }),
 }));
-jest.mock("../components/EntryCard", () => ({
+
+jest.mock("../components/Lists/../EntryCard", () => ({
   __esModule: true,
   default: ({ id }) => <div data-testid={`entry-card-${id}`} />,
+}));
+jest.mock("../components/Lists/../UserAccess", () => ({
+  __esModule: true,
+  default: () => null,
 }));
 
 function setRouter(overrides = {}) {
@@ -42,7 +44,6 @@ function setRouter(overrides = {}) {
   return { push };
 }
 
-// Sample data
 const entries = [
   {
     _id: "a1",
@@ -63,20 +64,21 @@ describe("<EntryList /> — core behavior", () => {
     setRouter();
     render(<EntryList entries={entries} />);
 
-    // There is a link wrapping each EntryCard
-    const links = screen.getAllByRole("link");
-    expect(links).toHaveLength(entries.length);
+    const list = screen.getByRole("list");
+    const items = within(list).getAllByRole("listitem");
+    const links = within(list).getAllByRole("link");
 
-    // (Optional) list items count too
-    const items = screen.getAllByRole("listitem");
     expect(items).toHaveLength(entries.length);
+    expect(links).toHaveLength(entries.length);
   });
 
   test("2) each link has correct href and accessible name (aria-label with en-GB date)", () => {
     setRouter();
     render(<EntryList entries={entries} />);
 
-    const links = screen.getAllByRole("link");
+    const list = screen.getByRole("list");
+    const links = within(list).getAllByRole("link");
+
     links.forEach((link, i) => {
       const { _id, dateTime } = entries[i];
       const expectedHref = `/${_id}`;
@@ -84,7 +86,6 @@ describe("<EntryList /> — core behavior", () => {
       const expectedLabel = `View details for entry on ${formatted}`;
 
       expect(link).toHaveAttribute("href", expectedHref);
-      // Because you set aria-label on the Link, it becomes the accessible name
       expect(link).toHaveAccessibleName(expectedLabel);
     });
   });
@@ -94,7 +95,9 @@ describe("<EntryList /> — core behavior", () => {
     const { push } = setRouter();
     render(<EntryList entries={entries} />);
 
-    const firstLink = screen.getAllByRole("link")[0];
+    const list = screen.getByRole("list");
+    const firstLink = within(list).getAllByRole("link")[0];
+
     await user.click(firstLink);
 
     expect(push).toHaveBeenCalledWith(
