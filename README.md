@@ -173,8 +173,9 @@ EMU app is optimized for mobile screen, but because responsive CSS design has be
     
 <h4>Backend</h4>
 
-  - Designing and building a scalable **backend architecture** on MongoDB.
+  - Designing and building a scalable **backend architecture** on MongoDB, featuring a REST APIs for seamless resource access.
   - Mastering the fundamental **Create, Read, Update, Delete (CRUD) operations** to manage resources efficiently and enable seamless communication between the client and server.
+  - Integrated Cloudinary for efficient media management.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
